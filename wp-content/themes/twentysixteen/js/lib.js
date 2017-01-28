@@ -6,13 +6,17 @@
 (function helloWorld(){
     console.log('helloWorld');
     jQuery("#wpbdp-main-box form input").addClass('form-control');
-})()
+    jQuery("form#wpbdp-search-form input").addClass('form-control');
+    jQuery('#wpbdp-field-2').select2();
+    jQuery('#wpbdp-field-12').select2();
+
+})();
 
 
 function htmlbodyHeightUpdate(){
-    var height3 = jQuery( window ).height()
-    var height1 = jQuery('.nav').height()+50
-    height2 = jQuery('.main').height()
+    var height3 = jQuery( window ).height();
+    var height1 = jQuery('.nav').height()+50;
+    height2 = jQuery('.main').height();
     if(height2 > height3){
         jQuery('html').height(Math.max(height1,height3,height2)+10);
         jQuery('body').height(Math.max(height1,height3,height2)+10);
