@@ -91,7 +91,7 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="<?php echo get_page_link(246); ?>">За нас<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
                 <li ><a href="<?php echo get_page_link(246). 'бизнес-каталог/?wpbdp_view=submit_listing'; ?>">Контакти<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
-                <li ><a href="#">Цени<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-envelope"></span></a></li>
+                <li ><a href="#">Це3ни<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-envelope"></span></a></li>
                 <!--<li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
                     <ul class="dropdown-menu forAnimate" role="menu">
