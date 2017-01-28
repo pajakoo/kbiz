@@ -1,0 +1,325 @@
+@font-face {
+    font-family: "icomoon";
+    src:url("../fonts/icomoon.eot");
+    src:url("../fonts/icomoon.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/icomoon.woff") format("woff"),
+    url("../fonts/icomoon.ttf") format("truetype"),
+    url("../fonts/icomoon.svg#icomoon") format("svg");
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+.side-menu{
+    position: fixed;
+    top:0;
+    left:15px;
+    width:160px;
+    height:100%;
+    color:white;
+    background-color: #021f34;
+    overflow: hidden;
+    display: none;
+}
+
+.cat-container{
+    margin-top: -25px;
+}
+
+.cat-icons{
+    width:91px;
+    height:91px;
+    background-color: #f7a600;
+    margin: 50px 0 0 50px;
+    float:left;
+}
+
+.side-menu #logo{
+    heihgth:250px;
+
+}
+
+.side-menu .menu{
+    margin: 250px 0 0 0 ;
+    list-style: none;
+}
+
+.footer{
+    height: 300px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.fs2 {
+    font-family: sans-serif;
+    font-size: 1em;
+    line-height: 1.5;
+    color: #333;
+}
+
+body{
+    background: none;
+}
+
+.cat-item {
+    list-style: none;
+    width:91px;
+    height:91px;
+    background-color: #F7A707;
+    margin: 50px 0 0 50px;
+    float:left;
+}
+
+.cat-icons.zzz {
+    background: red;
+    color:blue;
+}
+
+.cat-container a:hover{
+    color:white;
+    text-decoration: none;
+}
+.cat-container a{
+    color:white;
+    text-decoration: none;
+}
+
+.icon-format{
+    font-size:32px;
+    color:white;
+    width:30px;
+    margin: 15px auto 15px;
+}
+
+.cat_name{
+    text-align: center;
+}
+
+
+svg{
+    width:85px;
+    height:auto;
+}
+path{
+    color:red;
+}
+
+#wpbdp-main-box form input[type="submit"]{
+    display: none;
+
+}
+
+body,html{
+    height: 100%;
+    background-color: transparent!important;
+}
+
+
+html {
+    background: url(../../../uploads/2017/01/ra6vbivis2y-thomas-tixtaaz.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.wpbdp-listing{
+    /*background: red;*/
+}
+
+/* remove outer padding */
+.main .row{
+    padding: 0px;
+    margin: 0px;
+}
+
+/*Remove rounded coners*/
+
+nav.sidebar.navbar {
+    border-radius: 0px;
+}
+
+nav.sidebar, .main{
+    -webkit-transition: margin 200ms ease-out;
+    -moz-transition: margin 200ms ease-out;
+    -o-transition: margin 200ms ease-out;
+    transition: margin 200ms ease-out;
+}
+
+/* Add gap to nav and right windows.*/
+.main{
+    padding: 10px 10px 0 10px;
+}
+
+/* .....NavBar: Icon only with coloring/layout.....*/
+
+/*small/medium side display*/
+@media (min-width: 768px) {
+
+    /*Allow main to be next to Nav*/
+    .main{
+        position: absolute;
+        width: calc(100% - 40px); /*keeps 100% minus nav size*/
+        margin-left: 40px;
+        float: right;
+    }
+
+    /*lets nav bar to be showed on mouseover*/
+    nav.sidebar:hover + .main{
+        margin-left: 200px;
+    }
+
+    /*Center Brand*/
+    nav.sidebar.navbar.sidebar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+        margin-left: 0px;
+    }
+    /*Center Brand*/
+    nav.sidebar .navbar-brand, nav.sidebar .navbar-header{
+        text-align: center;
+        width: 100%;
+        margin-left: 0px;
+    }
+
+    /*Center Icons*/
+    nav.sidebar a{
+        padding-right: 13px;
+    }
+
+    /*adds border top to first nav box */
+    nav.sidebar .navbar-nav > li:first-child{
+        border-top: 1px #e5e5e5 solid;
+    }
+
+    /*adds border to bottom nav boxes*/
+    nav.sidebar .navbar-nav > li{
+        /*border-bottom: 1px #e5e5e5 solid;*/
+    }
+
+    /* Colors/style dropdown box*/
+    nav.sidebar .navbar-nav .open .dropdown-menu {
+        position: static;
+        float: none;
+        width: auto;
+        margin-top: 0;
+        background-color: transparent;
+        border: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    /*allows nav box to use 100% width*/
+    nav.sidebar .navbar-collapse, nav.sidebar .container-fluid{
+        padding: 0 0px 0 0px;
+    }
+
+    /*colors dropdown box text */
+    .navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
+        color: #777;
+    }
+
+    /*gives sidebar width/height*/
+    nav.sidebar{
+        width: 200px;
+        height: 100%;
+        margin-left: -160px;
+        float: left;
+        z-index: 8000;
+        margin-bottom: 0px;
+        color:white;
+        background: #021f34;
+        position: fixed;
+        top:0;
+    }
+
+    body.logged-in nav.sidebar{
+        top:32px;
+    }
+
+    /*give sidebar 100% width;*/
+    nav.sidebar li {
+        width: 100%;
+    }
+
+    /* Move nav to full on mouse over*/
+    nav.sidebar:hover{
+        margin-left: 0px;
+    }
+    /*for hiden things when navbar hidden*/
+    .forAnimate{
+        opacity: 0;
+    }
+}
+
+/* .....NavBar: Fully showing nav bar..... */
+
+@media (min-width: 1330px) {
+
+    /*Allow main to be next to Nav*/
+    .main{
+        width: calc(100% - 200px); /*keeps 100% minus nav size*/
+        margin-left: 200px;
+    }
+
+    /*Show all nav*/
+    nav.sidebar{
+        margin-left: 0px;
+        float: left;
+    }
+    /*Show hidden items on nav*/
+    nav.sidebar .forAnimate{
+        opacity: 1;
+    }
+}
+
+nav.sidebar .navbar-nav .open .dropdown-menu>li>a:hover, nav.sidebar .navbar-nav .open .dropdown-menu>li>a:focus {
+    color: #CCC;
+    background-color: transparent;
+}
+
+nav:hover .forAnimate{
+    opacity: 1;
+}
+section{
+    padding-left: 15px;
+}

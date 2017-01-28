@@ -1,0 +1,25 @@
+Date: 2017-01-27 16:50
+Method: reload
+User Mode: Free
+BackupGuard version: 1.1.26
+Supported archive version: 5
+Database prefix: wp_karlovobusiness
+Site URL: http://localhost:8888/karlovobusiness
+Home URL: http://localhost:8888/karlovobusiness
+Uploads path: /Users/pajakoo/IdeaProjects/karlovobusiness/wp-content/uploads
+Site installation: standard
+OS: Darwin
+Server: Apache/2.4.7 (Unix) PHP/5.5.9 OpenSSL/1.0.1f mod_perl/2.0.8-dev Perl/v5.16.3
+User agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36
+PHP version: 5.5.9
+SAPI: apache2handler
+Codepage: C
+Int size: 8
+Int lib: bcmath
+Memory limit: 128M
+Max execution time: 30
+Environment: Wordpress 4.7.1
+Backup type: files,database
+
+2017-01-27 16:50: Start backup
+2017-01-27 16:50: SGExceptionExecutionTimeError: Execution timeout error [File: /Users/pajakoo/IdeaProjects/karlovobusiness/wp-content/plugins/backup/com/core/backup/SGBackup.php, Line: 104, URL: /karlovobusiness/wp-admin/admin-ajax.php]
