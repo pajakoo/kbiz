@@ -26,7 +26,7 @@
 <body <?php body_class(); ?>>
 <nav class="navbar navbar-inverse sidebar " role="navigation">
     <div class="container-fluid">
-        <p>Bat Toni is in the house 2</p>
+        <p>Bat Toni is in the house 3</p>
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
