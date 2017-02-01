@@ -25,7 +25,10 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-
+#page {
+    margin-right: 0;
+    color: white;
+}
 
 .side-menu{
     position: fixed;
@@ -39,18 +42,6 @@
     display: none;
 }
 
-.cat-container{
-    margin-top: -25px;
-}
-
-.cat-icons{
-    width:91px;
-    height:91px;
-    background-color: #f7a600;
-    margin: 50px 0 0 50px;
-    float:left;
-}
-
 .side-menu #logo{
     heihgth:250px;
 
@@ -59,6 +50,10 @@
 .side-menu .menu{
     margin: 250px 0 0 0 ;
     list-style: none;
+}
+
+.entry-header {
+    text-align: center;
 }
 
 .footer{
@@ -101,12 +96,25 @@
 body{
     background: none;
 }
+/* Category page styles */
+
+.cat-container{
+    margin-top: -25px;
+}
 
 .cat-item {
     list-style: none;
+    /*width:91px;*/
+    /*height:91px;*/
+    background-color: #F7A707;
+    margin: 50px 0 0 50px;
+    float:left;
+}
+
+.cat-icons{
     width:91px;
     height:91px;
-    background-color: #F7A707;
+    background-color: #f7a600;
     margin: 50px 0 0 50px;
     float:left;
 }
@@ -116,25 +124,28 @@ body{
     color:blue;
 }
 
-.cat-container a:hover{
+.cat-container a:hover {
     color:white;
     text-decoration: none;
 }
-.cat-container a{
+.cat-container a {
     color:white;
     text-decoration: none;
 }
 
-.icon-format{
+.icon-format {
     font-size:32px;
     color:white;
     width:30px;
     margin: 15px auto 15px;
 }
 
-.cat_name{
+.cat_name {
     text-align: center;
+    word-wrap: break-word;
 }
+
+/* End Category page styles */
 
 
 svg{

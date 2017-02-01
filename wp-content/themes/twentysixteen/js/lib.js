@@ -13,7 +13,7 @@
 })();
 
 
-function htmlbodyHeightUpdate(){
+function htmlBodyHeightUpdate(){
     var height3 = jQuery( window ).height();
     var height1 = jQuery('.nav').height()+50;
     height2 = jQuery('.main').height();
@@ -29,12 +29,12 @@ function htmlbodyHeightUpdate(){
 
 }
 jQuery(document).ready(function () {
-    htmlbodyHeightUpdate()
+    htmlBodyHeightUpdate();
     jQuery( window ).resize(function() {
-        htmlbodyHeightUpdate()
+        htmlBodyHeightUpdate()
     });
     jQuery( window ).scroll(function() {
-        height2 = jQuery('.main').height()
-        htmlbodyHeightUpdate();
+        height2 = jQuery('.main').height();
+        htmlBodyHeightUpdate();
     });
 });
