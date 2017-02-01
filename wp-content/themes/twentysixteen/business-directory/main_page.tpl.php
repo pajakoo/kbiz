@@ -1,60 +1,78 @@
 <div class="col-lg-12 cat-container">
+    <div class="plans-container">
+        <h1 class="text-center">Пакети</h1>
+        <div class="catalog">
+            <div class="plan-name">
+                Онлайн Каталог
+            </div>
+            <div class="plan-price">
+                50лв.
+            </div>
+        </div>
+
+        <div class="catalog">
+            <div class="plan-name">
+                Онлайн Каталог <br> + <br> Хартиен Каталог
+            </div>
+            <div class="plan-price">80лв.</div>
+        </div>
+
+        <div class="catalog">
+            <div class="plan-name">
+                Онлайн Каталог <br> + <br> Хартиен Каталог <br> + <br> Снимка
+            </div>
+            <div class="plan-price">100лв.</div>
+        </div>
+    </div>
     <?php
 
-//taxonomy=wpbdp_category&post_type=wpbdp_listing&post_type=category
+    //taxonomy=wpbdp_category&post_type=wpbdp_listing&post_type=category
 
-$taxonomy = 'wpbdp_category';
-$terms = get_terms($taxonomy, array(
-    'parent' => 0,
-    'hide_empty' => false
-));
+    $taxonomy = 'wpbdp_category';
+    $terms = get_terms($taxonomy, array(
+        'parent' => 0,
+        'hide_empty' => false
+    ));
 
-//Kint::dump($terms);
+    //Kint::dump($terms);
 
-    //Kint::dump(  );
-    $args = array(
-        'post_type' => 'page',
-        'post_status' => 'publish'
-    );
-    $pages = get_posts( $args );
-
-    Kint::dump($pages);
-
-
-if ( $terms && !is_wp_error( $terms ) ) :
-        foreach ( $terms as $term ) {  ?>
-            <a href="<?php echo esc_url(get_term_link($term)) ?>">
-                <div class="cat-icons <?php echo get_field('class', $taxonomy . '_' . $term->term_id) ?>">
-                    <div class="fs2">
-                        <div class="icon-format icon-icons_<?php echo get_field('class', $taxonomy . '_' . $term->term_id) ?>"></div>
-                    </div>
-                    <div class="cat_name"><?php echo get_field('short_name', $taxonomy . '_' . $term->term_id); /*$term->name; */ ?></div>
+    if ($terms && !is_wp_error($terms)) :
+    foreach ($terms as $term) { ?>
+        <a href="<?php echo esc_url(get_term_link($term)) ?>">
+            <div class="cat-icons <?php echo get_field('class', $taxonomy . '_' . $term->term_id) ?>">
+                <div class="fs2">
+                    <div class="icon-format icon-icons_<?php echo get_field('class', $taxonomy . '_' . $term->term_id) ?>"></div>
                 </div>
-            </a>
-<!--            <img src="--><?php //echo get_field( 'img', $taxonomy.'_'.$term->term_id) ?><!--" />-->
-        <?php } ?>
-    </div>
-<?php endif;
+                <div class="cat_name"><?php echo get_field('short_name', $taxonomy . '_' . $term->term_id); /*$term->name; */ ?></div>
+            </div>
+        </a>
+        <!--            <img src="--><?php //echo get_field( 'img', $taxonomy.'_'.$term->term_id) ?><!--" />-->
+    <?php } ?>
 
+</div>
+
+
+<?php endif;
 
 
 return;
 
 
-Kint::dump(get_the_category(1));return;
+Kint::dump(get_the_category(1));
+return;
 // load all 'category' terms for the post
-$terms = get_the_terms( get_the_ID(), 'category');
+$terms = get_the_terms(get_the_ID(), 'category');
 
-Kint::dump($terms );
+Kint::dump($terms);
 
 // we will use the first term to load ACF data from
-if( !empty($terms) ) {
+if (!empty($terms)) {
 
     $term = array_pop($terms);
 
-    $custom_field = get_field('vt', $term );
+    $custom_field = get_field('vt', $term);
 
-    Kint::dump($custom_field );
+    Kint::dump($custom_field);
 }
 
 //return;
@@ -63,8 +81,8 @@ $args = array(
     'posts_per_page' => -1
 );
 $query = new WP_Query($args);
-if($query->have_posts() ) {
-    while($query->have_posts() ) {
+if ($query->have_posts()) {
+    while ($query->have_posts()) {
         $query->the_post();
         ?>
         <h2><?php the_content(); ?></h2>
@@ -78,37 +96,34 @@ return;
 $categories = get_categories($args);
 
 
-foreach($categories as $category) {
-   Kint::dump($category);
+foreach ($categories as $category) {
+    Kint::dump($category);
 }
-
-
 
 
 return;
 
 
 $term_id = 373;
-if($query->have_posts() ) {
-    while($query->have_posts() ) {
-    $query->the_post();
-    ?>
+if ($query->have_posts()) {
+    while ($query->have_posts()) {
+        $query->the_post();
+        ?>
         <h2><?php the_title(); ?></h2>
         <!--      get_post_custom()-->
-        <?php  Kint::dump( get_cat_name("restorants")); ?>
-    <?php
+        <?php Kint::dump(get_cat_name("restorants")); ?>
+        <?php
     }
 }
 
 return
 
 
-$directory_categories = wpbdp_categories_list();
+    $directory_categories = wpbdp_categories_list();
 foreach ($directory_categories as $dir_category) {
-    Kint::dump( get_term_meta($dir_category->term_id));
-    echo     '<div class="cat-icons '. $dir_category->slug .'">'. $dir_category->name .'</div>';
+    Kint::dump(get_term_meta($dir_category->term_id));
+    echo '<div class="cat-icons ' . $dir_category->slug . '">' . $dir_category->name . '</div>';
 }
-
 
 
 /*

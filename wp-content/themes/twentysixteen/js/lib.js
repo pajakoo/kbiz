@@ -7,8 +7,16 @@
     console.log('helloWorld');
     jQuery("#wpbdp-main-box form input").addClass('form-control');
     jQuery("form#wpbdp-search-form input").addClass('form-control');
+
+    // added bootstrap input classes for registering company form
+    jQuery('form #wpbdp-form-field').addClass('form-control');
+    
+    // added bootstrap input classes for login form
+    jQuery('#user_login').addClass('form-control');
+    jQuery('#user_pass').addClass('form-control');
     jQuery('#wpbdp-field-2').select2();
     jQuery('#wpbdp-field-12').select2();
+
 
 })();
 

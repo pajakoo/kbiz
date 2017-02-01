@@ -7,6 +7,7 @@
     url('https://i.icomoon.io/public/temp/2e23c17b74/KBIZ/icomoon.svg?jaduca#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
+
 }
 
 [class^="icon-"], [class*=" icon-"] {
@@ -161,6 +162,10 @@
     list-style: none;
 }
 
+.entry-header {
+    text-align: center;
+}
+
 .footer{
     height: 300px;
 }
@@ -237,6 +242,58 @@ body{
 .cat_name{
     text-align: center;
 }
+
+/* Choose plan page styles */
+
+.plans-container {
+    width: 100%;
+    margin: 20px 20px;
+}
+
+.plans-container h1 {
+    letter-spacing: 5px;
+
+}
+
+.catalog {
+    border: 2px solid #F9A700;
+    font-weight: bold;
+    margin: 10px 25px;
+    border-radius: 8px;
+    text-align: center;
+    width: 25%;
+    height: 300px;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.plan-name {
+    height: 260px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.plan-price {
+    font-size: 20px;
+    color: white;
+    height: 40px;
+    line-height: 40px;
+    background-color: #F9A700;
+    text-align: center;
+    border-radius: 0 0 8px 8px;
+}
+
+
+
+/* End Choose plan page styles */
+
+
+/* Register bussiness company styles */
+
+
+
+/* End Bussiness company styles  */
 
 
 svg{
