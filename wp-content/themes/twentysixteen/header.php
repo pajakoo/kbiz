@@ -38,7 +38,7 @@
 
 
 
-            <a class="navbar-brand" href="<?php echo get_page_link(246); ?>">
+            <a class="navbar-brand" href="<?php echo get_post_permalink( get_page_by_title('Business Directory')->ID ) ; ?>">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                      width="482.963px" height="137.998px" viewBox="0 0 482.963 137.998" style="enable-background:new 0 0 482.963 137.998;"
                      xml:space="preserve">
@@ -100,6 +100,16 @@
                     <li class=""><a href="<?php the_permalink(); ?>"><?php the_title(); ?><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-envelope"></span></a></li><?php
                 endwhile;
                 ?>
+
+                <li class="">
+                    <a href="<?php echo get_post_permalink( get_page_by_title('Business Directory')->ID ) .'?wpbdp_view=submit_listing' ?>">
+                        Регистрация
+                        <span style="font-size:16px;"
+                              class="pull-right hidden-xs showopacity glyphicon glyphicon-envelope"></span>
+                    </a>
+                </li>
+
+
                 <!--
                 <li class="active"><a href="<?php /*echo get_page_link(246); */?>">За нас<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
                 <li ><a href="<?php /*echo get_page_link(246). 'бизнес-каталог/?wpbdp_view=submit_listing'; */?>">Регистрация<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>

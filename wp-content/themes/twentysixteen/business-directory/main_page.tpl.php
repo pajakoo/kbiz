@@ -11,6 +11,16 @@ $terms = get_terms($taxonomy, array(
 
 //Kint::dump($terms);
 
+    //Kint::dump(  );
+    $args = array(
+        'post_type' => 'page',
+        'post_status' => 'publish'
+    );
+    $pages = get_posts( $args );
+
+    Kint::dump($pages);
+
+
 if ( $terms && !is_wp_error( $terms ) ) :
         foreach ( $terms as $term ) {  ?>
             <a href="<?php echo esc_url(get_term_link($term)) ?>">

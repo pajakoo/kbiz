@@ -1,4 +1,41 @@
 <?php
+/*
+function load_script_enqueue(){
+    wp_enqueue_script('customscript', get_template_directory_uri() . '/js/lib.js', array('jquery'), '1.0', true);
+}
+
+
+add_action('wp_enqueue_scripts',load_script_enqueue);
+
+if (!is_admin()) add_action("wp_enqueue_scripts", "my_jquery_enqueue", 11);
+function my_jquery_enqueue() {
+    wp_deregister_script('jquery');
+    wp_register_script('jquery', "http" . ($_SERVER['SERVER_PORT'] == 443 ? "s" : "") . "://code.jquery.com/jquery-3.1.1.min.js", false, null);
+    wp_enqueue_script('jquery');
+}
+
+function createProductCat($catName, $parent) {
+
+    $cat = wp_insert_term(
+        $catName, // the term
+        'category', // the taxonomy
+        array(
+            'description' => $catName,
+            'slug' => $catName,
+            'parent' => $parent
+        )
+    );
+    var_dump($cat);
+    return $cat["term_id"];
+}
+*/
+require get_template_directory() . '/inc/Kint/Kint.class.php';
+
+
+
+
+
+
 /**
  * Twenty Sixteen functions and definitions
  *

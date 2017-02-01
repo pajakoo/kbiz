@@ -14,6 +14,20 @@ function my_jquery_enqueue() {
     wp_enqueue_script('jquery');
 }
 
+function createProductCat($catName, $parent) {
+
+    $cat = wp_insert_term(
+        $catName, // the term
+        'category', // the taxonomy
+        array(
+            'description' => $catName,
+            'slug' => $catName,
+            'parent' => $parent
+        )
+    );
+    var_dump($cat);
+    return $cat["term_id"];
+}
 
 
 
