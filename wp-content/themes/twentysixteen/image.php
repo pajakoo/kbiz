@@ -1,87 +1,112 @@
 <?php
 /**
- * The main template file
- *
- * This is the most generic template file in a WordPress theme
- * and one of the two required files for a theme (the other being style.css).
- * It is used to display a page when nothing more specific matches a query.
- * E.g., it puts together the home page when no home.php file exists.
- *
- * @link http://codex.wordpress.org/Template_Hierarchy
+ * The template for displaying image attachments
  *
  * @package WordPress
- * @subpackage KBIZ
- * @since KBIZ 1.0
+ * @subpackage Twenty_Sixteen
+ * @since Twenty Sixteen 1.0
  */
 
-get_header();?>
+get_header(); ?>
 
-<div class="main">
-    <!-- Content Here -->
-</div>
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
 
-<div class="side-menu">
-    <div id="logo"></div>
-    <div class="menu">
-        <li>За нас</li>
-        <li>Контакти</li>
-        <li>Блог</li>
-        <li>Цена</li>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="row">
-            <div class="col-lg-offset-2 col-lg-10 search">
-                <input type="text" class="form-control" placeholder="Search for...">
-            </div>
-        </div>
-        <div class="row">
+			<?php
+				// Start the loop.
+				while ( have_posts() ) : the_post();
+			?>
 
-            <?php if ( have_posts() ) : ?>
+				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-                <?php if ( is_home() && ! is_front_page() ) : ?>
-                    <header class="col-lg-offset-2 col-lg-10">
-                        <h3 class="page-title screen-reader-text"><?php single_post_title(); ?></h3>
-                    </header>
-                <?php endif; ?>
+					<nav id="image-navigation" class="navigation image-navigation">
+						<div class="nav-links">
+							<div class="nav-previous"><?php previous_image_link( false, __( 'Previous Image', 'twentysixteen' ) ); ?></div>
+							<div class="nav-next"><?php next_image_link( false, __( 'Next Image', 'twentysixteen' ) ); ?></div>
+						</div><!-- .nav-links -->
+					</nav><!-- .image-navigation -->
 
-                <?php
-                // Start the loop.
-                while ( have_posts() ) : the_post();
+					<header class="entry-header">
+						<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+					</header><!-- .entry-header -->
 
-                    /*
-                     * Include the Post-Format-specific template for the content.
-                     * If you want to override this in a child theme, then include a file
-                     * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-                     */
-                    get_template_part( 'template-parts/content', get_post_format() );
+					<div class="entry-content">
 
-                    // End the loop.
-                endwhile;
+						<div class="entry-attachment">
+							<?php
+								/**
+								 * Filter the default twentysixteen image attachment size.
+								 *
+								 * @since Twenty Sixteen 1.0
+								 *
+								 * @param string $image_size Image size. Default 'large'.
+								 */
+								$image_size = apply_filters( 'twentysixteen_attachment_size', 'large' );
 
-                // Previous/next page navigation.
-                the_posts_pagination( array(
-                    'prev_text'          => __( 'Previous page', 'twentysixteen' ),
-                    'next_text'          => __( 'Next page', 'twentysixteen' ),
-                    'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentysixteen' ) . ' </span>',
-                ) );
+								echo wp_get_attachment_image( get_the_ID(), $image_size );
+							?>
 
-// If no content, include the "No posts found" template.
-            else :
-                get_template_part( 'template-parts/content', 'none' );
+							<?php twentysixteen_excerpt( 'entry-caption' ); ?>
 
-            endif;
-            ?>
-        </div>
-    </div>
-</div>
+						</div><!-- .entry-attachment -->
 
+						<?php
+							the_content();
+							wp_link_pages( array(
+								'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'twentysixteen' ) . '</span>',
+								'after'       => '</div>',
+								'link_before' => '<span>',
+								'link_after'  => '</span>',
+								'pagelink'    => '<span class="screen-reader-text">' . __( 'Page', 'twentysixteen' ) . ' </span>%',
+								'separator'   => '<span class="screen-reader-text">, </span>',
+							) );
+						?>
+					</div><!-- .entry-content -->
 
+					<footer class="entry-footer">
+						<?php twentysixteen_entry_meta(); ?>
+						<?php
+							// Retrieve attachment metadata.
+							$metadata = wp_get_attachment_metadata();
+							if ( $metadata ) {
+								printf( '<span class="full-size-link"><span class="screen-reader-text">%1$s </span><a href="%2$s">%3$s &times; %4$s</a></span>',
+									esc_html_x( 'Full size', 'Used before full size attachment link.', 'twentysixteen' ),
+									esc_url( wp_get_attachment_url() ),
+									absint( $metadata['width'] ),
+									absint( $metadata['height'] )
+								);
+							}
+						?>
+						<?php
+							edit_post_link(
+								sprintf(
+									/* translators: %s: Name of current post */
+									__( 'Edit<span class="screen-reader-text"> "%s"</span>', 'twentysixteen' ),
+									get_the_title()
+								),
+								'<span class="edit-link">',
+								'</span>'
+							);
+						?>
+					</footer><!-- .entry-footer -->
+				</article><!-- #post-## -->
+
+				<?php
+					// If comments are open or we have at least one comment, load up the comment template.
+					if ( comments_open() || get_comments_number() ) {
+						comments_template();
+					}
+
+					// Parent post navigation.
+					the_post_navigation( array(
+						'prev_text' => _x( '<span class="meta-nav">Published in</span><span class="post-title">%title</span>', 'Parent post link', 'twentysixteen' ),
+					) );
+				// End the loop.
+				endwhile;
+			?>
+
+		</main><!-- .site-main -->
+	</div><!-- .content-area -->
+
+<?php get_sidebar(); ?>
 <?php get_footer(); ?>
-
-
-<!--http://localhost:8888/karlovobusiness/bg/%D1%80%D0%B5%D0%B3%D0%B8%D0%BE%D0%BD-%D0%BA%D0%B0%D1%80%D0%BB%D0%BE%D0%B2%D0%BE/%D0%BA%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3/%D0%B2%D1%8A%D0%B3%D0%BB%D0%B5%D0%B4%D0%BE%D0%B1%D0%B8%D0%B2/-->
-<!--http://localhost:8888/karlovobusiness/bg/categories/-->
-
-

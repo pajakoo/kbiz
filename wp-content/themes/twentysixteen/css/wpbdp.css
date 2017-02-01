@@ -1,13 +1,12 @@
 @font-face {
-    font-family: "icomoon";
-    src:url("../fonts/icomoon.eot");
-    src:url("../fonts/icomoon.eot?#iefix") format("embedded-opentype"),
-    url("../fonts/icomoon.woff") format("woff"),
-    url("../fonts/icomoon.ttf") format("truetype"),
-    url("../fonts/icomoon.svg#icomoon") format("svg");
+    font-family: 'icomoon';
+    src:  url('https://i.icomoon.io/public/temp/2e23c17b74/KBIZ/icomoon.eot?jaduca');
+    src:  url('https://i.icomoon.io/public/temp/2e23c17b74/KBIZ/icomoon.eot?jaduca#iefix') format('embedded-opentype'),
+    url('https://i.icomoon.io/public/temp/2e23c17b74/KBIZ/icomoon.ttf?jaduca') format('truetype'),
+    url('https://i.icomoon.io/public/temp/2e23c17b74/KBIZ/icomoon.woff?jaduca') format('woff'),
+    url('https://i.icomoon.io/public/temp/2e23c17b74/KBIZ/icomoon.svg?jaduca#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
 
 [class^="icon-"], [class*=" icon-"] {
@@ -25,10 +24,108 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-#page {
-    margin-right: 0;
-    color: white;
+.icon-icons_advertisement:before {
+    content: "\e900";
 }
+.icon-icons_agriculture:before {
+    content: "\e901";
+}
+.icon-icons_automobile:before {
+    content: "\e902";
+}
+.icon-icons_computers:before {
+    content: "\e903";
+}
+.icon-icons_construction:before {
+    content: "\e904";
+}
+.icon-icons_design:before {
+    content: "\e905";
+}
+.icon-icons_education:before {
+    content: "\e906";
+}
+.icon-icons_electrical:before {
+    content: "\e907";
+}
+.icon-icons_furniture:before {
+    content: "\e908";
+}
+.icon-icons_health:before {
+    content: "\e909";
+}
+.icon-icons_hiking:before {
+    content: "\e90a";
+}
+.icon-icons_hoby:before {
+    content: "\e90b";
+}
+.icon-icons_industry:before {
+    content: "\e90c";
+}
+.icon-icons_institutions:before {
+    content: "\e90d";
+}
+.icon-icons_listing:before {
+    content: "\e90e";
+}
+.icon-icons_other:before {
+    content: "\e90f";
+}
+.icon-icons_restorants:before {
+    content: "\e910";
+}
+.icon-icons_services:before {
+    content: "\e911";
+}
+.icon-icons_solar:before {
+    content: "\e912";
+}
+.icon-icons_sport:before {
+    content: "\e913";
+}
+.icon-icons_trade:before {
+    content: "\e914";
+}
+.icon-logo-text .path1:before {
+    content: "\e915";
+    color: rgb(250, 168, 49);
+}
+.icon-logo-text .path2:before {
+    content: "\e916";
+    margin-left: -1em;
+    color: rgb(254, 254, 254);
+}
+.icon-logo-text .path3:before {
+    content: "\e917";
+    margin-left: -1em;
+    color: rgb(250, 168, 49);
+}
+.icon-logo-text .path4:before {
+    content: "\e918";
+    margin-left: -1em;
+    color: rgb(254, 254, 254);
+}
+.icon-logo-text .path5:before {
+    content: "\e919";
+    margin-left: -1em;
+    color: rgb(250, 168, 49);
+}
+.icon-logo .path1:before {
+    content: "\e91a";
+    color: rgb(250, 168, 49);
+}
+.icon-logo .path2:before {
+    content: "\e91b";
+    margin-left: -1em;
+    color: rgb(254, 254, 254);
+}
+.icon-logo .path3:before {
+    content: "\e91c";
+    margin-left: -1em;
+    color: rgb(250, 168, 49);
+}
+
 
 .side-menu{
     position: fixed;
@@ -42,6 +139,18 @@
     display: none;
 }
 
+.cat-container{
+    margin-top: -25px;
+}
+
+.cat-icons{
+    width:91px;
+    height:91px;
+    background-color: #f7a600;
+    margin: 50px 0 0 50px;
+    float:left;
+}
+
 .side-menu #logo{
     heihgth:250px;
 
@@ -52,17 +161,15 @@
     list-style: none;
 }
 
-.entry-header {
-    text-align: center;
-}
-
 .footer{
     height: 300px;
 }
 
 
 
-
+.form#wpbdp-search-form .wpbdp-search-field-label{
+    float:none;
+}
 
 
 
@@ -96,25 +203,12 @@
 body{
     background: none;
 }
-/* Category page styles */
-
-.cat-container{
-    margin-top: -25px;
-}
 
 .cat-item {
     list-style: none;
-    /*width:91px;*/
-    /*height:91px;*/
-    background-color: #F7A707;
-    margin: 50px 0 0 50px;
-    float:left;
-}
-
-.cat-icons{
     width:91px;
     height:91px;
-    background-color: #f7a600;
+    background-color: #F7A707;
     margin: 50px 0 0 50px;
     float:left;
 }
@@ -124,28 +218,25 @@ body{
     color:blue;
 }
 
-.cat-container a:hover {
+.cat-container a:hover{
     color:white;
     text-decoration: none;
 }
-.cat-container a {
+.cat-container a{
     color:white;
     text-decoration: none;
 }
 
-.icon-format {
+.icon-format{
     font-size:32px;
     color:white;
     width:30px;
     margin: 15px auto 15px;
 }
 
-.cat_name {
+.cat_name{
     text-align: center;
-    word-wrap: break-word;
 }
-
-/* End Category page styles */
 
 
 svg{
