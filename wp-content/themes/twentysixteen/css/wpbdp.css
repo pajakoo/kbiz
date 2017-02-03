@@ -1,13 +1,12 @@
 @font-face {
     font-family: 'icomoon';
-    src:  url('https://i.icomoon.io/public/temp/2e23c17b74/KBIZ/icomoon.eot?jaduca');
-    src:  url('https://i.icomoon.io/public/temp/2e23c17b74/KBIZ/icomoon.eot?jaduca#iefix') format('embedded-opentype'),
-    url('https://i.icomoon.io/public/temp/2e23c17b74/KBIZ/icomoon.ttf?jaduca') format('truetype'),
-    url('https://i.icomoon.io/public/temp/2e23c17b74/KBIZ/icomoon.woff?jaduca') format('woff'),
-    url('https://i.icomoon.io/public/temp/2e23c17b74/KBIZ/icomoon.svg?jaduca#icomoon') format('svg');
+    src:  url('fonts/icomoon.eot?rlgg9v');
+    src:  url('fonts/icomoon.eot?rlgg9v#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?rlgg9v') format('truetype'),
+    url('fonts/icomoon.woff?rlgg9v') format('woff'),
+    url('fonts/icomoon.svg?rlgg9v#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
 
 [class^="icon-"], [class*=" icon-"] {
@@ -128,6 +127,9 @@
 }
 
 
+
+
+
 .side-menu{
     position: fixed;
     top:0;
@@ -181,20 +183,9 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.site {
+    margin: 0 auto;
+}
 
 
 
@@ -285,15 +276,6 @@ body{
 }
 
 
-
-/* End Choose plan page styles */
-
-
-/* Register bussiness company styles */
-
-
-
-/* End Bussiness company styles  */
 
 
 svg{

@@ -1,7 +1,7 @@
 <div class="col-lg-12 cat-container">
     <div class="plans-container">
         <h1 class="text-center">Пакети</h1>
-        <div class="catalog">
+        <div class=" catalog">
             <div class="plan-name">
                 Онлайн Каталог
             </div>
@@ -10,14 +10,14 @@
             </div>
         </div>
 
-        <div class="catalog">
+        <div class=" catalog">
             <div class="plan-name">
                 Онлайн Каталог <br> + <br> Хартиен Каталог
             </div>
             <div class="plan-price">80лв.</div>
         </div>
 
-        <div class="catalog">
+        <div class=" catalog">
             <div class="plan-name">
                 Онлайн Каталог <br> + <br> Хартиен Каталог <br> + <br> Снимка
             </div>
@@ -35,6 +35,8 @@
     ));
 
     //Kint::dump($terms);
+
+
 
     if ($terms && !is_wp_error($terms)) :
     foreach ($terms as $term) { ?>
@@ -56,6 +58,19 @@
 
 
 return;
+
+//lists enqueuet scripts
+/*function wpa54064_inspect_scripts() {
+        global $wp_scripts;
+        foreach( $wp_scripts->queue as $handle ) :
+            echo $handle . ' | ';
+        endforeach;
+    }
+    add_action( 'wp_print_scripts', 'wpa54064_inspect_scripts' );*/
+
+
+
+
 
 
 Kint::dump(get_the_category(1));
