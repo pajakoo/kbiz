@@ -178,8 +178,51 @@
     float:none;
 }
 
+table thead{
+  display:none;
+}
 
+table.fee-options{
+    border-color:white;
+}
 
+table.fee-options td{
+    border-color:white;
+}
+
+table.fee-options tr{
+    display:list-item;
+    list-style: none;
+    border-color:white;
+}
+
+table.fee-options .fee-selection,
+table.fee-options .fee-duration,
+table.fee-options .fee-images {
+    display:none;
+}
+
+table .fee-amount {
+    padding: 50px;
+    background: #FF9900;
+    border: 1px solid #FF9900!important;
+    cursor: pointer;
+
+}
+
+table .fee-label label {
+    cursor: pointer;
+}
+
+table .fee-label {
+
+    font-weight: bold;
+    padding: 50px;
+    color: #FF9900;
+    border: 1px solid #FF9900!important;
+    cursor: pointer;
+
+}
 
 
 
@@ -414,7 +457,7 @@ nav.sidebar, .main{
     }
 
     body.logged-in nav.sidebar{
-        top:32px;
+        /*top:32px;*/
     }
 
     /*give sidebar 100% width;*/

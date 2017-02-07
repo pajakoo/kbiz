@@ -1,4 +1,4 @@
-<div class="col-lg-12 cat-container">
+<div class="col-lg-12 cat-container"><!--
     <div class="plans-container">
         <h1 class="text-center">Пакети</h1>
         <div class=" catalog">
@@ -23,7 +23,7 @@
             </div>
             <div class="plan-price">100лв.</div>
         </div>
-    </div>
+    </div>-->
     <?php
 
     //taxonomy=wpbdp_category&post_type=wpbdp_listing&post_type=category

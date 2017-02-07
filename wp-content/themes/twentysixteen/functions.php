@@ -32,11 +32,6 @@ function createProductCat($catName, $parent) {
 */
 
 
-
-
-
-
-
 require get_template_directory() . '/inc/Kint/Kint.class.php';
 
 
@@ -468,7 +463,7 @@ add_filter( 'widget_tag_cloud_args', 'twentysixteen_widget_tag_cloud_args' );
 
 
 function register_css() {
-
+    wp_deregister_style('twentysixteen-style');
 
     wp_register_style( 'style', get_template_directory_uri() . '/style.css', 'bootstrap-min' );
     wp_register_style( 'wpbdp-css', get_template_directory_uri() . '/css/wpbdp.css', ['bootstrap','style'] );
@@ -483,3 +478,36 @@ function register_css() {
 }
 add_action( 'wp_enqueue_scripts', 'register_css' );
 
+function load_script_enqueue(){
+    wp_enqueue_script('customscript', get_template_directory_uri() . '/js/lib.js', array('jquery'), '1.0', true);
+}
+
+
+add_action('wp_enqueue_scripts',load_script_enqueue);
+
+
+
+
+/**
+ * Redirect non-admins to the homepage after logging into the site.
+ *
+ * @since 	1.0
+ */
+function acme_login_redirect( $redirect_to, $request, $user  ) {
+
+    if( is_array( $user->roles ) && in_array( 'administrator', $user->roles ) ){
+        return admin_url();
+    } else {
+        wp_redirect( get_post_permalink( get_page_by_title('Business Directory')->ID ).'?wpbdp_view=submit_listing' );
+    }
+}
+add_filter( 'login_redirect', 'acme_login_redirect', 10, 3 );
+
+
+add_action('after_setup_theme', 'remove_admin_bar');
+
+function remove_admin_bar() {
+    if (!current_user_can('administrator') && !is_admin()) {
+        show_admin_bar(false);
+    }
+}

@@ -455,19 +455,4 @@ function twentysixteen_widget_tag_cloud_args( $args ) {
 add_filter( 'widget_tag_cloud_args', 'twentysixteen_widget_tag_cloud_args' );
 
 
-function createProductCat($catName, $parent) {
-
-    $cat = wp_insert_term(
-        $catName, // the term
-        'category', // the taxonomy
-        array(
-            'description' => $catName,
-            'slug' => $catName,
-            'parent' => $parent
-        )
-    );
-    var_dump($cat);
-    return $cat["term_id"];
-}
-
 require get_template_directory() . '/inc/Kint/Kint.class.php';

@@ -16,6 +16,15 @@
     jQuery('#user_pass').addClass('form-control');
     jQuery('#wpbdp-field-2').select2();
     jQuery('#wpbdp-field-12').select2();
+    jQuery('.primary-menu').addClass('nav navbar-nav');
+
+
+    jQuery('.fee-option').on('click', function(e){
+        jQuery(e.currentTarget).find('input').prop("checked", true);
+        jQuery('#wpbdp-listing-form-fees').submit();
+    });
+
+
 
 
 })();
