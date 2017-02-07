@@ -493,21 +493,21 @@ add_action('wp_enqueue_scripts',load_script_enqueue);
  *
  * @since 	1.0
  */
-function acme_login_redirect( $redirect_to, $request, $user  ) {
-
-    if( is_array( $user->roles ) && in_array( 'administrator', $user->roles ) ){
-        return admin_url();
-    } else {
-        wp_redirect( get_post_permalink( get_page_by_title('Business Directory')->ID ).'?wpbdp_view=submit_listing' );
-    }
-}
-add_filter( 'login_redirect', 'acme_login_redirect', 10, 3 );
-
-
-add_action('after_setup_theme', 'remove_admin_bar');
-
-function remove_admin_bar() {
-    if (!current_user_can('administrator') && !is_admin()) {
-        show_admin_bar(false);
-    }
-}
+//function acme_login_redirect( $redirect_to, $request, $user  ) {
+//
+//    if( is_array( $user->roles ) && in_array( 'administrator', $user->roles ) ){
+//        return admin_url();
+//    } else {
+//        wp_redirect( get_post_permalink( get_page_by_title('Business Directory')->ID ).'?wpbdp_view=submit_listing' );
+//    }
+//}
+//add_filter( 'login_redirect', 'acme_login_redirect', 10, 3 );
+//
+//
+//add_action('after_setup_theme', 'remove_admin_bar');
+//
+//function remove_admin_bar() {
+//    if (!current_user_can('administrator') && !is_admin()) {
+//        show_admin_bar(false);
+//    }
+//}

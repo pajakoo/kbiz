@@ -17,6 +17,7 @@
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 <!--    <link rel="stylesheet" href="https://i.icomoon.io/public/temp/fbec56d445/KBIZ/style.css">-->
 
+
     <?php if ( is_singular() && pings_open( get_queried_object() ) ) : ?>
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 	<?php endif; ?>
