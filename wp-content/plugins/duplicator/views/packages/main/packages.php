@@ -5,6 +5,7 @@
 	$statusCount	= count($qryStatus);
 	$package_debug	= DUP_Settings::Get('package_debug');
     $ajax_nonce		= wp_create_nonce('package_list');
+	$ui_create_frmt = is_numeric(DUP_Settings::Get('package_ui_created')) ? DUP_Settings::Get('package_ui_created') : 1;
 ?>
 
 <style>
@@ -57,8 +58,8 @@ TOOL-BAR -->
 		<td align="center" >
 			<a href="?page=duplicator-tools" id="btn-logs-dialog" class="button"  title="<?php _e("Package Logs", 'duplicator') ?>..."><i class="fa fa-list-alt"></i>
 		</td>
-		<td class="dup-toolbar-btns">						
-			<span><i class="fa fa-archive"></i> <?php _e("All Packages", 'duplicator'); ?></span> &nbsp;
+		<td>						
+			<span><i class="fa fa-archive"></i> <?php _e("All Packages", 'duplicator'); ?></span>
 			<a id="dup-pro-create-new"  href="?page=duplicator&tab=new1" class="add-new-h2"><?php _e("Create New", 'duplicator'); ?></a>
 		</td>
 	</tr>
@@ -130,7 +131,7 @@ TOOL-BAR -->
 			<?php if ($row['status'] >= 100) : ?>
 				<tr class="dup-pack-info <?php echo $css_alt ?>">
 					<td class="pass"><input name="delete_confirm" type="checkbox" id="<?php echo $row['id'] ;?>" /></td>
-					<td><?php echo date( "m-d-y G:i", strtotime($row['created']));?></td>
+					<td><?php echo DUP_Package::FormatCreatedDate($row['created'], $ui_create_frmt);?></td>
 					<td><?php echo DUP_Util::ByteSize($pack_archive_size); ?></td>
 					<td class='pack-name'><?php	echo  $pack_name ;?></td>
 					<td class="get-btns">
@@ -161,7 +162,7 @@ TOOL-BAR -->
 				?>
 				<tr class="dup-pack-info  <?php echo $css_alt ?>">
 					<td class="fail"><input name="delete_confirm" type="checkbox" id="<?php echo $row['id'] ;?>" /></td>
-					<td><?php echo date( "m-d-y G:i", strtotime($row['created']));?></td>
+					<td><?php echo DUP_Package::FormatCreatedDate($row['created'], $ui_create_frmt);?></td>
 					<td><?php echo DUP_Util::ByteSize($size); ?></td>
 					<td class='pack-name'><?php echo $pack_name ;?></td>
 					<td class="get-btns error-msg" colspan="2">		

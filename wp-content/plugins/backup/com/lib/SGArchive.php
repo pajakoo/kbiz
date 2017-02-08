@@ -24,6 +24,8 @@ class SGArchive
 	private $fileOffset = null;
 	private $delegate;
 	private $ranges = array();
+	private $state = null;
+	private $rangeCursor = 0;
 
 	public function __construct($filePath, $mode, $cdrSize = 0)
 	{
@@ -62,7 +64,7 @@ class SGArchive
 		$start = 0;
 
 		$fp = fopen($path, 'rb');
-		$fileSize = realFilesize($path);
+		$fileSize = backupGuardRealFilesize($path);
 
 		$state = $this->delegate->getState();
 		$offset = $state->getOffset();
@@ -72,6 +74,7 @@ class SGArchive
 		}
 		else{
 			$headerSize = $state->getHeaderSize();
+			$this->fileOffset = $state->getFileOffsetInArchive();
 		}
 
 		$this->ranges = $state->getRanges();
@@ -95,11 +98,9 @@ class SGArchive
 				break;
 			}
 
-			$shouldReload = $this->delegate->shouldReload(strlen($data));
-
 			$data = gzdeflate($data);
 			$zlen += strlen($data);
-			$sgArchiveSize = realFilesize($this->filePath);
+			$sgArchiveSize = backupGuardRealFilesize($this->filePath);
 			$sgArchiveSize += strlen($data);
 
 			if($sgArchiveSize > SG_ARCHIVE_MAX_SIZE_32) {
@@ -117,11 +118,15 @@ class SGArchive
 			$start += strlen($data);
 
 			SGPing::update();
-
+			$shouldReload = $this->delegate->shouldReload();
 			if ($shouldReload) {
-				$this->delegate->saveStateData(SG_STATE_ACTION_COMPRESSING_FILES, $this->ranges, $offset, $headerSize, true);
+				$this->delegate->saveStateData(SG_STATE_ACTION_COMPRESSING_FILES, $this->ranges, $offset, $headerSize, true, $this->fileOffset);
 
 				if (backupGuardIsReloadEnabled()) {
+					@fclose($fp);
+					@fclose($this->fileHandle);
+					@fclose($this->cdrFileHandle);
+
 					$this->delegate->reload();
 				}
 			}
@@ -198,13 +203,24 @@ class SGArchive
 			$tables = "";
 		}
 
+		$multisitePath = "";
+		$multisiteDomain = "";
+		// in case of multisite save old path and domain for later usage
+		if (is_multisite()) {
+			$multisitePath = PATH_CURRENT_SITE;
+			$multisiteDomain = DOMAIN_CURRENT_SITE;
+		}
+
 		//save db prefix, site and home url for later use
 		$extra = json_encode(array(
 			'siteUrl' => get_site_url(),
 			'home' => get_home_url(),
 			'dbPrefix' => SG_ENV_DB_PREFIX,
 			'tables' => $tables,
-			'method' => SGConfig::get('SG_BACKUP_TYPE')
+			'method' => SGConfig::get('SG_BACKUP_TYPE'),
+			'multisitePath' => $multisitePath,
+			'multisiteDomain' => $multisiteDomain,
+			'selectivRestoreable' => true
 		));
 
 		//extra size
@@ -311,7 +327,20 @@ class SGArchive
 		return $low.$high;
 	}
 
-	public function extractTo($destinationPath)
+	public function extractTo($destinationPath, $state = null)
+	{
+		$this->state = $state;
+		$action = $state->getAction();
+
+		if ($action == SG_STATE_ACTION_PREPARING_STATE_FILE) {
+			$this->extract($destinationPath);
+		}
+		else {
+			$this->continueExtract($destinationPath);
+		}
+	}
+
+	private function extract($destinationPath)
 	{
 		//read offset
 		fseek($this->fileHandle, -4, SEEK_END);
@@ -335,6 +364,9 @@ class SGArchive
 			SGConfig::set('SG_OLD_DB_PREFIX', $extra['dbPrefix']);
 			SGConfig::set('SG_BACKUPED_TABLES', $extra['tables']);
 			SGConfig::set('SG_BACKUP_TYPE', $extra['method']);
+
+			SGConfig::set('SG_MULTISITE_OLD_PATH', $extra['multisitePath']);
+			SGConfig::set('SG_MULTISITE_OLD_DOMAIN', $extra['multisiteDomain']);
 		}
 
 		$this->delegate->didExtractArchiveMeta($extra);
@@ -370,6 +402,13 @@ class SGArchive
 		$this->extractFiles($destinationPath);
 	}
 
+	private function continueExtract($destinationPath)
+	{
+		fseek($this->fileHandle, $this->state->getOffset());
+		$this->cdr = json_decode($this->state->getCdr(), true);
+		$this->extractFiles($destinationPath);
+	}
+
 	private function extractCdr($cdrSize, $destinationPath)
 	{
 		while ($cdrSize)
@@ -382,8 +421,9 @@ class SGArchive
 			$filename = $this->read($filenameLen);
 			$filename = $this->delegate->getCorrectCdrFilename($filename);
 
-			//read file offset (not used in this version)
-			$this->read(8);
+			//read file offset
+			$fileOffsetInArchive = $this->unpackLittleEndian($this->read(8), 8);
+			$fileOffsetInArchive = hexdec($fileOffsetInArchive);
 
 			//read compressed length
 			$zlen = $this->unpackLittleEndian($this->read(8), 8);
@@ -410,17 +450,30 @@ class SGArchive
 
 			$cdrSize--;
 
-			$this->cdr[] = array($filename, $zlen, $ranges);
+			$this->cdr[] = array($filename, $zlen, $ranges, $fileOffsetInArchive);
 		}
 	}
 
 	private function extractFiles($destinationPath)
 	{
-		fseek($this->fileHandle, 0, SEEK_SET);
+		$action = $this->state->getAction();
+		if ($action == SG_STATE_ACTION_PREPARING_STATE_FILE) {
+			$cdrIndex = 0;
+			$inprogress = false;
+			fseek($this->fileHandle, 0, SEEK_SET);
+		}
+		else {
+			$inprogress = $this->state->getInprogress();
+			$cdrIndex = $this->state->getCursor();
+		}
 
-		foreach ($this->cdr as $row) {
-			//read extra (not used in this version)
-			$this->read(4);
+		for ($index = $cdrIndex; $index<count($this->cdr); $index++) {
+			$row = $this->cdr[$index];
+
+			if (!$inprogress) {
+				//read extra (not used in this version)
+				$this->read(4);
+			}
 
 			$path = $destinationPath.$row[0];
 			$path = str_replace('\\', '/', $path);
@@ -429,43 +482,94 @@ class SGArchive
 				$path = dirname($path);
 			}
 
-			if (!$this->createPath($path)) {
-				$ranges = $row[2];
+			if (!$inprogress) {
+				if (!$this->createPath($path)) {
+					$ranges = $row[2];
 
-				//get last range of file
-				$range = end($ranges);
-				$offset = $range['start'] + $range['size'];
+					//get last range of file
+					$range = end($ranges);
+					$offset = $range['start'] + $range['size'];
 
-				// skip file and continue
-				fseek($this->fileHandle, $offset, SEEK_CUR);
-				$this->delegate->didFindExtractError('Could not create directory: '.dirname($path));
-				continue;
+					// skip file and continue
+					fseek($this->fileHandle, $offset, SEEK_CUR);
+					$this->delegate->didFindExtractError('Could not create directory: '.dirname($path));
+					continue;
+				}
 			}
 
 			$path = $destinationPath.$row[0];
 
-			$this->delegate->didStartExtractFile($path);
+			if (!$inprogress) {
+				$this->delegate->didStartExtractFile($path);
 
-			if (!is_writable(dirname($path))) {
-				$this->delegate->didFindExtractError('Destination path is not writable: '.dirname($path));
+				if (!is_writable(dirname($path))) {
+					$this->delegate->didFindExtractError('Destination path is not writable: '.dirname($path));
+				}
 			}
 
-			$fp = @fopen($path, 'wb');
+			if (!$inprogress) {
+				$fp = @fopen($path, 'wb');
+			}
+			else {
+				$fp = @fopen($path, 'ab');
+			}
 
 			$zlen = $row[1];
 			SGPing::update();
 			$ranges = $row[2];
 
-			for ($i = 0; $i<count($ranges); $i++) {
+			if ($inprogress) {
+				$this->rangeCursor = $this->state->getRangeCursor();
+			}
+			else {
+				$this->rangeCursor = 0;
+			}
+
+			for ($i = $this->rangeCursor; $i<count($ranges); $i++) {
 				$start = $ranges[$i]['start'];
 				$size = $ranges[$i]['size'];
 
 				$data = $this->read($size);
 				$data = gzinflate($data);
 
+				$inprogress = true;
+				$cdrindex = $index;
+				if (($i+1) == count($ranges)) {
+					$inprogress = false;
+					$cdrindex = $index + 1;
+				}
+
 				if (is_resource($fp)) {
 					fwrite($fp, $data);
 					fflush($fp);
+
+					$shouldReload = $this->delegate->shouldReload();
+
+					//restore with reloads will only work in external mode
+					if ($shouldReload && SGExternalRestore::isEnabled()) {
+						$token = $this->delegate->getToken();
+						$progress = $this->delegate->getProgress();
+
+						$offset = ftell($this->fileHandle);
+						$this->state->setCdr(json_encode($this->cdr));
+						$this->state->setOffset($offset);
+						$this->state->setInprogress($inprogress);
+						$this->state->setCdrSize(count($this->cdr));
+						$this->state->setToken($token);
+						$this->state->setProgress($progress);
+						$this->state->setAction(SG_STATE_ACTION_RESTORING_FILES);
+
+						$this->state->setCursor($cdrindex);
+						$this->state->setRangeCursor($i+1);
+						$this->state->save();
+
+						SGPing::update();
+
+						@fclose($fp);
+						@fclose($this->fileHandle);
+
+						$this->delegate->reload();
+					}
 				}
 				SGPing::update();
 			}

@@ -2,8 +2,10 @@
 	require_once(dirname(__FILE__).'/../boot.php');
 	require_once(SG_BACKUP_PATH.'SGBackup.php');
 
-	if(isAjax() && count($_POST))
+	if(backupGuardIsAjax() && count($_POST))
 	{
+		@session_write_close();
+
 		$actionId = (int)$_POST['actionId'];
 		$currentAction = SGBackup::getAction($actionId);
 

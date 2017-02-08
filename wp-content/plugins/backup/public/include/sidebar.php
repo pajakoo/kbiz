@@ -18,7 +18,7 @@
 		</ul>
 	</nav>
 	<div class="sg-alert-pro">
-		<p><?php _t('Website migration, Backup to cloud, automatization, mail notifications, and more in our PRO package!'); ?></p>
-		<p><a class="btn btn-primary" target="_blank" href="<?php echo SG_BACKUP_SITE_URL; ?>"><?php _t('Buy now!'); ?></a></p>
+		<p><?php _backupGuardT('Website migration, Backup to cloud, automatization, mail notifications, and more in our PRO package!'); ?></p>
+		<p><a class="btn btn-primary" target="_blank" href="<?php echo SG_BACKUP_SITE_URL; ?>"><?php _backupGuardT('Buy now!'); ?></a></p>
 	</div>
 </div>

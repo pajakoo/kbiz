@@ -2842,7 +2842,6 @@
 }
 .sg-wrapper-less .radio,
 .sg-wrapper-less .checkbox {
-  position: relative;
   display: block;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -7529,7 +7528,7 @@
 .sg-wrapper-less .sg-control-label {
   text-align: left;
   margin-bottom: 0;
-  margin-top: 4px;
+  margin-top: 11px;
 }
 .sg-wrapper-less .sg-upload-label {
   padding-left: 0px;

@@ -16,12 +16,7 @@ class SGReloadHandler
 		$this->port = @$_SERVER['SERVER_PORT'];
 
 		if (!$this->scheme) {
-			if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']!='') {
-				$this->scheme = 'https';
-			}
-			else {
-				$this->scheme = 'http';
-			}
+			$this->scheme = backupGuardGetCurrentUrlScheme();
 		}
 
 		if (!$this->port) {

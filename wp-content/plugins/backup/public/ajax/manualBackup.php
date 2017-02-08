@@ -7,7 +7,15 @@ try {
 	$state = false;
 	$success = array('success' => 1);
 
-	if (isAjax() && count($_POST)) {
+	if (backupGuardIsAjax() && count($_POST)) {
+
+		$allActions = SGBackup::getRunningActions();
+		if (count($allActions)) { // abort any other backup if there is an active action
+			die(json_encode(array(
+				"error" => "There is an active backup running. Please try later"
+			)));
+		}
+
 		$options = $_POST;
 		$error = array();
 		SGConfig::set("SG_BACKUP_TYPE", $options['backup-type']);

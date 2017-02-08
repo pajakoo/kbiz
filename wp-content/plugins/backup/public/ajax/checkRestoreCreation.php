@@ -3,17 +3,25 @@
 require_once(dirname(__FILE__).'/../boot.php');
 require_once(SG_BACKUP_PATH.'SGBackup.php');
 
-if(isAjax()) {
+if (backupGuardIsAjax()) {
 	$timeout = 10; //in sec
-	while($timeout != 0) {
+	while ($timeout != 0) {
 		sleep(1);
 		$timeout--;
 		$created = SGConfig::get('SG_RUNNING_ACTION', true);
 
 		if ($created) {
-			die('1');
+			$runningActions = SGBackup::getRunningActions();
+			if ($runningActions) {
+				$actionId = $runningActions[0]['id'];
+				die(json_encode(array(
+					'status' => 0,
+					'external_enabled' => SGExternalRestore::isEnabled()?1:0,
+					'external_url' => SGExternalRestore::getInstance()->getDestinationFileUrl()
+				)));
+			}
 		}
 	}
 
-	die('2');
+	die('{"status":1}');
 }

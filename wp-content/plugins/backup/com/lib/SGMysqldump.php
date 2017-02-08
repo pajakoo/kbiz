@@ -49,6 +49,11 @@ class SGMysqldump
     private $delegate = null;
     private $excludeTables = array();
 
+    private $cursor = 0;
+    private $state = null;
+    private $inprogress = false;
+    private $backedUpTables = array();
+
     /**
      * Constructor of SGMysqldump. Note that in the case of an SQLite database
      * connection, the filename must be in the $db parameter.
@@ -110,6 +115,16 @@ class SGMysqldump
         $this->delegate = $delegate;
     }
 
+    private function getState()
+    {
+        return $this->delegate->getState();
+    }
+
+    private function shouldReload()
+    {
+        return $this->delegate->shouldReload();
+    }
+
     /**
      * Custom array_replace_recursive to be used if PHP < 5.3
      * Replaces elements from passed arrays into the first array recursively
@@ -154,6 +169,7 @@ class SGMysqldump
      */
     public function start($filename)
     {
+        $this->state = $this->getState();
         $this->fileName = $filename;
 
         // Connect to database
@@ -162,40 +178,44 @@ class SGMysqldump
         // Create output file
         $this->compressManager->open($this->fileName);
 
-        // Write some basic info to output file
-        $this->compressManager->write($this->getDumpFileHeader());
+        if ($this->state->getAction() == SG_STATE_ACTION_PREPARING_STATE_FILE) {
+            // Write some basic info to output file
+            $this->compressManager->write($this->getDumpFileHeader());
 
-        // Store server settings and use sanner defaults to dump
-        $this->compressManager->write(
-            $this->typeAdapter->backup_parameters($this->dumpSettings)
-        );
-
-        if ($this->dumpSettings['databases']) {
+            // Store server settings and use sanner defaults to dump
             $this->compressManager->write(
-                $this->typeAdapter->getDatabaseHeader($this->db)
+                $this->typeAdapter->backup_parameters($this->dumpSettings)
             );
-            if ($this->dumpSettings['add-drop-database']) {
+
+            if ($this->dumpSettings['databases']) {
                 $this->compressManager->write(
-                    $this->typeAdapter->add_drop_database($this->db)
+                    $this->typeAdapter->getDatabaseHeader($this->db)
                 );
+                if ($this->dumpSettings['add-drop-database']) {
+                    $this->compressManager->write(
+                        $this->typeAdapter->add_drop_database($this->db)
+                    );
+                }
             }
         }
 
         // Get table, view and trigger structures from database
         $this->getDatabaseStructure();
 
-        if ($this->dumpSettings['databases']) {
-            $this->compressManager->write(
-                $this->typeAdapter->databases($this->db)
-            );
-        }
+        if ($this->state->getAction() == SG_STATE_ACTION_PREPARING_STATE_FILE) {
+            if ($this->dumpSettings['databases']) {
+                $this->compressManager->write(
+                    $this->typeAdapter->databases($this->db)
+                );
+            }
 
-        // If there still are some tables/views in include-tables array,
-        // that means that some tables or views weren't found.
-        // Give proper error and exit.
-        if (0 < count($this->dumpSettings['include-tables'])) {
-            $name = implode(",", $this->dumpSettings['include-tables']);
-            throw new SGException("Table or View (" . $name . ") not found in database");
+            // If there still are some tables/views in include-tables array,
+            // that means that some tables or views weren't found.
+            // Give proper error and exit.
+            if (0 < count($this->dumpSettings['include-tables'])) {
+                $name = implode(",", $this->dumpSettings['include-tables']);
+                throw new SGException("Table or View (" . $name . ") not found in database");
+            }
         }
 
         $this->exportTables();
@@ -326,26 +346,42 @@ class SGMysqldump
      */
     private function exportTables()
     {
-        $backupedTables = array();
+        if ($this->state->getAction() != SG_STATE_ACTION_PREPARING_STATE_FILE) {
+            $this->cursor = $this->state->getCursor();
+            $this->inprogress = $this->state->getInprogress();
+            $this->backedUpTables = $this->state->getBackedUpTables();
+        }
+        else {
+            $this->cursor = 0;
+            $this->inprogress = false;
+            $this->backedUpTables = array();
+        }
+
         // Exporting tables one by one
-        foreach ($this->tables as $table) {
+        for($i = $this->cursor; $i < count($this->tables); $i++) {
+            $table = $this->tables[$i];
             if (in_array($table, $this->dumpSettings['exclude-tables'], true)) {
+                $this->cursor += 1;
                 continue;
             }
 
-            SGBackupLog::writeAction('backup table: '.$table, SG_BACKUP_LOG_POS_START);
-
-            $this->getTableStructure($table);
+            if (!$this->inprogress) {
+                SGBackupLog::writeAction('backup table: '.$table, SG_BACKUP_LOG_POS_START);
+                $this->getTableStructure($table, false);
+            }
+            else {
+                $this->getTableStructure($table, true);
+            }
 
             if (false === $this->dumpSettings['no-data']) {
                 $this->listValues($table);
             }
 
-            $backupedTables[] = $table;
+            $this->backedUpTables[] = $table;
             SGBackupLog::writeAction('backup table: '.$table, SG_BACKUP_LOG_POS_END);
         }
 
-        SGConfig::set('SG_BACKUPED_TABLES', json_encode($backupedTables));
+        SGConfig::set('SG_BACKUPED_TABLES', json_encode($this->backedUpTables));
     }
 
     /**
@@ -525,11 +561,18 @@ class SGMysqldump
      */
     private function listValues($tableName)
     {
-        $this->prepareListValues($tableName);
+        if (!$this->state->getInprogress()) {
+            $this->prepareListValues($tableName);
+        }
 
         $onlyOnce = true;
         $lineSize = 0;
         $offset = 0;
+        if ($this->state->getInprogress()) {
+            $onlyOnce = false;
+            $offset = $this->state->getOffset();
+            $lineSize = $this->state->getLineSize();
+        }
 
         $colStmt = $this->getColumnStmt($tableName);
         $stmt = "SELECT $colStmt FROM `$tableName`";
@@ -544,8 +587,11 @@ class SGMysqldump
             $st = $this->dbHandler->exec($stmt.' LIMIT '.$offset.','.$limit);
 
             $row = $this->dbHandler->fetch($st);
-            if (!$row)
-            {
+            $this->inprogress = true;
+            if (!$row) {
+                $this->inprogress = false;
+                $this->cursor += 1;
+                $this->delegate->saveStateData(0, $this->cursor, $this->inprogress, 0, $this->backedUpTables);
                 break;
             }
 
@@ -557,7 +603,8 @@ class SGMysqldump
                         "INSERT INTO `$tableName` VALUES (" . implode(",", $vals) . ")"
                     );
                     $onlyOnce = false;
-                } else {
+                }
+                else {
                     $lineSize += $this->compressManager->write(",(" . implode(",", $vals) . ")");
                 }
                 if ($lineSize > self::MAXLINESIZE) {
@@ -566,8 +613,7 @@ class SGMysqldump
                     $lineSize = 0;
                 }
 
-                if ($this->delegate)
-                {
+                if ($this->delegate) {
                     $this->delegate->didExportRow();
                 }
 
@@ -575,6 +621,13 @@ class SGMysqldump
             }
 
             $offset += $limit;
+            if ($this->shouldReload()) {
+                $this->delegate->saveStateData($offset, $this->cursor, $this->inprogress, $lineSize, $this->backedUpTables);
+
+                if (backupGuardIsReloadEnabled()) {
+                    $this->delegate->reload();
+                }
+            }
         }
 
         if (!$onlyOnce) {
@@ -824,6 +877,7 @@ class CompressNone extends CompressManagerFactory
     public function open($filename)
     {
         $this->fileHandler = fopen($filename, "ab");
+
         if (false === $this->fileHandler) {
             throw new Exception("Output file is not writable");
         }

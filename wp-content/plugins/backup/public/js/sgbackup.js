@@ -1,6 +1,6 @@
 SG_ACTIVE_DOWNLOAD_AJAX = '';
 SG_DOWNLOAD_PROGRESS_AJAX = '';
-SG_CHECK_ACTION_STATUS_REQUEST_FREQUENCY = 5000;
+SG_CHECK_ACTION_STATUS_REQUEST_FREQUENCY = 2500;
 
 jQuery(document).on('change', '.btn-file :file', function() {
     var input = jQuery(this),
@@ -85,19 +85,19 @@ sgBackup.manualBackup = function(){
     jQuery('.alert').remove();
     if(jQuery('input[type=radio][name=backupType]:checked').val() == 2) {
         if(jQuery('.sg-custom-option:checked').length <= 0) {
-            error.push('Please choose one option.');
+            error.push('Please choose at least one option.');
         }
         //Check if any file is selected
         if(jQuery('input[type=checkbox][name=backupFiles]:checked').length > 0) {
             if(jQuery('.sg-custom-backup-files input:checkbox:checked').length <= 0) {
-                error.push('Please choose one file.');
+                error.push('Please choose at least one directory.');
             }
         }
     }
     //Check if any cloud is selected
     if(jQuery('input[type=checkbox][name=backupCloud]:checked').length > 0) {
         if (jQuery('.sg-custom-backup-cloud input:checkbox:checked').length <= 0) {
-            error.push('Please choose one cloud.');
+            error.push('Please choose at least one cloud.');
         }
     }
     //If any error show it and abort ajax
@@ -400,9 +400,13 @@ sgBackup.checkBackupCreation = function(){
 
 sgBackup.checkRestoreCreation = function(){
     var sgRestoreCreationHandler = new sgRequestHandler('checkRestoreCreation', {});
-    sgRestoreCreationHandler.dataType = 'html';
     sgRestoreCreationHandler.callback = function(response){
-        location.reload();
+        if (response.status==0 && response.external_enabled==1) {
+            location.href = response.external_url;
+        }
+        else {
+            location.reload();
+        }
     };
     sgRestoreCreationHandler.run();
 };

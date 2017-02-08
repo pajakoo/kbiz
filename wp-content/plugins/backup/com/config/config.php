@@ -11,8 +11,10 @@ define('SG_LOG_PATH', SG_CORE_PATH.'log/');
 define('SG_STORAGE_PATH', SG_CORE_PATH.'storage/');
 define('SG_EXCEPTION_PATH', SG_CORE_PATH.'exception/');
 define('SG_BACKUP_PATH', SG_CORE_PATH.'backup/');
+define('SG_RESTORE_PATH', SG_CORE_PATH.'restore/');
 define('SG_LIB_PATH', SG_APP_PATH.'lib/');
 define('SG_MAIL_PATH', SG_CORE_PATH.'mail/');
+define('SG_NOTICE_PATH', SG_CORE_PATH.'notice/');
 define('SG_SCHEDULE_PATH', SG_CORE_PATH.'schedule/');
 
 //Log
@@ -22,6 +24,11 @@ define('SG_LOG_LEVEL_MEDIUM', 2);
 define('SG_LOG_LEVEL_LOW', 4);
 define('SG_BACKUP_LOG_POS_START', 1);
 define('SG_BACKUP_LOG_POS_END', 2);
+
+//Notice
+define('SG_NOTICE_SUCCESS', 'success');
+define('SG_NOTICE_WARNING', 'warning');
+define('SG_NOTICE_ERROR', 'error');
 
 //Reload methods
 define('SG_RELOAD_METHOD_NONE', 'none');
@@ -38,15 +45,17 @@ define('SG_NUMBER_OF_BACKUPS_TO_KEEP', 100);
 //Backup timeout in seconds
 define('SG_BACKUP_TIMEOUT', 180);
 
+define('SG_RELOAD_TIMEOUT', 10);
+
 //Ping data update frequency
 define('SG_PING_DATE_UPDATE_FREQUENCY', 3);
 
 //Backup file extension
 define('SGBP_EXT', 'sgbp');
 
-define('SG_NOTICE_EXECUTION_TIMEOUT', 'timeoutError');
-define('SG_NOTICE_MIGRATION_ERROR', 'migrationError');
-define('SG_NOTICE_NOT_WRITABLE_ERROR', 'notwritable');
+define('SG_NOTICE_EXECUTION_TIMEOUT', 'timeout_error');
+define('SG_NOTICE_MIGRATION_ERROR', 'migration_error');
+define('SG_NOTICE_NOT_WRITABLE_ERROR', 'restore_notwritable_error');
 
 define('SG_WORDPRESS_CORE_TABLE', SG_ENV_DB_PREFIX.'options');
 define('SG_MAGENTO_CORE_TABLE', SG_ENV_DB_PREFIX.'core_config_data');
@@ -73,6 +82,8 @@ define('SG_STATE_ACTION_LISTING_FILES', 2);
 define('SG_STATE_ACTION_COMPRESSING_FILES', 3);
 define('SG_STATE_ACTION_PREPARING_UPLOAD', 4);
 define('SG_STATE_ACTION_UPLOADING_BACKUP', 5);
+define('SG_STATE_ACTION_RESTORING_FILES', 6);
+define('SG_STATE_ACTION_EXPORTING_SQL', 7);
 
 define('SG_STATE_TYPE_FILE', 1);
 define('SG_STATE_TYPE_DB', 2);
@@ -99,6 +110,9 @@ define('SG_MAX_SUPPORTED_ARCHIVE_VERSION', 5);
 //Reloader status
 define('SG_RELOADER_STATUS_IDLE', 1);
 define('SG_RELOADER_STATUS_RUNNING', 2);
+
+//External restore
+define('SG_EXTERNAL_RESTORE_FILE', 'bg_restore.php');
 
 //Mail
 define('SG_MAIL_BACKUP_SUCCESS_SUBJECT', 'Backup Succeeded');

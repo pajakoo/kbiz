@@ -25,11 +25,11 @@ $backupFileNamePrefix = htmlspecialchars($backupFileNamePrefix, ENT_QUOTES);
                 <div class="col-md-12">
                     <form class="form-horizontal" method="post" data-sgform="ajax" data-type="sgsettings">
                         <fieldset>
-                            <legend><?php echo _t('General settings')?></legend>
+                            <legend><?php echo _backupGuardT('General settings')?></legend>
                             <?php if(SGBoot::isFeatureAvailable('NOTIFICATIONS')): ?>
                                 <div class="form-group">
                                     <label class="col-md-8 sg-control-label sg-user-info">
-                                        <?php echo _t('Email notifications');
+                                        <?php echo _backupGuardT('Email notifications');
                                         if(!empty($userEmail)): ?>
                                             <br/><span class="text-muted sg-user-email sg-helper-block"><?php echo $userEmail; ?></span>
                                         <?php endif?>
@@ -42,7 +42,7 @@ $backupFileNamePrefix = htmlspecialchars($backupFileNamePrefix, ENT_QUOTES);
                                 </div>
                                 <div class="sg-general-settings">
                                     <div class="form-group">
-                                        <label class="col-md-4 sg-control-label" for="sg-email"><?php echo _t('Enter email')?></label>
+                                        <label class="col-md-4 sg-control-label" for="sg-email"><?php echo _backupGuardT('Enter email')?></label>
                                         <div class="col-md-8">
                                             <input id="sg-email" name="sgUserEmail" type="email" placeholder="example@domain.com" class="form-control input-md" value="<?php echo @$userEmail?>">
                                         </div>
@@ -51,7 +51,7 @@ $backupFileNamePrefix = htmlspecialchars($backupFileNamePrefix, ENT_QUOTES);
                             <?php endif; ?>
                             <div class="form-group">
                                 <label class="col-md-8 sg-control-label">
-                                    <?php echo _t('Do backup with reloadings'); ?>
+                                    <?php echo _backupGuardT('Reloads enabled'); ?>
                                 </label>
                                 <div class="col-md-3 pull-right text-right">
                                     <label class="sg-switch-container">
@@ -62,7 +62,7 @@ $backupFileNamePrefix = htmlspecialchars($backupFileNamePrefix, ENT_QUOTES);
                             <?php if(SGBoot::isFeatureAvailable('DELETE_LOCAL_BACKUP_AFTER_UPLOAD')): ?>
                                 <div class="form-group">
                                     <label class="col-md-8 sg-control-label">
-                                        <?php echo _t('Delete local backup after upload'); ?>
+                                        <?php echo _backupGuardT('Delete local backup after upload'); ?>
                                     </label>
                                     <div class="col-md-3 pull-right text-right">
                                         <label class="sg-switch-container">
@@ -73,7 +73,7 @@ $backupFileNamePrefix = htmlspecialchars($backupFileNamePrefix, ENT_QUOTES);
                             <?php endif; ?>
                             <?php if(SGBoot::isFeatureAvailable('NUMBER_OF_BACKUPS_TO_KEEP')): ?>
                                 <div class="form-group">
-                                    <label class="col-md-5 sg-control-label" for='amount-of-backups-to-keep'><?php echo _t("Backup retention")?></label>
+                                    <label class="col-md-5 sg-control-label" for='amount-of-backups-to-keep'><?php echo _backupGuardT("Backup retention")?></label>
                                     <div class="col-md-5 pull-right text-right">
                                         <input class="form-control" id='amount-of-backups-to-keep' name='amount-of-backups-to-keep' type="text" value="<?php echo (int)SGConfig::get('SG_AMOUNT_OF_BACKUPS_TO_KEEP')?(int)SGConfig::get('SG_AMOUNT_OF_BACKUPS_TO_KEEP'):SG_NUMBER_OF_BACKUPS_TO_KEEP?>">
                                     </div>
@@ -82,7 +82,7 @@ $backupFileNamePrefix = htmlspecialchars($backupFileNamePrefix, ENT_QUOTES);
 
                             <?php if(SGBoot::isFeatureAvailable('CUSTOM_BACKUP_NAME')): ?>
                                 <div class="form-group">
-                                    <label class="col-md-5 sg-control-label"><?php echo _t('Backup file name')?></label>
+                                    <label class="col-md-5 sg-control-label"><?php echo _backupGuardT('Backup file name')?></label>
                                     <div class="col-md-5 pull-right text-right">
                                         <input id="backup-file-name" name="backup-file-name" type="text" class="form-control input-md" value="<?php echo $backupFileNamePrefix?>">
                                     </div>
@@ -90,13 +90,13 @@ $backupFileNamePrefix = htmlspecialchars($backupFileNamePrefix, ENT_QUOTES);
 
                             <?php endif; ?>
                             <div class="form-group">
-                                <label class="col-md-7 sg-control-label" for="sg-email"><?php echo _t('AJAX request frequency')?></label>
+                                <label class="col-md-7 sg-control-label" for="sg-email"><?php echo _backupGuardT('AJAX request frequency')?></label>
                                 <div class="col-md-5">
                                     <?php echo selectElement($intervalSelectElement, array('id'=>'sg-ajax-interval', 'name'=>'ajaxInterval', 'class'=>'form-control'), '', $selectedInterval);?>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-5"><?php echo _t('Backup destination path'); ?></label>
+                                <label class="col-md-5"><?php echo _backupGuardT('Backup destination path'); ?></label>
                                 <div class="col-md-6 pull-right text-right">
                                     <span><?php echo str_replace(realpath(SG_APP_ROOT_DIRECTORY).'/', "" ,realpath(SG_BACKUP_DIRECTORY)); ?></span>
                                 </div>
@@ -104,7 +104,7 @@ $backupFileNamePrefix = htmlspecialchars($backupFileNamePrefix, ENT_QUOTES);
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="button1id"></label>
                                 <div class="col-md-8">
-                                    <button type="button" id="sg-save-settings" class="btn btn-success pull-right" onclick="sgBackup.sgsettings();"><?php _t('Save')?></button>
+                                    <button type="button" id="sg-save-settings" class="btn btn-success pull-right" onclick="sgBackup.sgsettings();"><?php _backupGuardT('Save')?></button>
                                 </div>
                             </div>
                         </fieldset>

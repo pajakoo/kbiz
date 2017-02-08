@@ -3,6 +3,7 @@
 require_once(SG_BACKUP_PATH.'SGIBackupDelegate.php');
 require_once(SG_LIB_PATH.'SGDBState.php');
 require_once(SG_LIB_PATH.'SGMysqldump.php');
+require_once(SG_LIB_PATH.'SGCharsetHandler.php');
 @include_once(SG_LIB_PATH.'SGMigrate.php');
 
 class SGBackupDatabase implements SGIMysqldumpDelegate
@@ -15,12 +16,21 @@ class SGBackupDatabase implements SGIMysqldumpDelegate
 	private $totalRowCount = 0;
 	private $currentRowCount = 0;
 	private $warningsFound = false;
-	private $queuedStorageUploads = array();
-	private $driver = SG_DB_DRIVER_WPDB;
+	private $pendingStorageUploads = array();
+	private $state = null;
+	private $reloadStartTs = null;
+	private $progressUpdateInterval;
+	private $migrationAvailable = null;
+	private $oldDbPrefix = null;
+	private $backedUpTables = null;
+	private $newTableNames = null;
+	private $migrateObj = null;
+	private $charsetHanlder = null;
 
 	public function __construct()
 	{
 		$this->sgdb = SGDatabase::getInstance();
+		$this->progressUpdateInterval = SGConfig::get('SG_ACTION_PROGRESS_UPDATE_INTERVAL');
 	}
 
 	public function setDelegate(SGIBackupDelegate $delegate)
@@ -33,39 +43,143 @@ class SGBackupDatabase implements SGIMysqldumpDelegate
 		$this->backupFilePath = $filePath;
 	}
 
+	public function isMigrationAvailable()
+	{
+		if ($this->migrationAvailable === null) {
+			$this->migrationAvailable = SGBoot::isFeatureAvailable('BACKUP_WITH_MIGRATION');
+		}
+
+		return $this->migrationAvailable;
+	}
+
+	public function getOldDbPrefix()
+	{
+		if ($this->oldDbPrefix === null) {
+			$this->oldDbPrefix = SGConfig::get('SG_OLD_DB_PREFIX');
+		}
+
+		return $this->oldDbPrefix;
+	}
+
+	public function getBackedUpTables()
+	{
+		if ($this->backedUpTables === null) {
+			$tableNames = SGConfig::get('SG_BACKUPED_TABLES');
+			if ($tableNames) {
+				$tableNames = json_decode($tableNames, true);
+			}
+			else {
+				$tableNames = array();
+			}
+			$this->backedUpTables = $tableNames;
+		}
+
+		return $this->backedUpTables;
+	}
+
+	public function getNewTableNames()
+	{
+		if ($this->newTableNames === null) {
+			$oldDbPrefix = $this->getOldDbPrefix();
+			$tableNames = $this->getBackedUpTables();
+
+			$newTableNames = array();
+			foreach ($tableNames as $tableName) {
+				$newTableNames[] = str_replace($oldDbPrefix, SG_ENV_DB_PREFIX, $tableName);
+			}
+			$this->newTableNames = $newTableNames;
+		}
+
+		return $this->newTableNames;
+	}
+
+	public function getMigrateObj()
+	{
+		if ($this->migrateObj === null) {
+			$this->migrateObj = new SGMigrate();
+		}
+
+		return $this->migrateObj;
+	}
+
+	public function getCharsetHandler()
+	{
+		if ($this->charsetHanlder === null) {
+			$this->charsetHanlder = new SGCharsetHandler();
+		}
+
+		return $this->charsetHanlder;
+	}
+
 	public function didFindWarnings()
 	{
 		return $this->warningsFound;
 	}
 
-	public function setQueuedStorageUploads($queuedStorageUploads)
+	public function setPendingStorageUploads($pendingStorageUploads)
 	{
-		$this->queuedStorageUploads = $queuedStorageUploads;
+		$this->pendingStorageUploads = $pendingStorageUploads;
 	}
 
-	public function saveStateData()
+	public function saveStateData($offset, $cursor, $inprogress, $lineSize, $backedUpTables)
 	{
-		$sgDBState = $this->delegate->getState();
+		$sgDBState = $this->getState();
 		$token = $this->delegate->getToken();
 
+		$sgDBState->setLineSize($lineSize);
+		$sgDBState->setNumberOfEntries($this->totalRowCount);
+		$sgDBState->setAction(SG_STATE_ACTION_EXPORTING_SQL);
+		$sgDBState->setInprogress($inprogress);
+		$sgDBState->setCursor($cursor);
+		$sgDBState->setProgressCursor($this->currentRowCount);
+		$sgDBState->setOffset($offset);
 		$sgDBState->setToken($token);
 		$sgDBState->setProgress($this->nextProgressUpdate);
 		$sgDBState->setWarningsFound($this->warningsFound);
-		$sgDBState->setQueuedStorageUploads($this->queuedStorageUploads);
+		$sgDBState->setPendingStorageUploads($this->pendingStorageUploads);
+		$sgDBState->setBackedUpTables($backedUpTables);
 		$sgDBState->save();
+	}
+
+	public function getState()
+	{
+		return $this->delegate->getState();
+	}
+
+	public function shouldReload()
+	{
+		$currentTime = time();
+
+		if (($currentTime - $this->reloadStartTs) >= SG_RELOAD_TIMEOUT) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public function reload()
+	{
+		$this->delegate->reload();
 	}
 
 	public function backup($filePath)
 	{
+		$this->reloadStartTs = time();
+		$this->state = $this->delegate->getState();
+
+		if ($this->state && $this->state->getAction() == SG_STATE_ACTION_PREPARING_STATE_FILE) {
+			SGBackupLog::writeAction('backup database', SG_BACKUP_LOG_POS_START);
+			$this->resetBackupProgress();
+		}
+		else {
+			$this->totalRowCount = $this->state->getNumberOfEntries();
+			$this->currentRowCount = $this->state->getProgressCursor();
+		}
+
 		$this->backupFilePath = $filePath;
-		$this->progressUpdateInterval = SGConfig::get('SG_ACTION_PROGRESS_UPDATE_INTERVAL');
 
-		SGBackupLog::writeAction('backup database', SG_BACKUP_LOG_POS_START);
-
-		$this->resetBackupProgress();
-
-		$this->saveStateData();
 		$this->export();
+
 		SGBackupLog::writeAction('backup database', SG_BACKUP_LOG_POS_END);
 	}
 
@@ -73,67 +187,100 @@ class SGBackupDatabase implements SGIMysqldumpDelegate
 	{
 		SGBackupLog::writeAction('restore database', SG_BACKUP_LOG_POS_START);
 		$this->backupFilePath = $filePath;
+
+		//prepare for restore (reset variables)
 		$this->resetRestoreProgress();
 
-		$this->driver = SG_DB_DRIVER_WPDB;
-		if (SG_DB_ADAPTER == SG_ENV_WORDPRESS && $this->sgdb->isMySqliAvailable()) {
-
-			// If db connection over mysqli failed continue restore with wpdb
-			$connection = $this->sgdb->connectOverMySqli();
-			if ($connection) {
-				$this->driver = SG_DB_DRIVER_MYSQLI;
-			}
-		}
-
+		//import all db tables
 		$this->import();
 
-		if (SGBoot::isFeatureAvailable('BACKUP_WITH_MIGRATION')) {
-
-			$sgMigrate = new SGMigrate($this->sgdb);
-
-			$tables = $this->getTables();
-
-			$oldSiteUrl = SGConfig::get('SG_OLD_SITE_URL');
-
-			// Find and replace old urls with new ones
-			$sgMigrate->migrate($oldSiteUrl, SG_SITE_URL, $tables);
-
-			$customizedOldSiteUrl = backupGuardRemoveWww($oldSiteUrl);
-			$customizedNewSiteUrl = backupGuardRemoveWww(SG_SITE_URL);
-			$sgMigrate->migrate($customizedOldSiteUrl, $customizedNewSiteUrl, $tables);
-
-			$customizedOldSiteUrl = backupGuardRemoveHttp($oldSiteUrl);
-			$customizedNewSiteUrl = backupGuardRemoveHttp(SG_SITE_URL);
-			$sgMigrate->migrate($customizedOldSiteUrl, $customizedNewSiteUrl, $tables);
-
-			$oldDbPrefix = SGConfig::get('SG_OLD_DB_PREFIX');
-			$sgMiscMigratableValues = explode(',', SG_MISC_MIGRATABLE_VALUES);
-
-			foreach ($sgMiscMigratableValues as $sgMiscMigratableValue) {
-
-				$oldValue = $oldDbPrefix.$sgMiscMigratableValue;
-				$newValue = SG_ENV_DB_PREFIX.$sgMiscMigratableValue;
-
-				if ($newValue == $oldValue) {
-					continue;
-				}
-
-				$sgMigrate->migrate($oldValue, $newValue, $tables);
-			}
-		}
-
-		if (SG_DB_ADAPTER == SG_ENV_WORDPRESS && $this->sgdb->isMySqliAvailable()) {
-			$this->sgdb->closeMySqliConnection();
+		//external restore file doesn't have the wordpress functions
+		//so we cannot do anything here
+		//it will finalize the restore for itself
+		if (!SGExternalRestore::isEnabled()) {
+			$this->finalizeRestore();
 		}
 
 		SGBackupLog::writeAction('restore database', SG_BACKUP_LOG_POS_END);
 	}
 
+	private function processMigration()
+	{
+		SGBackupLog::writeAction('migration', SG_BACKUP_LOG_POS_START);
+
+		$sgMigrate = new SGMigrate($this->sgdb);
+
+		$tables = $this->getTables();
+
+		$oldSiteUrl = SGConfig::get('SG_OLD_SITE_URL');
+
+		// Find and replace old urls with new ones
+		$sgMigrate->migrate($oldSiteUrl, SG_SITE_URL, $tables);
+
+		$customizedOldSiteUrl = backupGuardRemoveWww($oldSiteUrl);
+		$customizedNewSiteUrl = backupGuardRemoveWww(SG_SITE_URL);
+		$sgMigrate->migrate($customizedOldSiteUrl, $customizedNewSiteUrl, $tables);
+
+		$customizedOldSiteUrl = backupGuardRemoveHttp($oldSiteUrl);
+		$customizedNewSiteUrl = backupGuardRemoveHttp(SG_SITE_URL);
+		$sgMigrate->migrate($customizedOldSiteUrl, $customizedNewSiteUrl, $tables);
+
+		$oldDbPrefix = $this->getOldDbPrefix();
+		$sgMiscMigratableValues = explode(',', SG_MISC_MIGRATABLE_VALUES);
+		$dgMiscMigratebleTables = explode(',', SG_MISC_MIGRATABLE_TABLES);
+
+		foreach ($sgMiscMigratableValues as $sgMiscMigratableValue) {
+			$oldValue = $oldDbPrefix.$sgMiscMigratableValue;
+			$newValue = SG_ENV_DB_PREFIX.$sgMiscMigratableValue;
+
+			if ($newValue == $oldValue) {
+				continue;
+			}
+
+			$sgMigrate->migrate($oldValue, $newValue, $dgMiscMigratebleTables);
+		}
+
+		if (is_multisite()) {
+			$tables = explode(',', SG_MULTISITE_TABLES_TO_MIGRATE);
+
+			$oldPath = SGConfig::get('SG_MULTISITE_OLD_PATH');
+			$newPath = PATH_CURRENT_SITE;
+			$oldDomain = SGConfig::get('SG_MULTISITE_OLD_DOMAIN');
+			$newDomain = DOMAIN_CURRENT_SITE;
+
+			$sgMigrate->migrateMultisite($oldPath, $newPath, $tables);
+			$sgMigrate->migrateMultisite($oldDomain, $newDomain, $tables);
+		}
+
+		SGBackupLog::writeAction('migration', SG_BACKUP_LOG_POS_END);
+	}
+
+	public function finalizeRestore()
+	{
+		if (SG_ENV_ADAPTER != SG_ENV_WORDPRESS) {
+			return;
+		}
+
+		//run migration logic
+		if ($this->isMigrationAvailable()) {
+			$this->processMigration();
+		}
+
+		//recreate current user (to be able to login with it)
+		$this->restoreCurrentUser();
+
+		//setting the following options will tell WordPress that the db is already updated
+		global $wp_db_version;
+		update_option('db_version', $wp_db_version);
+		update_option('db_upgraded', true);
+	}
+
 	private function export()
 	{
-		if (!$this->isWritable($this->backupFilePath))
-		{
-			throw new SGExceptionForbidden('Permission denied. File is not writable: '.$this->backupFilePath);
+		if ($this->state && $this->state->getAction() == SG_STATE_ACTION_PREPARING_STATE_FILE) {
+			if (!$this->isWritable($this->backupFilePath)) {
+				throw new SGExceptionForbidden('Permission denied. File is not writable: '.$this->backupFilePath);
+			}
 		}
 
 		$tablesToExclude = explode(',', SGConfig::get('SG_BACKUP_DATABASE_EXCLUDE'));
@@ -147,6 +294,7 @@ class SGBackupDatabase implements SGIMysqldumpDelegate
 			'no-autocommit'=>false,
 			'single-transaction'=>false,
 			'lock-tables'=>false,
+			'default-character-set'=>SG_DB_CHARSET,
 			'add-locks'=>false
 		));
 
@@ -155,35 +303,24 @@ class SGBackupDatabase implements SGIMysqldumpDelegate
 		$dump->start($this->backupFilePath);
 	}
 
-	public function prepareQueryToExec($query)
+	private function prepareQueryToExec($query)
 	{
-		$query = $this->replaceInvalidCharachters($query);
+		$query = $this->replaceInvalidCharacters($query);
 
-		if (SGBoot::isFeatureAvailable('BACKUP_WITH_MIGRATION') ){
-
-			$oldDbPrefix = SGConfig::get('SG_OLD_DB_PREFIX');
-			$tableNames = SGConfig::get('SG_BACKUPED_TABLES');
-
-			if ($tableNames) {
-				$tableNames = json_decode($tableNames, true);
-			}
-			else {
-				return $query;
-			}
-
-			$newTableNames = array();
-			$sgMigrate = new SGMigrate();
-			foreach ($tableNames as $tableName) {
-				$newTableNames[] = str_replace($oldDbPrefix, SG_ENV_DB_PREFIX, $tableName);
-			}
-
-			$query = $sgMigrate->replaceValuesInQuery($tableNames, $newTableNames, $query);
+		if ($this->isMigrationAvailable()) {
+			$tableNames = $this->getBackedUpTables();
+			$newTableNames = $this->getNewTableNames();
+			$query = $this->getMigrateObj()->replaceValuesInQuery($tableNames, $newTableNames, $query);
 		}
+
+		$query = $this->getCharsetHandler()->replaceInvalidCharsets($query);
+
+		$query = rtrim(trim($query), "/*SGEnd*/");
 
 		return $query;
 	}
 
-	private function replaceInvalidCharachters($str)
+	private function replaceInvalidCharacters($str)
 	{
 		return preg_replace('/\x00/', '', $str);;
 	}
@@ -191,18 +328,16 @@ class SGBackupDatabase implements SGIMysqldumpDelegate
 	private function import()
 	{
 		$fileHandle = @fopen($this->backupFilePath, 'r');
-		if (!is_resource($fileHandle))
-		{
+		if (!is_resource($fileHandle)) {
 			throw new SGExceptionForbidden('Could not open file: '.$this->backupFilePath);
 		}
+
 		$importQuery = '';
-		while (($row = @fgets($fileHandle)) !== false)
-		{
+		while (($row = @fgets($fileHandle)) !== false) {
 			$importQuery .= $row;
 			$trimmedRow = trim($row);
 
-			if (strpos($trimmedRow, 'CREATE TABLE') !== false)
-			{
+			if (strpos($trimmedRow, 'CREATE TABLE') !== false) {
 				$strLength = strlen($trimmedRow);
 				$strCtLength =  strlen('CREATE TABLE ');
 				$length = $strLength - $strCtLength - 2;
@@ -211,14 +346,19 @@ class SGBackupDatabase implements SGIMysqldumpDelegate
 				SGBackupLog::write('Importing table: '.$tableName);
 			}
 
-			if($trimmedRow && substr($trimmedRow, -9) == "/*SGEnd*/")
-			{
+			if ($trimmedRow && substr($trimmedRow, -9) == "/*SGEnd*/") {
 				$importQuery = $this->prepareQueryToExec($importQuery);
 
-				$res = $this->sgdb->execWithAdapter($importQuery, $this->driver);
+				$res = $this->sgdb->execRaw($importQuery);
 				if ($res===false) {
-					// continue restoring database if any query fails
-					$this->warn('Could not import table: '.@$tableName);
+					//continue restoring database if any query fails
+					//we will just show a warning inside the log
+
+					if (isset($tableName)) {
+						$this->warn('Could not import table: '.$tableName);
+					}
+
+					$this->warn('Error: '.$this->sgdb->getLastError());
 				}
 
 				$importQuery = '';
@@ -229,6 +369,68 @@ class SGBackupDatabase implements SGIMysqldumpDelegate
 		}
 
 		@fclose($fileHandle);
+	}
+
+	public function saveCurrentUser()
+	{
+		if (SG_ENV_ADAPTER != SG_ENV_WORDPRESS) {
+			return;
+		}
+
+		$user = wp_get_current_user();
+
+		$currentUser = serialize(array(
+			'login' => $user->user_login,
+			'pass' => $user->user_pass,
+			'email' => $user->user_email,
+		));
+
+		SGConfig::set('SG_CURRENT_USER', $currentUser);
+	}
+
+	private function restoreCurrentUser()
+	{
+		$currentUser = SGConfig::get('SG_CURRENT_USER');
+		$user = unserialize($currentUser);
+
+		//erase user data from the config table
+		SGConfig::set('SG_CURRENT_USER', '');
+
+		//if a user is found, it means it's cache, because we have dropped wp_users already
+		$cachedUser = get_user_by('login', $user['login']);
+		if ($cachedUser) {
+			clean_user_cache($cachedUser); //delete user from cache
+		}
+
+		//create a user (it will be a subscriber)
+		$id = wp_create_user($user['login'], $user['pass'], $user['email']);
+		if (is_wp_error($id)) {
+			SGBackupLog::write('User not recreated: '.$id->get_error_message());
+			return false; //user was not created for some reason
+		}
+
+		//get the newly created user
+		$newUser = get_user_by('id', $id);
+
+		//remove its role of subscriber
+		$newUser->remove_role('subscriber');
+
+		//add admin role
+		$newUser->add_role('administrator');
+
+		//update password to set the correct (old) password
+		$this->sgdb->query(
+			'UPDATE '.SG_ENV_DB_PREFIX.'users SET user_pass=%s WHERE ID=%d',
+			array(
+				$user['pass'],
+				$id
+			)
+		);
+
+		//clean cache, so new password can take effect
+		clean_user_cache($newUser);
+
+		SGBackupLog::write('User recreated: '.$user['login']);
 	}
 
 	public function warn($message)

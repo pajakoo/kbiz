@@ -3,7 +3,7 @@
  * Plugin Name: Business Directory Plugin
  * Plugin URI: http://www.businessdirectoryplugin.com
  * Description: Provides the ability to maintain a free or paid business directory on your WordPress powered site.
- * Version: 4.1.5
+ * Version: 4.1.7
  * Author: D. Rodenbaugh
  * Author URI: http://businessdirectoryplugin.com
  * Text Domain: WPBDM
@@ -31,7 +31,7 @@
 if( preg_match( '#' . basename( __FILE__ ) . '#', $_SERVER['PHP_SELF'] ) )
     exit();
 
-define( 'WPBDP_VERSION', '4.1.5' );
+define( 'WPBDP_VERSION', '4.1.7' );
 
 define( 'WPBDP_PATH', wp_normalize_path( plugin_dir_path( __FILE__ ) ) );
 define( 'WPBDP_URL', trailingslashit( plugins_url( '/', __FILE__ ) ) );
@@ -503,7 +503,8 @@ class WPBDP_Plugin {
             if ( ! $login_url )
                 return;
 
-            $url = add_query_arg( 'redirect_to', urlencode( home_url( $_SERVER['REQUEST_URI'] ) ), $login_url );
+            $current_url = ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+            $url = add_query_arg( 'redirect_to', urlencode( $current_url ), $login_url );
             wp_redirect( esc_url_raw( $url ) );
             exit();
         }
@@ -801,9 +802,16 @@ class WPBDP_Plugin {
 
     /* theme filters */
     public function _comments_template($template) {
+        $is_single_listing = is_single() && get_post_type() == WPBDP_POST_TYPE;
+        $is_main_page = get_post_type() == 'page' && get_the_ID() == wpbdp_get_page_id( 'main' );
+
+        $comments_allowed = in_array(
+            $this->settings->get( 'allow-comments-in-listings' ),
+            array( 'allow-comments', 'allow-comments-and-insert-template' )
+        );
+
         // disable comments in WPBDP pages or if comments are disabled for listings
-        if ( (is_single() && get_post_type() == WPBDP_POST_TYPE && !$this->settings->get('show-comment-form')) ||
-              (get_post_type() == 'page' && get_the_ID() == wpbdp_get_page_id('main') )  ) {
+        if ( ( $is_single && ! $comments_allowed ) || $is_main_page ) {
             return WPBDP_TEMPLATES_PATH . '/empty-template.php';
         }
 

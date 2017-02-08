@@ -14,7 +14,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title"><?php ($backupType == SG_BACKUP_METHOD_MIGRATE)?_t("Prepare migration package"):_t("Manual Backup") ?></h4>
+            <h4 class="modal-title"><?php ($backupType == SG_BACKUP_METHOD_MIGRATE)?_backupGuardT("Prepare migration package"):_backupGuardT("Manual Backup") ?></h4>
         </div>
         <form class="form-horizontal" method="post" id="manualBackup">
             <div class="modal-body sg-modal-body">
@@ -24,26 +24,26 @@
                         <div class="radio">
                             <label for="fullbackup-radio">
                                 <input type="radio" name="backupType" id="fullbackup-radio" value="1" checked="checked">
-                                <?php _t('Full backup'); ?>
+                                <?php _backupGuardT('Full backup'); ?>
                             </label>
                         </div>
                         <div class="radio">
                             <label for="custombackup-radio">
                                 <input type="radio" name="backupType" id="custombackup-radio" value="2">
-                                <?php _t('Custom backup'); ?>
+                                <?php _backupGuardT('Custom backup'); ?>
                             </label>
                         </div>
                         <div class="col-md-12 sg-custom-backup">
                             <div class="checkbox">
                                 <label for="custombackupdb-chbx">
                                     <input type="checkbox" class="sg-custom-option" name="backupDatabase" id="custombackupdb-chbx">
-                                    <?php _t('Backup database'); ?>
+                                    <?php _backupGuardT('Backup database'); ?>
                                 </label>
                             </div>
                             <div class="checkbox sg-no-padding-top">
                                 <label for="custombackupfiles-chbx">
                                     <input type="checkbox" class="sg-custom-option" name="backupFiles" id="custombackupfiles-chbx">
-                                    <?php _t('Backup files'); ?>
+                                    <?php _backupGuardT('Backup files'); ?>
                                 </label>
                                 <!--Files-->
                                 <div class="col-md-12 sg-checkbox sg-custom-backup-files">
@@ -64,42 +64,42 @@
                             <div class="checkbox sg-no-padding-top">
                                 <label for="custombackupcloud-chbx">
                                     <input type="checkbox" name="backupCloud" id="custombackupcloud-chbx">
-                                    <?php _t('Upload to cloud'); ?>
+                                    <?php _backupGuardT('Upload to cloud'); ?>
                                 </label>
                                 <!--Storages-->
                                 <div class="col-md-12 sg-checkbox sg-custom-backup-cloud">
                                     <?php if(SGBoot::isFeatureAvailable('FTP')): ?>
                                         <div class="checkbox">
-                                            <label for="cloud-ftp" <?php echo empty($ftp)?'data-toggle="tooltip" data-placement="right" title="'._t('FTP is not active.',true).'"':''?>>
+                                            <label for="cloud-ftp" <?php echo empty($ftp)?'data-toggle="tooltip" data-placement="right" title="'._backupGuardT('FTP is not active.',true).'"':''?>>
                                                 <input type="checkbox" name="backupStorages[]" id="cloud-ftp" value="<?php echo SG_STORAGE_FTP ?>" <?php echo empty($ftp)?'disabled="disabled"':''?>>
-                                                <?php _t('FTP'); ?>
+                                                <?php _backupGuardT('FTP'); ?>
                                             </label>
                                         </div>
                                     <?php endif; ?>
                                     <?php if(SGBoot::isFeatureAvailable('DROPBOX')): ?>
                                         <div class="checkbox">
-                                            <label for="cloud-dropbox" <?php echo empty($dropbox)?'data-toggle="tooltip" data-placement="right" title="'._t('Dropbox is not active.',true).'"':''?>>
+                                            <label for="cloud-dropbox" <?php echo empty($dropbox)?'data-toggle="tooltip" data-placement="right" title="'._backupGuardT('Dropbox is not active.',true).'"':''?>>
                                                 <input type="checkbox" name="backupStorages[]" id="cloud-dropbox" value="<?php echo SG_STORAGE_DROPBOX ?>"
                                                     <?php echo empty($dropbox)?'disabled="disabled"':''?>>
-                                                <?php _t('Dropbox'); ?>
+                                                <?php _backupGuardT('Dropbox'); ?>
                                             </label>
                                         </div>
                                     <?php endif; ?>
                                     <?php if(SGBoot::isFeatureAvailable('GOOGLE_DRIVE')): ?>
                                         <div class="checkbox">
-                                            <label for="cloud-gdrive" <?php echo empty($gdrive)?'data-toggle="tooltip" data-placement="right" title="'._t('Google Drive is not active.',true).'"':''?>>
+                                            <label for="cloud-gdrive" <?php echo empty($gdrive)?'data-toggle="tooltip" data-placement="right" title="'._backupGuardT('Google Drive is not active.',true).'"':''?>>
                                                 <input type="checkbox" name="backupStorages[]" id="cloud-gdrive" value="<?php echo SG_STORAGE_GOOGLE_DRIVE?>"
                                                     <?php echo empty($gdrive)?'disabled="disabled"':''?>>
-                                                <?php _t('Google Drive'); ?>
+                                                <?php _backupGuardT('Google Drive'); ?>
                                             </label>
                                         </div>
                                     <?php endif; ?>
                                     <?php if(SGBoot::isFeatureAvailable('AMAZON')): ?>
                                         <div class="checkbox">
-                                            <label for="cloud-amazon" <?php echo empty($amazon)?'data-toggle="tooltip" data-placement="right" title="'._t('Amazon S3 is not active.',true).'"':''?>>
+                                            <label for="cloud-amazon" <?php echo empty($amazon)?'data-toggle="tooltip" data-placement="right" title="'._backupGuardT('Amazon S3 is not active.',true).'"':''?>>
                                                 <input type="checkbox" name="backupStorages[]" id="cloud-amazon" value="<?php echo SG_STORAGE_AMAZON?>"
                                                     <?php echo empty($amazon)?'disabled="disabled"':''?>>
-                                                <?php _t('Amazon S3'); ?>
+                                                <?php _backupGuardT('Amazon S3'); ?>
                                             </label>
                                         </div>
                                     <?php endif; ?>
@@ -112,7 +112,7 @@
                             <div class="checkbox">
                                 <label for="background-chbx">
                                     <input type="checkbox" name="backgroundMode" id="background-chbx">
-                                    <?php _t('Background mode'); ?>
+                                    <?php _backupGuardT('Background mode'); ?>
                                 </label>
                             </div>
                         <?php endif; ?>
@@ -122,7 +122,7 @@
             <div class="modal-footer">
                 <input type="text" name="backup-type" value="<?php echo $backupType?>" hidden>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" onclick="sgBackup.manualBackup()" class="btn btn-primary"><?php echo _t('Backup')?></button>
+                <button type="button" onclick="sgBackup.manualBackup()" class="btn btn-primary"><?php echo _backupGuardT('Backup')?></button>
             </div>
         </form>
     </div>

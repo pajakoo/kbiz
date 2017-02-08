@@ -4,27 +4,58 @@ require_once(dirname(__FILE__).'/SGState.php');
 
 class SGFileState extends SGState
 {
-	private $index = 0;
-	private $totalBackupFilesCount = 0;
-	private $currentBackupFileCount = 0;
 	private $cdrSize = 0;
 	private $ranges = array();
-	private $offset = 0;
+	private $fileOffsetInArchive = 0;
 	private $headerSize = 0;
+	private $cdr = array();
+	private $cursor = 0;
+	private $rangeCursor = 0;
+	private $numberOfEntries = 0;
 
-	public function setIndex($index)
+	function __construct()
 	{
-		$this->index = $index;
+		$this->type = SG_STATE_TYPE_FILE;
 	}
 
-	public function setTotalBackupFilesCount($totalBackupFilesCount)
+	public function setCursor($cursor)
 	{
-		$this->totalBackupFilesCount = $totalBackupFilesCount;
+		$this->cursor = $cursor;
 	}
 
-	public function setCurrentBackupFileCount($currentBackupFileCount)
+	public function setRangeCursor($rangeCursor)
 	{
-		$this->currentBackupFileCount = $currentBackupFileCount;
+		$this->rangeCursor = $rangeCursor;
+	}
+
+	public function setNumberOfEntries($numberOfEntries)
+	{
+		$this->numberOfEntries = $numberOfEntries;
+	}
+
+	public function getCursor()
+	{
+		return $this->cursor;
+	}
+
+	public function getRangeCursor()
+	{
+		return $this->rangeCursor;
+	}
+
+	public function getNumberOfEntries()
+	{
+		return $this->numberOfEntries;
+	}
+
+	public function setCdr($cdr = array())
+	{
+		$this->cdr = $cdr;
+	}
+
+	public function getCdr()
+	{
+		return $this->cdr;
 	}
 
 	public function setCdrSize($cdrSize)
@@ -37,11 +68,6 @@ class SGFileState extends SGState
 		$this->ranges = $ranges;
 	}
 
-	public function setOffset($offset)
-	{
-		$this->offset = $offset;
-	}
-
 	public function setHeaderSize($headerSize)
 	{
 		$this->headerSize = $headerSize;
@@ -52,34 +78,48 @@ class SGFileState extends SGState
 		return $this->headerSize;
 	}
 
-	public function getOffset()
-	{
-		return $this->offset;
-	}
-
 	public function getRanges()
 	{
 		return $this->ranges;
 	}
 
-	public function getIndex()
-	{
-		return $this->index;
-	}
-
-	public function getTotalBackupFilesCount()
-	{
-		return $this->totalBackupFilesCount;
-	}
-
-	public function getCurrentBackupFileCount()
-	{
-		return $this->currentBackupFileCount;
-	}
-
 	public function getCdrSize()
 	{
 		return $this->cdrSize;
+	}
+
+	public function getFileOffsetInArchive()
+	{
+		return $this->fileOffsetInArchive;
+	}
+
+	public function setFileOffsetInArchive($fileOffsetInArchive)
+	{
+		$this->fileOffsetInArchive = $fileOffsetInArchive;
+	}
+
+	public function init($stateJson)
+	{
+		$this->cdrSize = $stateJson['cdrSize'];
+		$this->ranges = $stateJson['ranges'];
+		$this->offset = $stateJson['offset'];
+		$this->headerSize = $stateJson['headerSize'];
+		$this->inprogress = $stateJson['inprogress'];
+		$this->cdr = $stateJson['cdr'];
+		$this->action = $stateJson['action'];
+		$this->actionId = $stateJson['actionId'];
+		$this->actionStartTs = $stateJson['actionStartTs'];
+		$this->backupFileName = $stateJson['backupFileName'];
+		$this->backupFilePath = $stateJson['backupFilePath'];
+		$this->progress = $stateJson['progress'];
+		$this->warningsFound = $stateJson['warningsFound'];
+		$this->pendingStorageUploads = $stateJson['pendingStorageUploads'];
+		$this->numberOfEntries = $stateJson['numberOfEntries'];
+		$this->cursor = $stateJson['cursor'];
+		$this->rangeCursor = $stateJson['rangeCursor'];
+		$this->fileOffsetInArchive = $stateJson['fileOffsetInArchive'];
+
+		return $this;
 	}
 
 	public function save()
@@ -98,11 +138,13 @@ class SGFileState extends SGState
 			'backupFilePath' => $this->backupFilePath,
 			'progress' => $this->progress,
 			'warningsFound' => $this->warningsFound,
-			'index' => $this->index,
-			'totalBackupFilesCount' => $this->totalBackupFilesCount,
-			'currentBackupFileCount' => $this->currentBackupFileCount,
 			'cdrSize' => $this->cdrSize,
-			'queuedStorageUploads' => $this->queuedStorageUploads
+			'pendingStorageUploads' => $this->pendingStorageUploads,
+			'cdr' => $this->cdr,
+			'numberOfEntries' => $this->numberOfEntries,
+			'cursor' => $this->cursor,
+			'rangeCursor' => $this->rangeCursor,
+			'fileOffsetInArchive' => $this->fileOffsetInArchive
 		)));
 	}
 }

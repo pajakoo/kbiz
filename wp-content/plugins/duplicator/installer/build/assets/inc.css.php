@@ -53,10 +53,9 @@
 	div#dup-main-help h3 {background-color:#dfdfdf; border:1px solid silver; border-radius:5px; padding:3px; margin-bottom:8px;}
 
 	div#progress-area {padding:5px; margin:150px 0 0 0px; text-align:center;}
-	div#ajaxerr-data {padding:5px; height:350px; width:99%; border:1px solid silver; border-radius:5px; background-color:#efefef; font-size:12px; overflow-y:scroll}
-	div.title-header {padding:2px; border-bottom:1px solid silver; font-weight:bold; margin-bottom:5px;}
+	div#ajaxerr-data {padding:5px; height:350px; width:99%; border:1px solid silver; border-radius:5px; background-color:#efefef; font-size:14px; overflow-y:scroll}
 	div.hdr-main {font-size:18px; padding:0 0 5px 0; border-bottom:1px solid #999; font-weight:bold; margin:5px 0 10px 0;}
-	div.hdr-sub {font-size:14px; padding:2px 2px 2px 0; border-bottom:1px solid #dfdfdf; font-weight:bold; margin-bottom:5px;}
+	div.hdr-sub {font-size:15px; padding:2px 2px 2px 0; border-bottom:1px solid #dfdfdf; font-weight:bold; margin-bottom:5px;}
 	
 	/*BOXES:Expandable sections */
 	div.dup-box {padding:0px; display:block; background-color:#fff; border:1px solid #e5e5e5; box-shadow:0 1px 1px rgba(0,0,0,.04);}
@@ -67,6 +66,7 @@
 
 	/* ============================
 	STEP 1 VIEW */
+	div#dup-s1-warning-check label {cursor: pointer}
 	table.s1-opts {width:100%; border:0px;}
 	table.s1-opts td{white-space:nowrap; padding:3px;}
 	table.s1-opts td:first-child{width:125px;}
@@ -78,7 +78,7 @@
 	div.circle-fail {background:#9A0D1D !important;}
 	select#logging {font-size:11px}
 	div.s1-modes {padding:0px 15px 0 0px;}
-	div#s1-dbconn {margin:auto; text-align:center; margin:15px 0 20px 0px}
+	div#s1-dbconn {margin:auto; text-align:center; margin:15px 0 10px 0px}
 	
 	input.s1-small-btn {font-size:11px; height:20px; border:1px solid gray; border-radius:3px; cursor:pointer}
 	input#s1-dbport-btn { width:80px}
@@ -90,31 +90,34 @@
 	div#s1-dbconn-status div.warn-msg {text-align: left; padding:5px; margin:10px 0 10px 0}
 	div#s1-dbconn-status div.warn-msg b{color:maroon}
 	
-	/*Warning Area and Message */
-	div.dup-step1-gopro {color: black;font-style: italic;margin-top: 11px; text-align:center;margin-top:30px; padding:5px}
-	div#dup-step1-warning {padding:5px;font-size:11px; color:gray; line-height:12px;font-style:italic; overflow-y:scroll; height:75px; border:1px solid #dfdfdf; background-color:#fff; border-radius:3px}
-	div#dup-step1-warning-check {padding:5px; font-size:12px; font-weight:normal; font-style:italic;}
-	div#dup-step1-warning-emptydb {display:none; color:#AF2222; margin:0px 0 0 20px}
-	div#dup-step1-tryagain {padding-top:50px; text-align:center; width:100%; font-size:16px; color:#444; font-weight:bold;}
+	/*Advanced Options & Warning Area*/
+	div.s1-advopts-section {margin:15px 0 25px 0}
+	div.s1-advopts-section label {cursor: pointer}
+	div.s1-advopts-help {text-align: center; margin:10px}
+	div.dup-s1-gopro {color: black;font-style: italic;margin-top: 11px; text-align:center;margin-top:20px; padding:5px}
+	div#dup-s1-warning {padding:5px;font-size:12px; color:gray; line-height:12px;font-style:italic; overflow-y:scroll; height:150px; border:1px solid #dfdfdf; background-color:#fff; border-radius:3px}
+	div#dup-s1-warning-check {padding:5px; font-size:12px; font-weight:normal; font-style:italic;}
+	div#dup-s1-warning-emptydb {display:none; color:#AF2222; margin:0px 0 0 20px}
+	table.s1-advopts label.radio {width:50px; display:inline-block}
 
 	/*Dialog*/
-	div#dup-step1-dialog-data {height:90%; font-size:11px; padding:5px; line-height:16px; }
-	td.dup-step1-dialog-data-details {padding:1px 0 10px 30px; border-radius:4px; line-height:14px; font-size:11px; display:none}
-	td.dup-step1-dialog-data-details b {width:50px;display:inline-block}
+	div#dup-s1-dialog-data {height:90%; font-size:11px; padding:5px; line-height:16px; }
+	td.dup-s1-dialog-data-details {padding:1px 0 10px 30px; border-radius:4px; line-height:14px; font-size:11px; display:none}
+	td.dup-s1-dialog-data-details b {width:50px;display:inline-block}
 	.dup-pass {display:inline-block; color:green;}
 	.dup-ok {display:inline-block; color:#5860C7;}
 	.dup-fail {display:inline-block; color:#AF0000;}
 	.dup-notice {display:inline-block; color:#000;}
 	hr.dup-dots { border:none; border-top:1px dotted silver; height:1px; width:100%;}
-	div.dup-ui-error {padding-top:2px; font-size:14px}
+	div.dup-ui-error {padding-top:2px; font-size:14px; line-height: 20px}
 	div.help {color:#555; font-style:italic; font-size:11px}
 
 	/* ============================
 	STEP 2 VIEW */
-	table.table-inputs-step2{width:100%; border:0px;}
-	table.table-inputs-step2 td{white-space:nowrap; padding:2px;}
-	div#dup-step2-adv-opts {margin-top:5px; }
-	div.dup-step2-allnonelinks {font-size:11px; float:right;}
+	table.table-inputs-s2{width:100%; border:0px;}
+	table.table-inputs-s2 td{white-space:nowrap; padding:2px;}
+	div#dup-s2-adv-opts {margin-top:5px; }
+	div.dup-s2-allnonelinks {font-size:11px; float:right;}
 
 	/* ============================
 	STEP 3 VIEW */
@@ -123,9 +126,10 @@
 	table.s3-report-results,
 	table.s3-report-errs {border-collapse:collapse; border:1px solid #dfdfdf; }
 	table.s3-report-errs  td {text-align:center; width:33%}
-	table.s3-report-results th, table.s3-report-errs th {background-color:#efefef; padding:0px; font-size:12px; padding:0px}
-	table.s3-report-results td, table.s3-report-errs td {padding:0px; white-space:nowrap; border:1px solid #dfdfdf; text-align:center; font-size:11px}
+	table.s3-report-results th, table.s3-report-errs th {background-color:#efefef; padding:0px; font-size:14px; padding:0px}
+	table.s3-report-results td, table.s3-report-errs td {padding:0px; white-space:nowrap; border:1px solid #dfdfdf; text-align:center; font-size:12px}
 	table.s3-report-results td:first-child {text-align:left; font-weight:bold; padding-left:3px}
+	div.dup-step3-err-title {width:100%; background-color: #dfdfdf; font-weight: bold; margin:-5px 0 15px 0; padding:3px 0 1px 3px; border-radius: 4px; font-size:14px}
 
 	div.s3-err-msg {padding:8px;  display:none; border:1px dashed #999; margin:10px 0 20px 0px; border-radius:5px;}
 	div.s3-err-msg div.content{padding:5px; font-size:11px; line-height:17px; max-height:125px; overflow-y:scroll; border:1px solid silver; margin:3px;  }
@@ -164,7 +168,6 @@
 	.top_badPass{background:#edabab;border:1px solid #bc0000;display:block;}
 	.top_goodPass{background:#ffffe0; border:1px solid #e6db55;	display:block;}
 	.top_strongPass{background:#d3edab;	border:1px solid #73bc00; display:block;}
-
 
 	/*================================================
 	PARSLEY:Overrides*/

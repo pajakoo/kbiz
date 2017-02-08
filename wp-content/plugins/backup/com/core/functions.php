@@ -1,5 +1,53 @@
 <?php
 
+function backupGuardGetFilenameOptions($options)
+{
+	$selectedPaths = explode(',', $options['SG_BACKUP_FILE_PATHS']);
+	$pathsToExclude = explode(',', $options['SG_BACKUP_FILE_PATHS_EXCLUDE']);
+
+	$opt = '';
+
+	if (SG_ENV_ADAPTER == SG_ENV_WORDPRESS) {
+		$opt .= 'opt(';
+
+		if ($options['SG_BACKUP_TYPE'] == SG_BACKUP_TYPE_CUSTOM) {
+			if ($options['SG_ACTION_BACKUP_DATABASE_AVAILABLE']) {
+				$opt .= 'db_';
+			}
+
+			if ($options['SG_ACTION_BACKUP_FILES_AVAILABLE']) {
+				if (in_array('wp-content', $selectedPaths)) {
+					$opt .= 'wpc_';
+				}
+				if (!in_array('wp-content/plugins', $pathsToExclude)) {
+					$opt .= 'plg_';
+				}
+				if (!in_array('wp-content/themes', $pathsToExclude)) {
+					$opt .= 'thm_';
+				}
+				if (!in_array('wp-content/uploads', $pathsToExclude)) {
+					$opt .= 'upl_';
+				}
+			}
+
+
+		}
+		else {
+			$opt .= 'full';
+		}
+
+		$opt = trim($opt, "_");
+		$opt .= ')_';
+	}
+
+	return $opt;
+}
+
+function backupGuardGenerateToken()
+{
+	return md5(time());
+}
+
 // returning url without www.
 function backupGuardRemoveWww($url)
 {
@@ -44,6 +92,8 @@ function backupGuardGetBackupOptions($options)
 		$clouds = $options['backupStorages'];
 		$backupOptions['SG_BACKUP_UPLOAD_TO_STORAGES'] = implode(',', $clouds);
 	}
+
+	$backupOptions['SG_BACKUP_TYPE'] = $options['backupType'];
 
 	if ($options['backupType'] == SG_BACKUP_TYPE_FULL) {
 		$backupOptions['SG_ACTION_BACKUP_DATABASE_AVAILABLE']= 1;
@@ -196,7 +246,7 @@ function backupGuardSymlinksCleanup($dir)
 	return;
 }
 
-function realFilesize($filename)
+function backupGuardRealFilesize($filename)
 {
 	$fp = fopen($filename, 'r');
 	$return = false;
@@ -230,7 +280,7 @@ function realFilesize($filename)
 	return $return;
 }
 
-function formattedDuration($startTs, $endTs)
+function backupGuardFormattedDuration($startTs, $endTs)
 {
 	$unit = 'seconds';
 	$duration = $endTs-$startTs;
@@ -298,7 +348,7 @@ function backupGuardDownloadFile($file, $type = 'application/octet-stream')
 	exit;
 }
 
-function downloadFileSymlink($safedir, $filename)
+function backupGuardDownloadFileSymlink($safedir, $filename)
 {
 	$downloaddir = SG_SYMLINK_PATH;
 	$downloadURL = SG_SYMLINK_URL;
@@ -348,4 +398,9 @@ function downloadFileSymlink($safedir, $filename)
 		wp_die('Symlink / shortcut creation failed! Seems your server configurations don’t allow symlink creation, so we’re unable to provide you the direct download url. You can download your backup using any FTP client. All backups and related stuff we locate “/wp-content/uploads/backup-guard” directory. If you need this functionality, you should check out your server configurations and make sure you don’t have any limitation related to symlink creation.');
 	}
 	exit;
+}
+
+function backupGuardGetCurrentUrlScheme()
+{
+	return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')?'https':'http';
 }

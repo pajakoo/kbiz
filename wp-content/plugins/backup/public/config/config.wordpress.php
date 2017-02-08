@@ -1,11 +1,14 @@
 <?php
-
 require_once(dirname(__FILE__).'/config.php');
-//Url
-define('SG_PLUGIN_NAME', 'backup');
+
+//Plugin's directory name
+define('SG_PLUGIN_NAME', basename(dirname(SG_PUBLIC_PATH)));
+
+//Urls
 define('SG_PUBLIC_URL', plugins_url().'/'.SG_PLUGIN_NAME.'/public/');
 define('SG_PUBLIC_AJAX_URL', SG_PUBLIC_URL.'ajax/');
-define('SG_CLOUD_REDIRECT_URL', admin_url('admin.php?page=backup_guard_cloud'));
+define('SG_PUBLIC_BACKUPS_URL', network_admin_url('admin.php?page=backup_guard_backups'));
+define('SG_PUBLIC_CLOUD_URL', network_admin_url('admin.php?page=backup_guard_cloud'));
 define('SG_REVIEW_URL', 'https://wordpress.org/support/view/plugin-reviews/backup?filter=5');
 
 //BackupGuard Site URL

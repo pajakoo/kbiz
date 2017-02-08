@@ -2,10 +2,10 @@
 Contributors: businessdirectoryplugin
 Donate link: http://businessdirectoryplugin.com/premium-modules/
 Tags: business directory, address book, chamber of commerce business directory, church directory, local business directory, company business directory, contact directory, custom business directory, directory, listings directory, link directory, member directory, staff directory, directory plugin
-Requires at least: 4.1
-Tested up to: 4.6.1
-Last Updated: 2016-Dec 1
-Stable tag: tags/4.1.5
+Requires at least: 4.2
+Tested up to: 4.7
+Last Updated: 2016-Dec 19
+Stable tag: tags/4.1.7
 License: GPLv2 or later
 
 Build any kind of local directory, directory of business providers, a Yellow-Pages business directory, Yelp-like review directory and much more! 
@@ -140,6 +140,23 @@ If you are having problems please visit [support forum](http://www.businessdirec
 
 
 == Changelog ==
+
+= Version 4.1.7 =
+* Fix 'Include comment form on listing pages' setting to store the proper value.
+* Avoid PHP Warning when field value includes '%'.
+* Use an array to pass headers to wp_mail in Email class.
+* Increase importance of rules in .wpbdp-show-on-mobile CSS class.
+
+= Version 4.1.6 =
+* Fix error in migration routine affecting multivalued fields on some sites.
+* Introduce new setting for comment handling to prevent duplicate comment forms.
+* Review compatibility with WordPress 4.7.
+* Fix preview links for admins.
+* Fix a problem with URL redirection to custom login pages.
+* Accept one option per line (including commas) as part of a multivalued field options.
+* Improve Schema.org integration
+* Add Swedish translation.
+* Add CSS fix for quick search box.
 
 = Version 4.1.5 =
 * Add support for template block/variable metadata in PHP comments.

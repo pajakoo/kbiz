@@ -321,7 +321,7 @@ class WPBDP_FormFields {
                                  'validators' => array( 'required' ), 'display_flags' => array( 'excerpt', 'listing', 'search' ), 'tag' => 'category' ),
             'excerpt' => array( 'label' => __('Short Business Description', 'WPBDM'), 'field_type' => 'textarea', 'association' => 'excerpt', 'weight' => 7,
                                 'display_flags' => array( 'excerpt', 'listing', 'search' ), 'tag' => 'excerpt' ),
-            'content' => array( 'label' => __("цжьцжьцжцьж","WPBDM"), 'field_type' => 'textarea', 'association' => 'content', 'weight' => 6,
+            'content' => array( 'label' => __("Long Business Description","WPBDM"), 'field_type' => 'textarea', 'association' => 'content', 'weight' => 6,
                                 'validators' => array( 'required' ), 'display_flags' => array( 'excerpt', 'listing', 'search' ), 'tag' => 'content' ),
             'website' => array( 'label' => __("Business Website Address","WPBDM"), 'field_type' => 'url', 'association' => 'meta', 'weight' => 5,
                               'validators' => array( 'url' ), 'display_flags' => array( 'excerpt', 'listing', 'search' ), 'tag' => 'website' ),

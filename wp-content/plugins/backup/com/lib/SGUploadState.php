@@ -4,7 +4,6 @@ require_once(dirname(__FILE__).'/SGState.php');
 
 class SGUploadState extends SGState
 {
-	private $offset = 0;
 	private $activeDirectory = '';
 	private $currentUploadChunksCount = 0;
 	private $totalUploadChunksCount = 0;
@@ -14,16 +13,12 @@ class SGUploadState extends SGState
 
 	function __construct()
 	{
+		$this->type = SG_STATE_TYPE_UPLOAD;
 	}
 
 	public function setActiveDirectory($activeDirectory)
 	{
 		$this->activeDirectory = $activeDirectory;
-	}
-
-	public function setOffset($offset)
-	{
-		$this->offset = $offset;
 	}
 
 	public function setCurrentUploadChunksCount($currentUploadChunksCount)
@@ -81,11 +76,6 @@ class SGUploadState extends SGState
 		return $this->activeDirectory;
 	}
 
-	public function getOffset()
-	{
-		return $this->offset;
-	}
-
 	public function init($stateJson)
 	{
 		$this->type = $stateJson['type'];
@@ -101,7 +91,7 @@ class SGUploadState extends SGState
 		$this->backupFileName = $stateJson['backupFileName'];
 		$this->backupFilePath = $stateJson['backupFilePath'];
 		$this->activeDirectory = $stateJson['activeDirectory'];
-		$this->queuedStorageUploads = $stateJson['queuedStorageUploads'];
+		$this->pendingStorageUploads = $stateJson['pendingStorageUploads'];
 		$this->totalUploadChunksCount = $stateJson['totalUploadChunksCount'];
 		$this->currentUploadChunksCount = $stateJson['currentUploadChunksCount'];
 
@@ -126,7 +116,7 @@ class SGUploadState extends SGState
 			'backupFileName' => $this->backupFileName,
 			'backupFilePath' => $this->backupFilePath,
 			'activeDirectory' => $this->activeDirectory,
-			'queuedStorageUploads' => $this->queuedStorageUploads,
+			'pendingStorageUploads' => $this->pendingStorageUploads,
 			'totalUploadChunksCount' => $this->totalUploadChunksCount,
 			'currentUploadChunksCount' => $this->currentUploadChunksCount
 		)));

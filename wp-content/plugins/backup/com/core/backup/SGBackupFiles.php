@@ -17,19 +17,21 @@ class SGBackupFiles implements SGArchiveDelegate
 	private $sgbp = null;
 	private $delegate = null;
 	private $nextProgressUpdate = 0;
-	private $totalBackupFilesCount = 0;
-	private $currentBackupFileCount = 0;
 	private $progressUpdateInterval = 0;
 	private $warningsFound = false;
 	private $dontExclude = array();
 	private $cdrSize = 0;
-	private $currentStateIndex = 0;
-	private $queuedStorageUploads = array();
+	private $pendingStorageUploads = array();
 	private $fileName = '';
+	private $progressCursor = 0;
+	private $numberOfEntries = 0;
+	private $cursor = 0;
+	private $reloadStartTs;
 
 	public function __construct()
 	{
 		$this->rootDirectory = realpath(SGConfig::get('SG_APP_ROOT_DIRECTORY')).'/';
+		$this->progressUpdateInterval = SGConfig::get('SG_ACTION_PROGRESS_UPDATE_INTERVAL');
 	}
 
 	public function setDelegate(SGIBackupDelegate $delegate)
@@ -47,9 +49,9 @@ class SGBackupFiles implements SGArchiveDelegate
 		$this->fileName = $fileName;
 	}
 
-	public function setQueuedStorageUploads($queuedStorageUploads)
+	public function setPendingStorageUploads($pendingStorageUploads)
 	{
-		$this->queuedStorageUploads = $queuedStorageUploads;
+		$this->pendingStorageUploads = $pendingStorageUploads;
 	}
 
 	public function addDontExclude($ex)
@@ -81,22 +83,20 @@ class SGBackupFiles implements SGArchiveDelegate
 
 	private function saveFileTree($tree)
 	{
-		file_put_contents(dirname($this->filePath).'/'.SG_TREE_FILE_NAME, json_encode($tree));
+		file_put_contents(dirname($this->filePath).'/'.SG_TREE_FILE_NAME, serialize($tree));
 	}
 
 	private function loadFileTree()
 	{
 		$allItems = file_get_contents(dirname($this->filePath).'/'.SG_TREE_FILE_NAME);
-		return json_decode($allItems, true);
+		return unserialize($allItems);
 	}
 
-	public $bufferSize = 0;
-
-	public function shouldReload($chunk)
+	public function shouldReload()
 	{
-		$this->bufferSize += $chunk;
+		$currentTime = time();
 
-		if ($this->bufferSize >= self::BUFFER_SIZE) {
+		if (($currentTime - $this->reloadStartTs) >= SG_RELOAD_TIMEOUT) {
 			return true;
 		}
 
@@ -110,7 +110,7 @@ class SGBackupFiles implements SGArchiveDelegate
 
 	public function backup($filePath, $options, $state)
 	{
-		$this->bufferSize = 0;
+		$this->reloadStartTs = time();
 		if ($state->getAction() == SG_STATE_ACTION_PREPARING_STATE_FILE) {
 			SGBackupLog::writeAction('backup files', SG_BACKUP_LOG_POS_START);
 		}
@@ -133,15 +133,14 @@ class SGBackupFiles implements SGArchiveDelegate
 		if ($state->getAction() == SG_STATE_ACTION_PREPARING_STATE_FILE) {
 			SGBackupLog::write('Backup files: '.$backupItems);
 
-			$this->resetBackupProgress();
+			$this->resetProgress();
 			$entries = $this->prepareFileTree($allItems);
 			$this->saveFileTree($entries);
-
-			$this->totalBackupFilesCount = count($entries);
+			$this->numberOfEntries = count($entries);
 			$this->warningsFound = false;
-			$this->saveStateData(SG_STATE_ACTION_LISTING_FILES);
+			$this->saveStateData(SG_STATE_ACTION_LISTING_FILES, array(), 0, 0, false, 0);
 
-			SGBackupLog::write('Number of files to backup: '.$this->totalBackupFilesCount);
+			SGBackupLog::write('Number of files to backup: '.$this->numberOfEntries);
 
 			if (backupGuardIsReloadEnabled()) {
 				$this->reload();
@@ -149,22 +148,22 @@ class SGBackupFiles implements SGArchiveDelegate
 		}
 		else {
 			$this->nextProgressUpdate = $state->getProgress();
-			$this->totalBackupFilesCount = $state->getTotalBackupFilesCount();
-			$this->currentBackupFileCount = $state->getCurrentBackupFileCount();
             $this->warningsFound = $state->getWarningsFound();
+
+            $this->numberOfEntries = $state->getNumberOfEntries();
+            $this->progressCursor = $state->getCursor();
 		}
 
 		$this->cdrSize = $state->getCdrSize();
-
 		$this->sgbp = new SGArchive($filePath, 'a', $this->cdrSize);
 		$this->sgbp->setDelegate($this);
 
 		$allItems = $this->loadFileTree();
 		$totalSize = 0;
 
-		$this->currentStateIndex = $state->getIndex();
+		$this->cursor = $state->getCursor();
 
-		for ($i=$this->currentStateIndex; $i < count($allItems); $i++) {
+		for ($i=$this->cursor; $i < count($allItems); $i++) {
 			if (!$state->getInprogress()) {
 				SGBackupLog::writeAction('backup file: '.$allItems[$i]['path'], SG_BACKUP_LOG_POS_START);
 			}
@@ -173,9 +172,9 @@ class SGBackupFiles implements SGArchiveDelegate
 			$this->addFileToArchive($path);
 			SGBackupLog::writeAction('backup file: '.$allItems[$i]['path'], SG_BACKUP_LOG_POS_END);
 
-			$this->currentStateIndex = $i+1;
+			$this->cursor = $i+1;
 			$this->cdrSize = $this->sgbp->getCdrFilesCount();
-			$this->saveStateData(SG_STATE_ACTION_COMPRESSING_FILES, $ranges = array(), $offset = 0, $headerSize = 0, $inprogress = false);
+			$this->saveStateData(SG_STATE_ACTION_COMPRESSING_FILES, array(), 0, 0, false, $state->getFileOffsetInArchive());
 		}
 
 		$this->sgbp->finalize();
@@ -194,10 +193,20 @@ class SGBackupFiles implements SGArchiveDelegate
 		$this->delegate->reload();
 	}
 
-	public function saveStateData($action, $ranges = array(), $offset = 0, $headerSize = 0, $inprogress = false)
+	public function getToken()
+	{
+		return $this->delegate->getToken();
+	}
+
+	public function getProgress()
+	{
+		return $this->nextProgressUpdate;
+	}
+
+	public function saveStateData($action, $ranges = array(), $offset = 0, $headerSize = 0, $inprogress = false, $fileOfssetInArchive = 0)
 	{
 		$sgFileState = $this->delegate->getState();
-		$token = $this->delegate->getToken();
+		$token = $this->getToken();
 
 		$sgFileState->setInprogress($inprogress);
 		$sgFileState->setHeaderSize($headerSize);
@@ -207,11 +216,12 @@ class SGBackupFiles implements SGArchiveDelegate
 		$sgFileState->setAction($action);
 		$sgFileState->setProgress($this->nextProgressUpdate);
 		$sgFileState->setWarningsFound($this->warningsFound);
-		$sgFileState->setIndex($this->currentStateIndex);
-		$sgFileState->setTotalBackupFilesCount($this->totalBackupFilesCount);
-		$sgFileState->setCurrentBackupFileCount($this->currentBackupFileCount);
 		$sgFileState->setCdrSize($this->cdrSize);
-		$sgFileState->setQueuedStorageUploads($this->queuedStorageUploads);
+		$sgFileState->setPendingStorageUploads($this->pendingStorageUploads);
+		$sgFileState->setNumberOfEntries($this->numberOfEntries);
+		$sgFileState->setCursor($this->cursor);
+		$sgFileState->setFileOffsetInArchive($fileOfssetInArchive);
+
 		$sgFileState->save();
 	}
 
@@ -224,12 +234,20 @@ class SGBackupFiles implements SGArchiveDelegate
 
 	public function restore($filePath)
 	{
+		$this->reloadStartTs = time();
+		$state = $this->getState();
 		$this->filePath = $filePath;
-
-		$this->resetRestoreProgress(dirname($filePath));
+		$this->resetProgress();
 		$this->warningsFound = false;
-		$this->extractArchive($filePath);
 
+		if ($state) {
+			$this->nextProgressUpdate = $state->getProgress();
+			$this->warningsFound = $state->getWarningsFound();
+			$this->progressCursor = $state->getCursor();
+			$this->numberOfEntries = $state->getCdrSize();
+		}
+
+		$this->extractArchive($filePath);
 		SGBackupLog::writeAction('restore files', SG_BACKUP_LOG_POS_END);
 	}
 
@@ -237,9 +255,10 @@ class SGBackupFiles implements SGArchiveDelegate
 	{
 		$restorePath = $this->rootDirectory;
 
+		$state = $this->getState();
 		$sgbp = new SGArchive($filePath, 'r');
 		$sgbp->setDelegate($this);
-		$sgbp->extractTo($restorePath);
+		$sgbp->extractTo($restorePath, $state);
 	}
 
 	public function getCorrectCdrFilename($filename)
@@ -264,7 +283,7 @@ class SGBackupFiles implements SGArchiveDelegate
 	public function didExtractFile($filePath)
 	{
 		//update progress
-		$this->currentBackupFileCount++;
+		$this->progressCursor++;
 		$this->updateProgress();
 
 		SGBackupLog::write('End restore file: '.$filePath);
@@ -277,15 +296,8 @@ class SGBackupFiles implements SGArchiveDelegate
 
 	public function didCountFilesInsideArchive($count)
 	{
-		$this->totalBackupFilesCount = $count;
+		$this->numberOfEntries = $count;
 		SGBackupLog::write('Number of files to restore: '.$count);
-	}
-
-	private function resetBackupProgress()
-	{
-		$this->currentBackupFileCount = 0;
-		$this->progressUpdateInterval = SGConfig::get('SG_ACTION_PROGRESS_UPDATE_INTERVAL');
-		$this->nextProgressUpdate = $this->progressUpdateInterval;
 	}
 
 	private function prepareFileTree($allItems)
@@ -299,10 +311,9 @@ class SGBackupFiles implements SGArchiveDelegate
 		return $entries;
 	}
 
-	private function resetRestoreProgress($restorePath)
+	private function resetProgress()
 	{
-		$this->currentBackupFileCount = 0;
-		$this->progressUpdateInterval = SGConfig::get('SG_ACTION_PROGRESS_UPDATE_INTERVAL');
+		$this->progressCursor = 0;
 		$this->nextProgressUpdate = $this->progressUpdateInterval;
 	}
 
@@ -396,7 +407,7 @@ class SGBackupFiles implements SGArchiveDelegate
 		}
 
 		//update progress and check cancellation
-		$this->currentBackupFileCount++;
+		$this->progressCursor++;
 		if ($this->updateProgress())
 		{
 			if ($this->delegate && $this->delegate->isCancelled())
@@ -454,7 +465,7 @@ class SGBackupFiles implements SGArchiveDelegate
 
 	private function updateProgress()
 	{
-		$progress = round($this->currentBackupFileCount*100.0/$this->totalBackupFilesCount);
+		$progress = round($this->progressCursor*100.0/$this->numberOfEntries);
 
 		if ($progress>=$this->nextProgressUpdate)
 		{

@@ -48,11 +48,17 @@ class SGReloader
 
 	public static function reloadWithAjaxUrl($awakeURL)
 	{
+		//external restore works only with ajax requests
+		if (defined('BG_EXTERNAL_RESTORE_RUNNING') && BG_EXTERNAL_RESTORE_RUNNING) {
+			return;
+		}
+
 		// awake frequency in miliseconds
 		$sgAwakeFrequency = SGConfig::get('SG_AJAX_REQUEST_FREQUENCY')?SGConfig::get('SG_AJAX_REQUEST_FREQUENCY'):SG_AJAX_DEFAULT_REQUEST_FREQUENCY;
 		$sgAwakeFrequency = $sgAwakeFrequency/1000; // awake frequency in seconds
 
-		$timeout = 3*$sgAwakeFrequency;
+		// add 3 seconds to awake frequency
+		$timeout = $sgAwakeFrequency + 3;
 		while ($timeout) {
 
 			$reloaderState = SGReloaderState::loadState();

@@ -16,7 +16,9 @@ class SGState
 	public $backupFilePath = '';
 	public $progress = 0;
 	public $warningsFound = false;
-	public $queuedStorageUploads = array();
+	public $pendingStorageUploads = array();
+
+	public $offset = 0;
 
 	function __construct()
 	{
@@ -72,9 +74,9 @@ class SGState
 		$this->warningsFound = $warningsFound;
 	}
 
-	public function setQueuedStorageUploads($queuedStorageUploads)
+	public function setPendingStorageUploads($pendingStorageUploads)
 	{
-		$this->queuedStorageUploads = $queuedStorageUploads;
+		$this->pendingStorageUploads = $pendingStorageUploads;
 	}
 
 	public function getInprogress()
@@ -127,9 +129,19 @@ class SGState
 		return $this->warningsFound;
 	}
 
-	public function getQueuedStorageUploads()
+	public function getPendingStorageUploads()
 	{
-		return $this->queuedStorageUploads;
+		return $this->pendingStorageUploads;
+	}
+
+	public function setOffset($offset)
+	{
+		$this->offset = $offset;
+	}
+
+	public function getOffset()
+	{
+		return $this->offset;
 	}
 
 	public function factory($stateJson)
@@ -140,34 +152,15 @@ class SGState
 
 		if ($type == SG_STATE_TYPE_FILE) {
 			$sgState = new SGFileState();
-			$sgState->setIndex($stateJson['index']);
-			$sgState->setTotalBackupFilesCount($stateJson['totalBackupFilesCount']);
-			$sgState->setCurrentBackupFileCount($stateJson['currentBackupFileCount']);
-			$sgState->setCdrSize($stateJson['cdrSize']);
-			$sgState->setRanges($stateJson['ranges']);
-			$sgState->setOffset($stateJson['offset']);
-			$sgState->setHeaderSize($stateJson['headerSize']);
-			$sgState->setInprogress($stateJson['inprogress']);
 		}
 		else if ($type == SG_STATE_TYPE_UPLOAD) {
 			$sgState = new SGUploadState();
-			$sgState = $sgState->init($stateJson);
-			return $sgState;
 		}
 		else {
 			$sgState = new SGDBState();
 		}
 
-		$sgState->setType($type);
-		$sgState->setAction($stateJson['action']);
-		$sgState->setActionId($stateJson['actionId']);
-		$sgState->setActionStartTs($stateJson['actionStartTs']);
-		$sgState->setBackupFileName($stateJson['backupFileName']);
-		$sgState->setBackupFilePath($stateJson['backupFilePath']);
-		$sgState->setProgress($stateJson['progress']);
-		$sgState->setWarningsFound($stateJson['warningsFound']);
-		$sgState->setQueuedStorageUploads($stateJson['queuedStorageUploads']);
-
+		$sgState = $sgState->init($stateJson);
 		return $sgState;
 	}
 }

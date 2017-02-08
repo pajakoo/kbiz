@@ -5,7 +5,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title"><?php _t('Terms & Conditions')?></h4>
+            <h4 class="modal-title"><?php _backupGuardT('Terms & Conditions')?></h4>
         </div>
         <div class="modal-body sg-modal-body">
             <div class="col-md-12">
@@ -25,7 +25,7 @@
             <div class="clearfix"></div>
         </div>
         <div class="modal-footer">
-            <button type="button" data-dismiss="modal" class="btn btn-primary"><?php echo _t('Ok')?></button>
+            <button type="button" data-dismiss="modal" class="btn btn-primary"><?php echo _backupGuardT('Ok')?></button>
         </div>
     </div>
 </div>

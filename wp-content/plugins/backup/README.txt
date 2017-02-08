@@ -1,21 +1,21 @@
-=== BackupGuard ===
-Plugin Name: BackupGuard
+=== Backup ===
+Plugin Name: Backup
 Contributors: BackupGuard
 Donate link: https://backup-guard.com/products/backup-wordpress
-Tags: backup, backup database, backup files, backup plugin, cloud backup, db backup, dropbox backup, dump, ftp backup, full backup, google drive backup, restoration, restore, rollback, scheduled backup, wordpress backup, duplicate, clone, migrate, migration, export db, db migration, migrate db, amazon backup, amazon, google drive, dropbox, ftp
+Tags: backup, backupguard, backup guard, backup database, backup files, backup plugin, cloud backup, db backup, dropbox backup, dump, ftp backup, full backup, google drive backup, restoration, restore, rollback, scheduled backup, wordpress backup, duplicate, clone, migrate, migration, export db, db migration, migrate db, amazon backup, amazon, google drive, dropbox, ftp
 Requires at least: 3.8
-Tested up to: 4.6.1
+Tested up to: 4.7
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-BackupGuard is the best backup choice for WordPress. Backup, restore, clone, duplicate or migrate your website with few clicks.
+Backup Guard is the best backup choice for WordPress. Backup, restore, clone, duplicate or migrate your website with few clicks.
 
 == Description ==
 
-BackupGuard is the most complete backup and migration choice for WordPress. We offer the easiest way to <strong>backup</strong>, <strong>restore</strong> and <strong>migrate</strong> your WordPress based website or blog. You can backup/migrate your files, database or both.
+Backup Guard is the most complete backup and migration choice for WordPress. We offer the easiest way to <strong>backup</strong>, <strong>restore</strong> and <strong>migrate</strong> your WordPress based website or blog. You can backup/migrate your files, database or both.
 
-<p>Download <strong>BackupGuard Pro</strong> here: <a  href="https://backup-guard.com/products/backup-wordpress">https://backup-guard.com/products/backup-wordpress</a>.</p>
+<p>Download <strong>Backup Guard Pro</strong> here: <a  href="https://backup-guard.com/products/backup-wordpress">https://backup-guard.com/products/backup-wordpress</a>.</p>
 
 https://www.youtube.com/watch?v=HCz4mkMMXos
 
@@ -33,7 +33,7 @@ https://www.youtube.com/watch?v=HCz4mkMMXos
 <li><b>WordPress multisite/network support</b></li>
 </ul>
 
-See <strong>BackupGuard Free</strong> in action here: <a href="https://www.youtube.com/watch?v=nt6XoP69c0M">https://www.youtube.com/watch?v=nt6XoP69c0M</a>.
+See <strong>Backup Guard Free</strong> in action here: <a href="https://www.youtube.com/watch?v=nt6XoP69c0M">https://www.youtube.com/watch?v=nt6XoP69c0M</a>.
 
 <h4>Pro Features</h4>
 <ul>
@@ -56,7 +56,7 @@ See <strong>BackupGuard Free</strong> in action here: <a href="https://www.youtu
 <li><b>Emergency support</b> - up to 24 hours</li>
 </ul>
 
-See <strong>BackupGuard Pro</strong> in action here: <a href="https://www.youtube.com/watch?v=TSPgmrSu-ls">https://www.youtube.com/watch?v=TSPgmrSu-ls</a>.
+See <strong>Backup Guard Pro</strong> in action here: <a href="https://www.youtube.com/watch?v=TSPgmrSu-ls">https://www.youtube.com/watch?v=TSPgmrSu-ls</a>.
 
 <h4>Documentation</h4>
 The <strong>documentation</strong> you can find here: <a  href="https://backup-guard.com/products/backup-wordpress/doc">https://backup-guard.com/products/backup-wordpress/doc</a>.
@@ -72,8 +72,8 @@ The <strong>documentation</strong> you can find here: <a  href="https://backup-g
 
 <h4>Min. requirements</h4>
 <ul>
-<li><strong>BackupGuard Free</strong> requires - PHP 5.3.3, zlib, WordPress 3.8</li>
-<li><strong>BackupGuard Pro</strong> requires - PHP 5.3.3, zlib, curl, WordPress 3.8</li>
+<li><strong>Backup Guard Free</strong> requires - PHP 5.3.3, zlib, WordPress 3.8</li>
+<li><strong>Backup Guard Pro</strong> requires - PHP 5.3.3, zlib, curl, WordPress 3.8</li>
 </ul>
 
 <h4>Supported hostings</h4>
@@ -106,8 +106,8 @@ The <strong>documentation</strong> you can find here: <a  href="https://backup-g
 Installation:
 
 <ul>
-<li>Instruction for <strong>BackupGuard Free</strong> find <a href="https://backup-guard.com/products/backup-wordpress/doc/install-backupguard-free">here</a></li>
-<li>Instruction for <strong>BackupGuard Pro</strong> find <a  href="https://backup-guard.com/products/backup-wordpress/doc/install-backupguard-pro">here</a></li>
+<li>Instruction for <strong>Backup Guard Free</strong> find <a href="https://backup-guard.com/products/backup-wordpress/doc/install-backupguard-free">here</a></li>
+<li>Instruction for <strong>Backup Guard Pro</strong> find <a  href="https://backup-guard.com/products/backup-wordpress/doc/install-backupguard-pro">here</a></li>
 </ul>
 
 == Frequently Asked Questions ==
@@ -124,27 +124,27 @@ It depends on how often data gets updated on your website. Maybe daily backups a
 
 = What is included in the basic (free) plan? =
 
-BackupGuard Free gives you the ability to backup or restore your website as many times as you want. You can also download your backups and import them in other websites where BackupGuard is installed and running.
+Backup Guard Free gives you the ability to backup or restore your website as many times as you want. You can also download your backups and import them in other websites where Backup Guard is installed and running.
 
-= Why should I purchase BackupGuard Pro? =
+= Why should I purchase Backup Guard Pro? =
 
-Although BackupGuard Free gives you the ability to backup and restore your website as many times as you want, your backups will only reside on your server. With our Pro plans you can upload your backups to the cloud of your preference, schedule your backups, receive notifications, and many other features.
+Although Backup Guard Free gives you the ability to backup and restore your website as many times as you want, your backups will only reside on your server. With our Pro plans you can upload your backups to the cloud of your preference, schedule your backups, receive notifications, and many other features.
 
-That's not all, if you are a paid user, you will receive priority/emergency support and finally, only with our Platinum plan, you will receive "unlimited plans" license which will allow you to install BackupGuard on as many websites as you want.
+That's not all, if you are a paid user, you will receive priority/emergency support and finally, only with our Platinum plan, you will receive "unlimited plans" license which will allow you to install Backup Guard on as many websites as you want.
 
-<a href="https://backup-guard.com/products/backup-wordpress">BackupGuard PRO</a>
+<a href="https://backup-guard.com/products/backup-wordpress">Backup Guard PRO</a>
 
-= What other platforms has BackupGuard planned to support? =
+= What other platforms has Backup Guard planned to support? =
 
 We currently support WordPress and Magento platforms, but with the help of our flexible and universal backup technology, multi-platform coverage is just around the corner. Prestashop and Joomla are next.
 
-= What are the minimum requirements for installing BackupGuard? =
+= What are the minimum requirements for installing Backup Guard? =
 
 Your hosting/server must have installed PHP 5.3 or higher with zlib library enabled.
 
 Note: depending on the product you are using, there more be more requirements, that's why we recommend you to check our products section for more details.
 
-= What are the limitations of the backup created by BackupGuard? =
+= What are the limitations of the backup created by Backup Guard? =
 
 Of course there is a limit regarding the size of the archive, but practically it is unreachable. We use our own SGBP archive format which compared to Zip doesn't limit you to 4GB archive/file size or 65k of number of files.
 
@@ -160,20 +160,44 @@ When you are facing an issue of any kind with any of our products, the first thi
 
 SGBP is our own archive format, therefore currently there is no software that can extract it.
 
-= Is it possible to migrate website using BackupGuard? =
+= Is it possible to migrate website using Backup Guard? =
 
-Although we don't offer server migration feature, BackupGuard creates an exact snapshot of the current state of your website and whenever you restore it, the exact same state gets restored. So practically, you can migrate your website with just downloading and importing your backup.
+Although we don't offer server migration feature, Backup Guard creates an exact snapshot of the current state of your website and whenever you restore it, the exact same state gets restored. So practically, you can migrate your website with just downloading and importing your backup.
 
 == Screenshots ==
 
-1.  Main screen / list of backups
-2.  Perform manual backup popup
-3.  Import backup popup
-4.  Cloud settings screen
-5.  Scheduled backup settings screen
-6.  General settings screen
+1.  Unlimited backups & restores
+2.  Website migration
+3.  Scheduled backups
+4.  Cloud integrations
+5.  Mail notifications
+6.  Backup customization
 
 == Changelog ==
+
+= 1.1.32 =
+* External restore bug fixes
+* Redirect bug fixed
+* Databes backup reloading bug fixed
+
+= 1.1.30 =
+* Secure and reliable restoration
+* Charset and collate migration
+* LightSpeed web server support
+* Active user won’t be dropped after restoration
+* Plugin update logic was improved
+* Other security fixes and optimizations
+
+= 1.1.29 =
+* Bug Fixing
+
+= 1.1.28 =
+* Code cleanup
+* Reloading implimitation during database backup
+
+= 1.1.27 =
+* Code cleanup
+* Reloading implimitation during restore
 
 = 1.1.26 =
 * Reloading logic changed
@@ -293,7 +317,7 @@ Although we don't offer server migration feature, BackupGuard creates an exact s
 = 1.0 =
 * Initial commit.
 
-BackupGuard v.1.1.26
+Backup Guard v.1.1.30
 
 == Features ==
 <h4>One Click Backup</h4>

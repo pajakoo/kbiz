@@ -1,5 +1,5 @@
 <?php
-function _t($key, $return = false)
+function _backupGuardT($key, $return = false)
 {
     if($return)
     {
@@ -27,7 +27,7 @@ function backupGuardShouldeDisplayDiscountNotice()
     }
 }
 
-function isAjax()
+function backupGuardIsAjax()
 {
     return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
 }
@@ -108,7 +108,7 @@ function backupGuardParseBackupOptions($options)
     return $scheduleOptions;
 }
 
-function filterStatusesByActionType($currentBackup, $currentOptions)
+function backupGuardFilterStatusesByActionType($currentBackup, $currentOptions)
 {
     $filteredStatuses = array();
     if($currentBackup['type'] == SG_ACTION_TYPE_RESTORE)
@@ -118,7 +118,7 @@ function filterStatusesByActionType($currentBackup, $currentOptions)
     }
     else
     {
-        $currentOptions = activeOptionToType($currentOptions);
+        $currentOptions = backupGuardActiveOptionToType($currentOptions);
         if ($currentOptions['backupDatabase']) $filteredStatuses[] = $currentOptions['backupDatabase'];
         if ($currentOptions['backupFiles']) $filteredStatuses[] = $currentOptions['backupFiles'];
         if ($currentOptions['ftp']) $filteredStatuses[] = $currentOptions['ftp'];
@@ -129,7 +129,7 @@ function filterStatusesByActionType($currentBackup, $currentOptions)
     return $filteredStatuses;
 }
 
-function activeOptionToType($activeOption)
+function backupGuardActiveOptionToType($activeOption)
 {
     $activeOption = json_decode($activeOption, true);
     $activeOptions['backupDatabase'] = !empty($activeOption['SG_ACTION_BACKUP_DATABASE_AVAILABLE'])?SG_ACTION_STATUS_IN_PROGRESS_DB:0;
@@ -160,7 +160,7 @@ function activeOptionToType($activeOption)
     return $activeOptions;
 }
 
-function convertToBytes($from){
+function backupGuardConvertToBytes($from){
     $number=substr($from,0,-2);
     switch(strtoupper(substr($from,-2))){
         case "KB":
@@ -178,7 +178,7 @@ function convertToBytes($from){
     }
 }
 
-function getRunningActions()
+function backupGuardGetRunningActions()
 {
     $runningActions = SGBackup::getRunningActions();
     $isAnyActiveActions = count($runningActions);

@@ -1,7 +1,7 @@
 <?php
 require_once(dirname(__FILE__).'/../boot.php');
 
-if(isAjax()) {
+if(backupGuardIsAjax()) {
 
 	$discountNoticeInfoJson = SGConfig::get('SG_HIDE_DISCOUNT_NOTICE');
 

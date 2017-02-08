@@ -3,7 +3,7 @@ require_once(dirname(__FILE__).'/../boot.php');
 $error = array();
 $success = array('success'=>1);
 
-if(isAjax() && isset($_POST['cancel']))
+if(backupGuardIsAjax() && isset($_POST['cancel']))
 {
     SGConfig::set('SG_AMOUNT_OF_BACKUPS_TO_KEEP', SG_NUMBER_OF_BACKUPS_TO_KEEP);
     SGConfig::set('SG_NOTIFICATIONS_ENABLED', '0');
@@ -13,11 +13,11 @@ if(isAjax() && isset($_POST['cancel']))
     die(json_encode($success));
 }
 
-if(isAjax() && count($_POST))
+if(backupGuardIsAjax() && count($_POST))
 {
-    $amountOfBackupsToKeep = SG_NUMBER_OF_BACKUPS_TO_KEEP;
-    if (isset($_POST['amount-of-backups-to-keep']) && (int)$_POST['amount-of-backups-to-keep']) {
-        $amountOfBackupsToKeep = $_POST['amount-of-backups-to-keep'];
+    $amountOfBackupsToKeep = (int)@$_POST['amount-of-backups-to-keep'];
+    if ($amountOfBackupsToKeep <= 0) {
+        $amountOfBackupsToKeep = SG_NUMBER_OF_BACKUPS_TO_KEEP;
     }
     SGConfig::set('SG_AMOUNT_OF_BACKUPS_TO_KEEP', $amountOfBackupsToKeep);
 
@@ -27,10 +27,10 @@ if(isAjax() && count($_POST))
     {
         $email = @$_POST['sgUserEmail'];
         if (empty($email)) {
-            array_push($error, _t('Email is required.', true));
+            array_push($error, _backupGuardT('Email is required.', true));
         }
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            array_push($error, _t('Invalid email address.', true));
+            array_push($error, _backupGuardT('Invalid email address.', true));
         }
 
         SGConfig::set('SG_NOTIFICATIONS_ENABLED', '1');
