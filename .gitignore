@@ -1,5 +1,6 @@
 *.log
 wp-config.php
+wp-config-sample.php
 wp-content/advanced-cache.php
 wp-content/backup-db/
 wp-content/backups/
@@ -208,3 +209,31 @@ chromedriver/screenshots/
 # wp-snapshots
 #########################
 /wp-snapshots
+wp-content/businessdirectory-themes/.DS_Store
+wp-content/languages/.DS_Store
+wp-content/plugins/backup/BackupGuard.php
+wp-content/plugins/backup/com/core/notice/
+wp-content/plugins/backup/com/core/restore/
+wp-content/plugins/backup/com/lib/SGCharsetHandler.php
+wp-content/plugins/backup/public/restore_wordpress.php
+wp-content/plugins/backup/public/templates/
+wp-content/plugins/business-directory-plugin/languages/WPBDM-sv_SE.mo
+wp-content/plugins/business-directory-plugin/languages/WPBDM-sv_SE.po
+wp-content/plugins/business-directory-plugin/themes/
+wp-content/plugins/duplicator/assets/js/handlebars.min.js
+wp-content/plugins/duplicator/classes/scan.validator.php
+wp-content/plugins/duplicator/ctrls/
+wp-content/plugins/duplicator/debug/
+wp-content/plugins/duplicator/views/tools/diagnostics/
+wp-content/plugins/simple-post-type-permalinks/
+wp-content/plugins/wordpress/wp-facebook-login/
+wp-content/plugins/wp-asset-clean-up/
+Would skip repository wp-content/plugins/wp-facebook-login/
+wp-content/plugins/wp-spamshield/includes/class.blacklists.php
+wp-content/plugins/wp-spamshield/includes/class.compatibility.php
+wp-content/plugins/wp-spamshield/includes/class.security.php
+wp-content/plugins/wp-spamshield/includes/class.utils.php
+wp-content/plugins/wp-spamshield/includes/class.widget.php
+wp-content/themes/twentysixteen2/.DS_Store
+wp-content/themes/twentysixteen2/inc/.DS_Store
+wp-content/themes/twentysixteen2/inc/kint/.DS_Store
