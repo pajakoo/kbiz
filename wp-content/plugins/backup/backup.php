@@ -4,7 +4,7 @@
  * Plugin Name:       Backup
  * Plugin URI:        https://backup-guard.com/products/backup-wordpress
  * Description:       Backup for WordPress is the best backup choice for WordPress based websites or blogs.
- * Version:           1.1.32
+ * Version:           1.1.33
  * Author:            BackupGuard
  * Author URI:        https://backup-guard.com/products/backup-wordpress
  * License:           GPL-2.0+
@@ -15,7 +15,7 @@ if (function_exists('activate_backup_guard')) {
 	die('Please deactivate any other BackupGuard version before activating this one.');
 }
 
-define('SG_BACKUP_GUARD_VERSION', '1.1.32');
+define('SG_BACKUP_GUARD_VERSION', '1.1.33');
 
 // If this file is called directly, abort.
 if (!defined('WPINC')) {

@@ -485,9 +485,6 @@ function load_script_enqueue(){
 
 add_action('wp_enqueue_scripts',load_script_enqueue);
 
-
-
-
 /**
  * Redirect non-admins to the homepage after logging into the site.
  *

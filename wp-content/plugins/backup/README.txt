@@ -175,6 +175,10 @@ Although we don't offer server migration feature, Backup Guard creates an exact 
 
 == Changelog ==
 
+= 1.1.33 =
+* Migration bug resolved
+* Restore bug resolved
+
 = 1.1.32 =
 * External restore bug fixes
 * Redirect bug fixed
@@ -317,7 +321,7 @@ Although we don't offer server migration feature, Backup Guard creates an exact 
 = 1.0 =
 * Initial commit.
 
-Backup Guard v.1.1.30
+Backup Guard v.1.1.33
 
 == Features ==
 <h4>One Click Backup</h4>

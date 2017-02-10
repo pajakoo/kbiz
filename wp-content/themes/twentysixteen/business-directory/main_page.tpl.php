@@ -28,6 +28,10 @@
 
 //taxonomy=wpbdp_category&post_type=wpbdp_listing&post_type=category
 
+
+    //echo get_locale();
+
+
 $taxonomy = 'wpbdp_category';
 $terms = get_terms($taxonomy, array(
     'parent' => 0,
@@ -51,7 +55,7 @@ if ( $terms && !is_wp_error( $terms ) ) :
     </div>
 <?php endif;
 
-
+//echo do_shortcode('[supsystic-slider id=1 position="center"]');
 
 return;
 

@@ -217,14 +217,6 @@ class SGBackupDatabase implements SGIMysqldumpDelegate
 		// Find and replace old urls with new ones
 		$sgMigrate->migrate($oldSiteUrl, SG_SITE_URL, $tables);
 
-		$customizedOldSiteUrl = backupGuardRemoveWww($oldSiteUrl);
-		$customizedNewSiteUrl = backupGuardRemoveWww(SG_SITE_URL);
-		$sgMigrate->migrate($customizedOldSiteUrl, $customizedNewSiteUrl, $tables);
-
-		$customizedOldSiteUrl = backupGuardRemoveHttp($oldSiteUrl);
-		$customizedNewSiteUrl = backupGuardRemoveHttp(SG_SITE_URL);
-		$sgMigrate->migrate($customizedOldSiteUrl, $customizedNewSiteUrl, $tables);
-
 		$oldDbPrefix = $this->getOldDbPrefix();
 		$sgMiscMigratableValues = explode(',', SG_MISC_MIGRATABLE_VALUES);
 		$dgMiscMigratebleTables = explode(',', SG_MISC_MIGRATABLE_TABLES);
@@ -273,6 +265,12 @@ class SGBackupDatabase implements SGIMysqldumpDelegate
 		global $wp_db_version;
 		update_option('db_version', $wp_db_version);
 		update_option('db_upgraded', true);
+
+		$upload_dir = wp_upload_dir();
+		$wpUploads = $upload_dir['basedir'];
+		if (!is_writable($wpUploads)) {
+			update_option("upload_path", ""); //To fix invalid path inserted in db
+		}
 	}
 
 	private function export()

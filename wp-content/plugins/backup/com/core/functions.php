@@ -48,22 +48,20 @@ function backupGuardGenerateToken()
 	return md5(time());
 }
 
-// returning url without www.
-function backupGuardRemoveWww($url)
-{
-	return str_replace("www.", '', $url);
-}
-
-function backupGuardRemoveHttp($url)
-{
-	$urlComponents = backupGuardParseUrl($url);
-	return backupGuardRemoveWww($urlComponents['host']);
-}
-
 // Parse a URL and return its components
 function backupGuardParseUrl($url)
 {
-	return parse_url($url);
+	$urlComponents = parse_url($url);
+
+	$domain = $urlComponents['host'];
+	$domain = preg_replace("/(www|\dww|w\dw|ww\d)\./", "", $domain);
+
+	$path = "";
+	if (isset($urlComponents['path'])) {
+	    $path   = $urlComponents['path'];
+	}
+
+	return $domain.$path;
 }
 
 function backupGuardIsReloadEnabled()
