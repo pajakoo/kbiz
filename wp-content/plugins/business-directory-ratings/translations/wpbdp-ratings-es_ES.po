@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -103,6 +103,7 @@ msgstr "Permitir que los usuarios no registrados publiquen calificaciones?"
 #: business-directory-ratings.php:166
 msgid "Allow (some) HTML in ratings comments?"
 msgstr ""
+"¿Permitir algunas etiquetas HTML en los comentarios de la calificación?"
 
 #: business-directory-ratings.php:171
 msgid "Rating comments"
@@ -281,7 +282,7 @@ msgstr "Su comentario."
 
 #: templates/form.tpl.php:47
 msgid "You may use these HTML tags: %s."
-msgstr ""
+msgstr "Puede utilizar estas etiquetas HTML: %s."
 
 #: templates/ratings.tpl.php:5
 msgid "There are no reviews yet."

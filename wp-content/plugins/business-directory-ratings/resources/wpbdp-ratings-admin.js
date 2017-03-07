@@ -18,7 +18,7 @@ jQuery(function($){
     $stars.each(function(i,v){ wpbdp_raty_this(v); });
 
     // delete link
-    $('#wpbdp-ratings .row-actions a.delete').live('click', function(e){
+    $('#wpbdp-ratings').on( 'click', '.row-actions a.delete', function(e){
         e.preventDefault();
 
         var $rating = $(this).parents('tr');
@@ -37,7 +37,7 @@ jQuery(function($){
 
     // edit link
     // TODO: integrate with add-form below
-    $('#wpbdp-ratings .row-actions a.edit').live('click', function(e){
+    $('#wpbdp-ratings').on( 'click', '.row-actions a.edit', function(e){
         e.preventDefault();
 
         var $rating = $(this).parents('tr');
@@ -47,7 +47,7 @@ jQuery(function($){
     });
 
     // edit / cancel
-    $('#wpbdp-ratings .comment-edit input.save-button').live('click', function(e){
+    $('#wpbdp-ratings').on( 'click', '.comment-edit input.save-button', function(e){
         e.preventDefault();
 
         var $rating = $(this).parents('tr');
@@ -64,7 +64,7 @@ jQuery(function($){
         }, 'json');
     });
 
-    $('#wpbdp-ratings .comment-edit input.cancel-button').live('click', function(e){
+    $('#wpbdp-ratings').on( 'click', '.comment-edit input.cancel-button', function(e){
         e.preventDefault();
 
         var $rating = $(this).parents('tr');

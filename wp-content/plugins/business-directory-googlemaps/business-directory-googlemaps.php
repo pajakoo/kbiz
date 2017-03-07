@@ -3,14 +3,14 @@
  * Plugin Name: Business Directory Plugin - Google Maps Module
  * Description: Adds support for Google Maps for display in a Business Directory listing.  Allows you to map any set of fields to the address for use by Google Maps.  REQUIRES Business Directory 3.0 or higher to run.
  * Plugin URI: http://www.businessdirectoryplugin.com
- * Version: 4.0.6
+ * Version: 4.0.7.1
  * Author: D. Rodenbaugh
  * Author URI: http://businessdirectoryplugin.com
  */
 
 class BusinessDirectory_GoogleMapsPlugin {
 
-    const VERSION = '4.0.6';
+    const VERSION = '4.0.7.1';
     const REQUIRED_BD_VERSION = '4.0';
 
     const GOOGLE_MAPS_JS_URL = 'https://maps.google.com/maps/api/js';
@@ -137,7 +137,8 @@ class BusinessDirectory_GoogleMapsPlugin {
                        'fields' => 'ids',
                        'posts_per_page' => -1,
                        'post_status' => 'publish',
-                       'tax_query' => array() );
+                       'tax_query' => array(),
+                       'suppress_filters' => false );
 
         if ( $term && $region_term )
             $args['tax_query']['relation'] = 'AND';
@@ -696,25 +697,32 @@ class BusinessDirectory_GoogleMapsPlugin {
         else
             $query = $wp_query;
 
-        $args = array_merge( $query->query, array() ); // Use array_merge() to copy the args.
+        $args = array_merge( array_filter( $query->query_vars ), array() ); // Use array_merge() to copy the args.
+
         $args['post_type'] = WPBDP_POST_TYPE;
         $args['post_status'] = 'publish';
         $args['fields'] = 'ids';
         $args['suppress_filters'] = false;
+        $args['wpbdp_main_query'] = true;
 
-        if ( 'all' == wpbdp_get_option( 'googlemaps-listings-on-page' ) ) {
-            $args['posts_per_page'] = -1;
-
-            if ( isset( $args['paged'] ) ) unset( $args['paged'] );
-            if ( isset( $args['numberposts'] ) ) unset( $args['paged'] );
-            if ( isset( $args['paged'] ) ) unset( $args['paged'] );
-        }
+        $args = $this->maybe_update_query_to_retrieve_all_listings( $args );
 
         $listings = get_posts( $args );
+
         array_walk( $listings, array( &$this, 'add_listing_to_map' ) );
 
         return ! empty( $this->map_locations );
     }
+
+    private function maybe_update_query_to_retrieve_all_listings( $query = array() ) {
+        if ( 'all' == wpbdp_get_option( 'googlemaps-listings-on-page' ) ) {
+            $query['posts_per_page'] = -1;
+            unset( $query['paged'] );
+        }
+
+        return $query;
+    }
+
 
     /**
      * Adds a listing to the current map locations.
@@ -755,13 +763,7 @@ class BusinessDirectory_GoogleMapsPlugin {
         $args['post_type'] = WPBDP_POST_TYPE;
         $args['post_status'] = 'publish';
 
-        if ( 'all' == wpbdp_get_option( 'googlemaps-listings-on-page' ) ) {
-            $args['posts_per_page'] = -1;
-
-            if ( isset( $args['paged'] ) ) unset( $args['paged'] );
-            if ( isset( $args['numberposts'] ) ) unset( $args['paged'] );
-            if ( isset( $args['paged'] ) ) unset( $args['paged'] );
-        }
+        $args = $this->maybe_update_query_to_retrieve_all_listings( $args );
 
         if ( !isset( $args['tax_query'] ) )
             $args['tax_query'][] = array( 'taxonomy' => WPBDP_CATEGORY_TAX, 'field' => 'id', 'terms' => $category->term_id );
@@ -798,16 +800,9 @@ class BusinessDirectory_GoogleMapsPlugin {
         $args['post_type'] = WPBDP_POST_TYPE;
         $args['post_status'] = 'publish';
         $args['fields'] = 'ids';
-
-        if ( 'all' == wpbdp_get_option( 'googlemaps-listings-on-page' ) ) {
-            $args['posts_per_page'] = -1;
-
-            if ( isset( $args['paged'] ) ) unset( $args['paged'] );
-            if ( isset( $args['numberposts'] ) ) unset( $args['paged'] );
-            if ( isset( $args['paged'] ) ) unset( $args['paged'] );
-        }
-
         $args['suppress_filters'] = false;
+
+        $args = $this->maybe_update_query_to_retrieve_all_listings( $args );
 
         if ( $listings = get_posts( $args ) ) {
             array_walk( $listings, array( $this, 'add_listing_to_map' ) );

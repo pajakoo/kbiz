@@ -232,7 +232,7 @@ google.maps.TransitMode.TRAM indicates that the calculated route should prefer t
             if ( msg )
                 alert( t._error );
 
-            t._$form.find( '.find-route-btn' ).removeAttr( 'disabled' )
+            t._$form.find( '.find-route-btn' ).prop( 'disabled', false )
                                               .val( WPBDP_googlemaps_directions_l10n.submit_normal );
         },
 
@@ -243,7 +243,7 @@ google.maps.TransitMode.TRAM indicates that the calculated route should prefer t
                 return;
 
             t._working = true;
-            t._$form.find( '.find-route-btn' ).attr( 'disabled', 'disabled' )
+            t._$form.find( '.find-route-btn' ).prop( 'disabled', true )
                                               .val( WPBDP_googlemaps_directions_l10n.submit_working );
 
             // Reset everything.
@@ -386,7 +386,7 @@ google.maps.TransitMode.TRAM indicates that the calculated route should prefer t
             $( '#wpbdp-map-directions-wrapper' ).remove();
 
             t._working = false;
-            t._$form.find( '.find-route-btn' ).removeAttr( 'disabled' )
+            t._$form.find( '.find-route-btn' ).prop( 'disabled', false )
                                               .val( WPBDP_googlemaps_directions_l10n.submit_normal );
         }
     } );

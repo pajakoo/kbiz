@@ -2,7 +2,7 @@
 /*
  Plugin Name: Business Directory Plugin - Ratings Module
  Plugin URI: http://www.businessdirectoryplugin.com
- Version: 4.0.6
+ Version: 4.0.7
  Author: D. Rodenbaugh
  Description: Business Directory Ratings.  Allows your users to rate businesses, search by rating, and enter comments about listings.
  Author URI: http://www.skylineconsult.com
@@ -12,7 +12,7 @@ require_once(plugin_dir_path(__FILE__) . 'admin.php');
 
 class BusinessDirectory_RatingsModule {
 
-    const VERSION = '4.0.6';
+    const VERSION = '4.0.7';
     const REQUIRED_BD_VERSION = '4.0';
     const DB_VERSION = '0.6';
 

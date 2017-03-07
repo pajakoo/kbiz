@@ -1,14 +1,14 @@
-# Copyright (C) 2016 Business Directory Plugin - Ratings Module
+# Copyright (C) 2017 Business Directory Plugin - Ratings Module
 # This file is distributed under the same license as the Business Directory Plugin - Ratings Module package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Business Directory Plugin - Ratings Module 4.0.6\n"
+"Project-Id-Version: Business Directory Plugin - Ratings Module 4.0.7\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/business-directory-ratings\n"
-"POT-Creation-Date: 2016-12-13 23:18:16+00:00\n"
+"POT-Creation-Date: 2017-02-14 01:27:40+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 

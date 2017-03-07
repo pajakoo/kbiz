@@ -1,22 +1,28 @@
-# Translation of Twenty Sixteen in Bulgarian
-# This file is distributed under the same license as the Twenty Sixteen package.
+# Translation of Themes - Twenty Sixteen in Bulgarian
+# This file is distributed under the same license as the Themes - Twenty Sixteen package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2016-07-21 11:21:23+0000\n"
+"PO-Revision-Date: 2017-01-29 00:58:00+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: GlotPress/2.1.0-alpha\n"
-"Project-Id-Version: Twenty Sixteen\n"
+"X-Generator: GlotPress/2.3.0-alpha\n"
+"Language: bg\n"
+"Project-Id-Version: Themes - Twenty Sixteen\n"
+
+#. Theme Name of the plugin/theme
+msgid "Twenty Sixteen"
+msgstr "Twenty Sixteen"
 
 #. Description of the plugin/theme
 msgid "Twenty Sixteen is a modernized take on an ever-popular WordPress layout — the horizontal masthead with an optional right sidebar that works perfectly for blogs and websites. It has custom color options with beautiful default color schemes, a harmonious fluid grid using a mobile-first approach, and impeccable polish in every detail. Twenty Sixteen will make your WordPress look beautiful everywhere."
 msgstr "Twenty Sixteen е модерна версия на най-популярната структура на тема за WordPress - хоризонтален хедър с възможност за дясна колона. Този дизайн работи добре както за блогове, така и за сайтове. Има много възможности за персонализация и цветови схеми, структура, която се адаптира към устройството, на което се разглежда сайта и е изпипан в детайли. С Twenty Sixteen сайтът ви ще изглежда добре на всички екрани."
 
-#. Theme Name of the plugin/theme
-msgid "Twenty Sixteen"
-msgstr "Twenty Sixteen"
+#. translators: %s: Name of current post
+#: inc/template-tags.php:184 template-parts/content.php:28
+msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
+msgstr "Цялата публикация <span class=\"screen-reader-text\"> \"%s\"</span>"
 
 #. translators: %s: Name of current post
 #: image.php:84 template-parts/content-page.php:37
@@ -24,11 +30,6 @@ msgstr "Twenty Sixteen"
 #: template-parts/content-single.php:45 template-parts/content.php:49
 msgid "Edit<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr "Редактиране<span class=\"screen-reader-text\"> \"%s\"</span>"
-
-#. translators: %s: Name of current post
-#: inc/template-tags.php:184 template-parts/content.php:28
-msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
-msgstr "Цялата публикация <span class=\"screen-reader-text\"> \"%s\"</span>"
 
 #: inc/customizer.php:283
 msgid "Red"
@@ -55,13 +56,13 @@ msgctxt "label"
 msgid "Search for:"
 msgstr "Търсене за:"
 
-#: footer.php:17
-msgid "Footer Primary Menu"
-msgstr "Основно меню във футъра"
-
 #: footer.php:28
 msgid "Footer Social Links Menu"
 msgstr "Меню с връзки към социални мрежи във футъра"
+
+#: footer.php:17
+msgid "Footer Primary Menu"
+msgstr "Основно меню във футъра"
 
 #: functions.php:158
 msgid "Add widgets here to appear in your sidebar."
@@ -99,13 +100,13 @@ msgstr "Автор:"
 msgid "Previous post:"
 msgstr "Предишна публикация:"
 
-#: single.php:35
-msgid "Next post:"
-msgstr "Следваща публикация:"
-
 #: single.php:37
 msgid "Previous"
 msgstr "Предишни"
+
+#: single.php:35
+msgid "Next post:"
+msgstr "Следваща публикация:"
 
 #: single.php:34
 msgid "Next"
@@ -135,14 +136,14 @@ msgctxt "Used before publish date."
 msgid "Posted on"
 msgstr "Публикувано на"
 
-#: inc/template-tags.php:50
-msgid "Leave a comment<span class=\"screen-reader-text\"> on %s</span>"
-msgstr "Оставете коментар <span class=\"screen-reader-text\"> за %s</span>"
-
 #: inc/template-tags.php:38
 msgctxt "Used before post format."
 msgid "Format"
 msgstr "Формат"
+
+#: inc/template-tags.php:50
+msgid "Leave a comment<span class=\"screen-reader-text\"> on %s</span>"
+msgstr "Оставете коментар <span class=\"screen-reader-text\"> за %s</span>"
 
 #: inc/template-tags.php:25
 msgctxt "Used before post author name."
@@ -161,38 +162,38 @@ msgstr "Сиво"
 msgid "Dark"
 msgstr "Тъмно"
 
-#: inc/customizer.php:184
-msgid "Secondary Text Color"
-msgstr "Цвят на допълнителния текст"
+#: inc/customizer.php:172
+msgid "Main Text Color"
+msgstr "Цвят на главния текст"
 
 #: inc/customizer.php:253
 msgid "Default"
 msgstr "По подразбиране"
 
-#: inc/customizer.php:172
-msgid "Main Text Color"
-msgstr "Цвят на главния текст"
-
-#: inc/customizer.php:145
-msgid "Page Background Color"
-msgstr "Цвят на фона на страницата"
+#: inc/customizer.php:184
+msgid "Secondary Text Color"
+msgstr "Цвят на допълнителния текст"
 
 #: inc/customizer.php:160
 msgid "Link Color"
 msgstr "Цвят на връзките"
 
-#: inc/customizer.php:130
-msgid "Base Color Scheme"
-msgstr "Основна цветова схема"
-
-#: inc/back-compat.php:41 inc/back-compat.php:53 inc/back-compat.php:68
-msgid "Twenty Sixteen requires at least WordPress version 4.4. You are running version %s. Please upgrade and try again."
-msgstr "Twenty Sixteen изисква WordPress да бъде с версия 4.3 или по-нова. В момента използвате версия %s. Моля обновете и опитайте отново."
+#: inc/customizer.php:145
+msgid "Page Background Color"
+msgstr "Цвят на фона на страницата"
 
 #: image.php:102 single.php:29
 msgctxt "Parent post link"
 msgid "<span class=\"meta-nav\">Published in</span><span class=\"post-title\">%title</span>"
 msgstr "<span class=\"meta-nav\">Публикувано в</span><span class=\"post-title\">%title</span>"
+
+#: inc/back-compat.php:41 inc/back-compat.php:53 inc/back-compat.php:68
+msgid "Twenty Sixteen requires at least WordPress version 4.4. You are running version %s. Please upgrade and try again."
+msgstr "Twenty Sixteen изисква WordPress да бъде с версия 4.3 или по-нова. В момента използвате версия %s. Моля обновете и опитайте отново."
+
+#: inc/customizer.php:130
+msgid "Base Color Scheme"
+msgstr "Основна цветова схема"
 
 #: image.php:73
 msgctxt "Used before full size attachment link."
@@ -220,21 +221,33 @@ msgstr "Меню"
 msgid "Skip to content"
 msgstr "Напред към съдържанието"
 
-#: functions.php:285
-msgid "collapse child menu"
-msgstr "свиване на дъщерното меню"
-
 #: functions.php:284
 msgid "expand child menu"
 msgstr "разширяване на дъщерното меню"
 
+#: functions.php:285
+msgid "collapse child menu"
+msgstr "свиване на дъщерното меню"
+
 #. translators: If there are characters in your language that are not supported
-#. by Montserrat, translate this to 'off'. Do not translate into your own
+#. by Inconsolata, translate this to 'off'. Do not translate into your own
 #. language.
-#: functions.php:208
-msgctxt "Montserrat font: on or off"
+#: functions.php:213
+msgctxt "Inconsolata font: on or off"
 msgid "on"
-msgstr "off"
+msgstr "включен"
+
+#: functions.php:166
+msgid "Content Bottom 1"
+msgstr "Съдържание най-отдолу 1"
+
+#: functions.php:168 functions.php:178
+msgid "Appears at the bottom of the content on posts and pages."
+msgstr "Появява се най-отдолу след съдържанието на публикации и страници."
+
+#: functions.php:176
+msgid "Content Bottom 2"
+msgstr "Съдържание най-отдолу 2"
 
 #. translators: If there are characters in your language that are not supported
 #. by Merriweather, translate this to 'off'. Do not translate into your own
@@ -244,25 +257,13 @@ msgctxt "Merriweather font: on or off"
 msgid "on"
 msgstr "off"
 
-#: functions.php:176
-msgid "Content Bottom 2"
-msgstr "Съдържание най-отдолу 2"
-
-#: functions.php:168 functions.php:178
-msgid "Appears at the bottom of the content on posts and pages."
-msgstr "Появява се най-отдолу след съдържанието на публикации и страници."
-
-#: functions.php:166
-msgid "Content Bottom 1"
-msgstr "Съдържание най-отдолу 1"
-
 #. translators: If there are characters in your language that are not supported
-#. by Inconsolata, translate this to 'off'. Do not translate into your own
+#. by Montserrat, translate this to 'off'. Do not translate into your own
 #. language.
-#: functions.php:213
-msgctxt "Inconsolata font: on or off"
+#: functions.php:208
+msgctxt "Montserrat font: on or off"
 msgid "on"
-msgstr "включен"
+msgstr "off"
 
 #: functions.php:156
 msgid "Sidebar"
@@ -314,13 +315,13 @@ msgstr "Тук няма нищо. Опитайте с търсене?"
 msgid "Oops! That page can&rsquo;t be found."
 msgstr "Страницата не е открита."
 
-#. Author of the plugin/theme
-msgid "the WordPress team"
-msgstr "Екипът на WordPress"
-
 #. Theme URI of the plugin/theme
 msgid "https://wordpress.org/themes/twentysixteen/"
 msgstr "https://wordpress.org/themes/twentysixteen/"
+
+#. Author of the plugin/theme
+msgid "the WordPress team"
+msgstr "Екипът на WordPress"
 
 #. #-#-#-#-#  twentysixteen.pot (Twenty Sixteen 1.3)  #-#-#-#-#
 #. Author URI of the plugin/theme

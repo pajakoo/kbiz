@@ -103,7 +103,7 @@ class WPBDP_Ratings_Field extends WPBDP_FormFieldType {
         $schema['review'] = array();
 
         foreach ( wpbdp_ratings()->get_reviews( $post_id ) as $review ) {
-            $author = ( $rating->user_id == 0 ) ? trim( $rating->user_name ) : trim( get_the_author_meta( 'display_name', $rating->user_id ) );
+            $author = ( $review->user_id == 0 ) ? trim( $review->user_name ) : trim( get_the_author_meta( 'display_name', $review->user_id ) );
 
             $schema['review'][] = array(
                 '@type' => 'Review',

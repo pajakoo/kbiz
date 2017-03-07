@@ -490,6 +490,8 @@ add_action('wp_enqueue_scripts',load_script_enqueue);
  *
  * @since 	1.0
  */
+
+//
 //function acme_login_redirect( $redirect_to, $request, $user  ) {
 //
 //    if( is_array( $user->roles ) && in_array( 'administrator', $user->roles ) ){
