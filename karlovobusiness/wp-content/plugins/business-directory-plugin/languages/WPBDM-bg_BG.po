@@ -8,9 +8,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-02-10 23:26+0200\n"
+"PO-Revision-Date: 2017-06-08 18:06+0300\n"
 "Language-Team: \n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.0.2\n"
 "Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: bg\n"
@@ -33,12 +33,12 @@ msgstr ""
 
 #: admin/class-admin-listings.php:138
 msgid "Listing Information"
-msgstr ""
+msgstr "Информация за обявата"
 
 #: admin/class-admin-listings.php:145
 msgctxt "admin"
 msgid "Listing Fields / Images"
-msgstr ""
+msgstr "Полета / Снимки на Обявите"
 
 #: admin/class-admin-listings.php:156
 #, fuzzy
@@ -48,7 +48,7 @@ msgstr "Всички категории"
 
 #: admin/class-admin-listings.php:157
 msgid "Payment Status"
-msgstr ""
+msgstr "Статус на плащането"
 
 #: admin/class-admin-listings.php:158
 msgid "Featured (Sticky) Status"
@@ -57,77 +57,77 @@ msgstr ""
 #: admin/class-admin-listings.php:189
 msgctxt "admin"
 msgid "(Listing expired in this category)"
-msgstr ""
+msgstr "(Обяватя е изтекла в тази категория)"
 
 #: admin/class-admin-listings.php:207 admin/class-admin-listings.php:290
 msgid "Paid"
-msgstr ""
+msgstr "Птено"
 
 #: admin/class-admin-listings.php:212
 msgid "Mark as"
-msgstr ""
+msgstr "Отбележи като"
 
 #: admin/class-admin-listings.php:221 admin/class-admin-listings.php:300
 msgid "Pending Upgrade"
-msgstr ""
+msgstr "В процес на обновяване"
 
 #: admin/class-admin-listings.php:229 admin/listing-metabox.php:70
 msgid "Upgrade to %s"
-msgstr ""
+msgstr "Подобрете вашата обява на %s"
 
 #: admin/class-admin-listings.php:236 admin/listing-metabox.php:77
 msgid "Downgrade to %s"
-msgstr ""
+msgstr "Свалете нивото на вашата обява на %s"
 
 #: admin/class-admin-listings.php:239 admin/class-admin-listings.php:418
 msgctxt "admin actions"
 msgid "Upgrade to Featured"
-msgstr ""
+msgstr "Направи Обявата \"Премиум\""
 
 #: admin/class-admin-listings.php:295
 msgid "Unpaid"
-msgstr ""
+msgstr "Неплатено"
 
 #: admin/class-admin-listings.php:305
 msgctxt "admin"
 msgid "Expired"
-msgstr ""
+msgstr "Изтича"
 
 #: admin/class-admin-listings.php:354
 msgctxt "admin actions"
 msgid "Edit Listing"
-msgstr ""
+msgstr "Редактирай"
 
 #: admin/class-admin-listings.php:357
 msgctxt "admin actions"
 msgid "Delete Listing"
-msgstr ""
+msgstr "Изтрий"
 
 #: admin/class-admin-listings.php:416
 msgctxt "admin actions"
 msgid "Publish Listing"
-msgstr ""
+msgstr "Публикувай обявата"
 
 #: admin/class-admin-listings.php:419
 msgctxt "admin actions"
 msgid "Downgrade to Normal"
-msgstr ""
+msgstr "Снижете до Нормално"
 
 #: admin/class-admin-listings.php:421
 msgctxt "admin actions"
 msgid "Mark as Paid"
-msgstr ""
+msgstr "Отбележи като Платено"
 
 #: admin/class-admin-listings.php:423
 msgctxt "admin actions"
 msgid "Renew Listing"
-msgstr ""
+msgstr "Обнови"
 
 #: admin/class-admin.php:102
 msgid ""
 "Preview is only available after you've saved the first draft. This is due\n"
 "to how WordPress stores the data."
-msgstr ""
+msgstr "За бърз преглед, запазете образеца предварително."
 
 #: admin/class-admin.php:135
 msgctxt "drip pointer"
@@ -136,12 +136,14 @@ msgid ""
 "scratch in this ridiculously actionable (and FREE) 5-part email course. Get "
 "a FREE premium module just for signing up."
 msgstr ""
+"Разберете как да се създаде непреодолими, процъфтяващ бизнес указател от "
+"нулата в този абсурдно действена (и безплатно) 5-част имейл разбира се. "
+"Получете БЕЗПЛАТНО премиum модул само за регистриране."
 
 #: admin/class-admin.php:137
-#, fuzzy
 msgctxt "drip pointer"
 msgid "Email Address:"
-msgstr "Валедиране на електронен адрес"
+msgstr "Валидиране на електронен адрес"
 
 #: admin/class-admin.php:143
 msgctxt "drip pointer"
@@ -151,12 +153,12 @@ msgstr ""
 #: admin/class-admin.php:145
 msgctxt "drip pointer"
 msgid "Yes, please!"
-msgstr ""
+msgstr "Да, моля"
 
 #: admin/class-admin.php:147
 msgctxt "drip pointer"
 msgid "No, thanks"
-msgstr ""
+msgstr "Не, благодаря"
 
 #: admin/class-admin.php:164
 #, fuzzy
@@ -167,12 +169,12 @@ msgstr "Кратко описание"
 #: admin/class-admin.php:175
 msgctxt "admin"
 msgid "You're all set. Visit your new <a>Business Directory</a> page."
-msgstr ""
+msgstr "Готово ! "
 
 #: admin/class-admin.php:196
 msgctxt "drip pointer"
 msgid "Invalid e-mail address."
-msgstr ""
+msgstr "Невалиден e-mail адрес"
 
 #: admin/class-admin.php:230
 #, fuzzy
@@ -193,81 +195,81 @@ msgstr ""
 #: admin/class-admin.php:237 admin/class-admin.php:238
 msgctxt "admin menu"
 msgid "Add New Listing"
-msgstr ""
+msgstr "Нова обява"
 
 #: admin/class-admin.php:243 admin/class-admin.php:244
 msgctxt "admin menu"
 msgid "Manage Options"
-msgstr ""
+msgstr "Управление на Опциите"
 
 #: admin/class-admin.php:249 admin/class-admin.php:250
 msgctxt "admin menu"
 msgid "Manage Fees"
-msgstr ""
+msgstr "Управление на Цените"
 
 #: admin/class-admin.php:255 admin/class-admin.php:256
 msgctxt "admin menu"
 msgid "Manage Form Fields"
-msgstr ""
+msgstr "Управление на Полетата на Формуляра"
 
 #: admin/class-admin.php:261 admin/class-admin.php:262
 msgctxt "admin menu"
 msgid "Listings"
-msgstr ""
+msgstr "Обяви"
 
 #: admin/class-admin.php:276 admin/class-admin.php:277
 msgctxt "admin menu"
 msgid "CSV Import"
-msgstr ""
+msgstr "Вмъкване на CSV"
 
 #: admin/class-admin.php:282 admin/class-admin.php:283
 msgctxt "admin menu"
 msgid "CSV Export"
-msgstr ""
+msgstr "Eкспортиране na CSV"
 
 #: admin/class-admin.php:288 admin/class-admin.php:289
 msgctxt "admin menu"
 msgid "Debug"
-msgstr ""
+msgstr "Отстраняване на Грешки"
 
 #: admin/class-admin.php:298
 msgctxt "admin menu"
 msgid "Main Menu"
-msgstr ""
+msgstr "Главно Меню"
 
 #: admin/class-admin.php:309
 msgctxt "admin menu"
 msgid "Uninstall Business Directory Plugin"
-msgstr ""
+msgstr "Дезинсталиране на Бизнес Плъгин Директорията"
 
 #: admin/class-admin.php:310
 msgctxt "admin menu"
 msgid "Uninstall"
-msgstr ""
+msgstr "Дезинсталиране"
 
 #: admin/class-admin.php:424
 #: admin/templates/listing-metabox-categories.tpl.php:69
 msgctxt "admin infometabox"
 msgid "never"
-msgstr ""
+msgstr "Никога"
 
 #: admin/class-admin.php:518
 msgctxt "admin"
 msgid "Dismiss this notice."
-msgstr ""
+msgstr "Отхвърли съобщението"
 
 #: admin/class-admin.php:546
 msgctxt "admin"
 msgid "The listing has been published."
 msgid_plural "The listings have been published."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Обявата е публикувана."
+msgstr[1] "Обявите бяха публикувани"
 
 #: admin/class-admin.php:564
 msgctxt "admin"
 msgid "The listing status has been set as paid."
 msgid_plural "The listings status has been set as paid."
-msgstr[0] ""
+msgstr[0] "Състоянието на регистрация е отбелязано като платена"
 msgstr[1] ""
 
 #: admin/class-admin.php:570
@@ -286,21 +288,21 @@ msgstr[1] ""
 msgctxt "admin"
 msgid "The listing has been modified."
 msgid_plural "The listings have been modified."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Обявата беше успешно променена"
+msgstr[1] "Обявите бяха успешно променени"
 
 #: admin/class-admin.php:602
 msgctxt "admin"
 msgid "The listing has been upgraded."
 msgid_plural "The listings have been upgraded."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Обявата беше успешно обновена"
+msgstr[1] "Обявите бяха успешно обновени"
 
 #: admin/class-admin.php:614
 msgctxt "admin"
 msgid "The listing has been downgraded."
 msgid_plural "The listings have been downgraded."
-msgstr[0] ""
+msgstr[0] "Обявата беше успешно снижена"
 msgstr[1] ""
 
 #: admin/class-admin.php:625
@@ -310,34 +312,36 @@ msgid ""
 "approved. Please check your gateway's backend to see if the payment really "
 "went through."
 msgstr ""
+"Статусът на плащането е Непроменен. Периодичните плащания не могат да бъдат "
+"валидирани ръчно. Моля върнете се портала за да се убедите че плащането е "
+"минало"
 
 #: admin/class-admin.php:630
 msgctxt "admin"
 msgid "The transaction has been approved."
-msgstr ""
+msgstr "Транзакцията е потвърдена"
 
 #: admin/class-admin.php:640
 msgctxt "admin"
 msgid "The transaction has been rejected."
-msgstr ""
+msgstr "Транзакцията не е потвърдена"
 
 #: admin/class-admin.php:646
 msgctxt "admin"
 msgid "The fee was successfully assigned."
-msgstr ""
+msgstr "Цената е въведена успешно"
 
 #: admin/class-admin.php:655
 msgctxt "admin"
 msgid "Listing was renewed."
 msgid_plural "Listings were renewed."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Обявата беше обновена"
+msgstr[1] "Обявите бяха обновени"
 
 #: admin/class-admin.php:662
-#, fuzzy
 msgctxt "admin"
 msgid "Renewal email sent."
-msgstr "Електронен адрес"
+msgstr "Обновяване на Електронен адрес"
 
 #: admin/class-admin.php:696
 msgctxt "admin category id"
@@ -347,7 +351,7 @@ msgstr ""
 #: admin/class-admin.php:698 admin/class-admin.php:704
 msgctxt "admin"
 msgid "Listing Count"
-msgstr ""
+msgstr "Брой Обяви"
 
 #: admin/class-admin.php:813
 msgctxt "admin"
@@ -373,12 +377,12 @@ msgstr ""
 #: admin/class-admin.php:823
 msgctxt "admin"
 msgid "Go to \"Manage Form Fields\""
-msgstr ""
+msgstr "Отиди на \" Управление на Полетата на Формуляра\""
 
 #: admin/class-admin.php:826
 msgctxt "admin"
 msgid "Create these required fields for me"
-msgstr ""
+msgstr "Създай тези * Задължителни полета за мен"
 
 #: admin/class-admin.php:835
 msgctxt "admin"
@@ -397,7 +401,7 @@ msgstr ""
 #: admin/class-admin.php:841
 msgctxt "admin"
 msgid "Create required pages for me"
-msgstr ""
+msgstr "Създай тези * Задължителни полета за мен"
 
 #: admin/class-admin.php:881
 msgctxt "admin compat"
@@ -427,6 +431,8 @@ msgid ""
 "Please upgrade to the required versions indicated below to make sure "
 "everything functions properly."
 msgstr ""
+"Моля обновете версията до показаната по-долу, за да се убедите че всичко "
+"функционира правилно "
 
 #: admin/class-admin.php:918
 msgctxt "admin"
@@ -439,7 +445,7 @@ msgstr ""
 #: admin/class-listing-fields-metabox.php:21
 msgctxt "admin"
 msgid "Listing Fields"
-msgstr ""
+msgstr "Полета на Обявите"
 
 #: admin/class-listing-fields-metabox.php:40
 #: templates/submit-listing/images.tpl.php:12
@@ -450,7 +456,7 @@ msgstr "Качени снимки до момента"
 #: admin/class-listing-fields-metabox.php:41
 msgctxt "templates"
 msgid "There are no images currently attached to the listing."
-msgstr ""
+msgstr "Към момента нямате качени изображения"
 
 #: admin/class-themes-admin.php:47
 msgctxt "themes"
@@ -515,17 +521,17 @@ msgstr ""
 #: admin/class-themes-admin.php:223
 msgctxt "themes"
 msgid "Suggested fields created successfully."
-msgstr ""
+msgstr "Полетата са попълнинени успешно по подразбиране"
 
 #: admin/class-themes-admin.php:226
 msgctxt "themes"
 msgid "Theme installed successfully."
-msgstr ""
+msgstr "Темата е инсталирана успешно"
 
 #: admin/class-themes-admin.php:229
 msgctxt "themes"
 msgid "Theme was deleted sucessfully."
-msgstr ""
+msgstr "Темата е изтрита успешно"
 
 #: admin/class-themes-admin.php:232
 msgctxt "themes"
@@ -671,7 +677,7 @@ msgstr ""
 #: admin/fees.php:25 admin/fees.php:260
 msgctxt "fees admin"
 msgid "Active"
-msgstr ""
+msgstr "Активирано"
 
 #: admin/fees.php:28 admin/fees.php:258
 #, fuzzy
@@ -685,7 +691,7 @@ msgstr ""
 #: admin/fees.php:31 admin/fees.php:255
 msgctxt "fees admin"
 msgid "Disabled"
-msgstr ""
+msgstr "Изключено"
 
 #: admin/fees.php:39
 msgctxt "fees admin"
@@ -919,7 +925,7 @@ msgstr ""
 #: admin/form-fields.php:76
 msgctxt "form-fields admin"
 msgid "Optional"
-msgstr ""
+msgstr "Опционално"
 
 #: admin/form-fields.php:80
 msgctxt "form-fields admin"
@@ -929,7 +935,7 @@ msgstr ""
 #: admin/form-fields.php:81
 msgctxt "form-fields admin"
 msgid "In Excerpt"
-msgstr ""
+msgstr "Експертен Режим"
 
 #: admin/form-fields.php:86
 msgctxt "form-fields admin"
@@ -972,7 +978,7 @@ msgstr ""
 #: admin/form-fields.php:256
 msgctxt "form-fields admin"
 msgid "Field deleted."
-msgstr ""
+msgstr "Полетата са изтрити"
 
 #: admin/form-fields.php:277
 msgctxt "form-fields admin"
@@ -1018,12 +1024,12 @@ msgstr "Уеб сайт"
 #: admin/form-fields.php:296
 msgctxt "form-fields admin"
 msgid "City"
-msgstr ""
+msgstr "Населено място"
 
 #: admin/form-fields.php:297
 msgctxt "form-fields admin"
 msgid "State"
-msgstr ""
+msgstr "Област"
 
 #: admin/form-fields.php:298
 #, fuzzy
@@ -1051,7 +1057,7 @@ msgstr ""
 #: admin/form-fields.php:302
 msgctxt "form-fields admin"
 msgid "Twitter"
-msgstr ""
+msgstr "Twitter"
 
 #: admin/form-fields.php:303
 #, fuzzy
@@ -1068,12 +1074,12 @@ msgstr "Бизнес тагове"
 #: admin/listing-metabox.php:11
 msgctxt "admin"
 msgid "General"
-msgstr ""
+msgstr "Основни настройки"
 
 #: admin/listing-metabox.php:12
 msgctxt "admin"
 msgid "Fee Details"
-msgstr ""
+msgstr "Абонаментен план"
 
 #: admin/listing-metabox.php:13
 msgctxt "admin"
@@ -2202,28 +2208,28 @@ msgstr ""
 
 #: admin/templates/home.tpl.php:25
 msgid "Configure/Manage Options"
-msgstr ""
+msgstr "Конфигуриране/управление на опции"
 
 #: admin/templates/home.tpl.php:28
 msgid "Setup/Manage Form Fields"
-msgstr ""
+msgstr "Настройка/управление на формулярни полета"
 
 #: admin/templates/home.tpl.php:31
 msgid "Setup/Manage Fees"
-msgstr ""
+msgstr "Управление на Цените"
 
 #: admin/templates/home.tpl.php:37
 msgid "Featured Listings Pending Upgrade"
-msgstr ""
+msgstr "Премиум оферти чакащи за Upgrade"
 
 #: admin/templates/home.tpl.php:44
 msgid "Manage Paid Listings"
-msgstr ""
+msgstr "Управление на платените обяви"
 
 #: admin/templates/listing-change-fee.tpl.php:3
 msgctxt "admin listing fee"
 msgid "Listing Fee Selection"
-msgstr ""
+msgstr "Цена на обявата"
 
 #: admin/templates/listing-change-fee.tpl.php:5
 msgctxt "admin listing fee"
@@ -2517,7 +2523,7 @@ msgstr ""
 
 #: admin/templates/settings.tpl.php:21
 msgid "Settings updated."
-msgstr ""
+msgstr "Обновени настройки"
 
 #: admin/templates/sidebar.tpl.php:3
 msgctxt "admin sidebar"
@@ -2871,12 +2877,12 @@ msgstr "Кратко описание"
 #: admin/templates/uninstall-complete.tpl.php:7
 msgctxt "admin uninstall"
 msgid "Uninstall completed."
-msgstr ""
+msgstr "Дезинсталирането е приключено"
 
 #: admin/templates/uninstall-complete.tpl.php:8
 msgctxt "admin uninstall"
 msgid "Return to Dashboard."
-msgstr ""
+msgstr "Обратно към Таблото за управление"
 
 #: admin/templates/uninstall-confirm.tpl.php:1
 msgctxt "uninstall"
@@ -2904,17 +2910,17 @@ msgstr ""
 #: admin/tracking.php:214
 msgctxt "tracking"
 msgid "No, Thanks."
-msgstr ""
+msgstr "Не, Благодаря"
 
 #: admin/tracking.php:221
 msgctxt "tracking"
 msgid "Allow Tracking"
-msgstr ""
+msgstr "Позволява проследяване"
 
 #: business-directory-plugin.php:668
 msgctxt "admin plugins"
 msgid "Settings"
-msgstr ""
+msgstr "Настройки"
 
 #: business-directory-plugin.php:776 business-directory-plugin.php:783
 msgctxt "rss feed"
@@ -2930,7 +2936,7 @@ msgstr "Добавяне на обява"
 #: business-directory-plugin.php:1142
 msgctxt "title"
 msgid "Find a Listing"
-msgstr "Търси за обява"
+msgstr "Търси Обява"
 
 #: business-directory-plugin.php:1147
 msgctxt "title"
@@ -2944,7 +2950,7 @@ msgstr ""
 
 #: core/api.php:401
 msgid "Free"
-msgstr "Тарифа"
+msgstr "Безплатно"
 
 #: core/class-csv-import.php:394
 msgctxt "admin csv-import"
@@ -3098,7 +3104,7 @@ msgstr ""
 #: core/class-listing.php:319 core/class-listing.php:345
 msgctxt "listing"
 msgid "(Fee Unavailable)"
-msgstr ""
+msgstr "(Цената е недостъпна)"
 
 #: core/class-listings-api.php:310
 msgctxt "notify email"
@@ -3124,17 +3130,17 @@ msgstr "Телефонен номер"
 #: core/class-listings-widget.php:60
 msgctxt "widgets"
 msgid "Thumbnails"
-msgstr ""
+msgstr "Картинка"
 
 #: core/class-listings-widget.php:68
 msgctxt "widgets"
 msgid "Show thumbnails"
-msgstr ""
+msgstr "Поками картинка"
 
 #: core/class-listings-widget.php:72
 msgctxt "widgets"
 msgid "Image width (in px):"
-msgstr ""
+msgstr "Широчина на изображението"
 
 #: core/class-listings-widget.php:78
 msgctxt "widgets"
@@ -3154,7 +3160,7 @@ msgstr ""
 #: core/class-payment.php:223 core/view-submit-listing.php:488
 msgctxt "listings"
 msgid "Fee \"%s\" for category \"%s\"%s"
-msgstr ""
+msgstr "Цена \"%s\" за категория \"%s\"%s"
 
 #: core/class-payment.php:226 core/view-submit-listing.php:491
 msgctxt "listings"
@@ -3164,7 +3170,7 @@ msgstr ""
 #: core/class-recaptcha.php:100 core/class-recaptcha.php:115
 msgctxt "recaptcha"
 msgid "The reCAPTCHA wasn't entered correctly."
-msgstr ""
+msgstr "Съдържанието не беше попълнено правилно"
 
 #: core/class-settings.php:24
 msgctxt "admin settings"
@@ -3572,7 +3578,7 @@ msgstr ""
 #: core/class-settings.php:240 core/class-settings.php:242
 msgctxt "post status"
 msgid "Draft"
-msgstr ""
+msgstr "Чернова"
 
 #: core/class-settings.php:240 core/class-settings.php:242
 msgctxt "post status"
@@ -4691,27 +4697,27 @@ msgstr ""
 
 #: core/class-wpbdp.php:34
 msgid "Edit Listing"
-msgstr ""
+msgstr "Редактирай"
 
 #: core/class-wpbdp.php:35
 msgid "New Listing"
-msgstr ""
+msgstr "Нова обява"
 
 #: core/class-wpbdp.php:36
 msgid "View Listing"
-msgstr ""
+msgstr "Прегледай"
 
 #: core/class-wpbdp.php:37
 msgid "Search Listings"
-msgstr ""
+msgstr "Потърси Обяви"
 
 #: core/class-wpbdp.php:38
 msgid "No listings found"
-msgstr ""
+msgstr "Няма намерени резултати"
 
 #: core/class-wpbdp.php:39
 msgid "No listings found in trash"
-msgstr ""
+msgstr "Няма намерени резултати в кошчето"
 
 #: core/class-wpbdp.php:55
 #, fuzzy
@@ -4729,7 +4735,7 @@ msgstr "Бизнес тагове"
 
 #: core/class-wpbdp.php:68
 msgid "Directory Tag"
-msgstr ""
+msgstr "Бизнес таг"
 
 #: core/compatibility/class-navxt-integration.php:159
 msgctxt "navxt"
@@ -5145,7 +5151,7 @@ msgstr ""
 
 #: core/gateways-authorize-net.php:25
 msgid "Login ID"
-msgstr ""
+msgstr "Вход"
 
 #: core/gateways-authorize-net.php:29
 msgid "Transaction Key"
@@ -5188,7 +5194,7 @@ msgstr ""
 #: core/gateways-authorize-net.php:175
 msgctxt "authorize-net"
 msgid "Could not process payment."
-msgstr ""
+msgstr "Плащането не може да бъде извършено"
 
 #: core/gateways-dummy.php:15
 msgctxt "dummy gateway"
@@ -5203,27 +5209,27 @@ msgstr ""
 #: core/gateways-dummy.php:39
 msgctxt "dummy gateway"
 msgid "New Status:"
-msgstr ""
+msgstr "Нов Статус"
 
 #: core/gateways-dummy.php:41
 msgctxt "dummy gateway"
 msgid "Completed"
-msgstr ""
+msgstr "Завършено"
 
 #: core/gateways-dummy.php:43
 msgctxt "dummy gateway"
 msgid "Pending"
-msgstr ""
+msgstr "Висящо"
 
 #: core/gateways-dummy.php:45
 msgctxt "dummy gateway"
 msgid "Canceled"
-msgstr ""
+msgstr "Отказано"
 
 #: core/gateways-dummy.php:47
 msgctxt "dummy gateway"
 msgid "Rejected"
-msgstr ""
+msgstr "Отхвърлено"
 
 #: core/gateways-dummy.php:49
 msgctxt "dummy gateway"
@@ -5327,7 +5333,7 @@ msgstr ""
 
 #: core/installer.php:1065
 msgid "Perform Manual Upgrade"
-msgstr ""
+msgstr "Обнови ръчно"
 
 #: core/installer.php:1081 core/installer.php:1082 core/installer.php:1093
 msgid "Business Directory - Manual Upgrade"
@@ -5627,7 +5633,7 @@ msgstr "Няма намерени резултати"
 
 #: core/templates-ui.php:194
 msgid "Directory"
-msgstr ""
+msgstr "Директория"
 
 #: core/templates-ui.php:201
 #, fuzzy
@@ -5636,17 +5642,17 @@ msgstr "Всички категории"
 
 #: core/templates-ui.php:208
 msgid "Create A Listing"
-msgstr ""
+msgstr "Създай Обява"
 
 #: core/templates-ui.php:241
 msgctxt "templates"
 msgid "Search Listings"
-msgstr ""
+msgstr "Потърси Обяви"
 
 #: core/templates-ui.php:244
 msgctxt "templates"
 msgid "Advanced Search"
-msgstr ""
+msgstr "Разширено търсене"
 
 #: core/templates-ui.php:273 core/templates-ui.php:298
 msgctxt "templates sort"
@@ -5781,7 +5787,7 @@ msgstr ""
 #: core/view-submit-listing.php:299
 msgctxt "templates"
 msgid "Please agree to the Terms and Conditions."
-msgstr ""
+msgstr "За да продължите, моля приемете Общите Условия за ползване на сайта."
 
 #: core/view-submit-listing.php:305
 msgctxt "templates"
@@ -5796,17 +5802,17 @@ msgstr ""
 #: core/view-submit-listing.php:327
 msgctxt "templates"
 msgid "Terms and Conditions:"
-msgstr ""
+msgstr "Общи Условия за ползване на сайта."
 
 #: core/view-submit-listing.php:338
 msgctxt "templates"
 msgid "I agree to the Terms and Conditions"
-msgstr ""
+msgstr "Съгласен съм с Общите Условия за ползване на сайта."
 
 #: core/view-submit-listing.php:501 core/views/upgrade_listing.php:49
 msgctxt "submit"
 msgid "Listing upgrade to featured"
-msgstr ""
+msgstr "Направи Обявата \"Премиум\""
 
 #: core/view-submit-listing.php:534
 msgctxt "submit_state"
@@ -5827,7 +5833,7 @@ msgstr ""
 #: core/views/checkout.php:86
 msgctxt "checkout"
 msgid "Continue"
-msgstr ""
+msgstr "Напред"
 
 #: core/views/checkout.php:97
 msgctxt "checkout"
@@ -5841,17 +5847,17 @@ msgctxt "checkout"
 msgid ""
 "Your payment is being verified. This usually takes a few minutes but can "
 "take up to 24 hours."
-msgstr ""
+msgstr "Плащането ви се обработва в момента. Това отнема обикновено до 24 часа"
 
 #: core/views/checkout.php:120 core/views/checkout.php:141
 msgctxt "checkout"
 msgid "← Return to Directory."
-msgstr ""
+msgstr "Връщане към основните категории."
 
 #: core/views/checkout.php:130
 msgctxt "checkout"
 msgid "Your payment was received sucessfully."
-msgstr ""
+msgstr "Вашето плащяне не получено"
 
 #: core/views/checkout.php:137
 msgctxt "checkout"
@@ -5907,7 +5913,7 @@ msgstr "Електронен адрес"
 #: core/views/listing_contact.php:117
 msgctxt "templates"
 msgid "Send Message to listing owner"
-msgstr ""
+msgstr "Изпрати съобщение до представителя на Фирмата"
 
 #: core/views/listing_contact.php:163
 msgid "l F j, Y \\a\\t g:i a"
@@ -5916,7 +5922,7 @@ msgstr ""
 #: core/views/listing_contact.php:173
 msgctxt "contact-message"
 msgid "Your message has been sent."
-msgstr ""
+msgstr "Съобщението не беше изпратено"
 
 #: core/views/listing_contact.php:178
 msgctxt "contact-message"
@@ -5926,12 +5932,12 @@ msgstr ""
 #: core/views/listing_contact.php:191
 msgctxt "contact-message"
 msgid "There was a problem encountered. Your message has not been sent"
-msgstr ""
+msgstr "Срещнахме проблем и съобщението не беше изпратено"
 
 #: core/views/listing_contact.php:194
 msgctxt "contact-message"
 msgid "Return to listing."
-msgstr ""
+msgstr "Връщане към Обявата"
 
 #: core/views/main.php:9
 msgctxt "templates"
@@ -5946,7 +5952,7 @@ msgstr ""
 #: core/views/main.php:11
 msgctxt "templates"
 msgid "There are currently no listings in the directory."
-msgstr ""
+msgstr "Няма обяви в категорията"
 
 #: core/views/main.php:25
 msgctxt "templates"
@@ -5959,27 +5965,28 @@ msgstr ""
 #: core/views/manage_recurring.php:20
 msgctxt "manage subscriptions"
 msgid "You are not on recurring payments for any of your listings."
-msgstr ""
+msgstr "Няма периодични плащания за никоя от Обявите"
 
 #: core/views/manage_recurring.php:92
 msgctxt "manage subscriptions"
 msgid "Invalid subscription."
-msgstr ""
+msgstr "Регистрацията е невалидна"
 
 #: core/views/manage_recurring.php:97
 msgctxt "manage subscriptions"
 msgid "← Return to \"Delete Listing\"."
-msgstr ""
+msgstr "Връщане към \"Изтрий Обявата\""
 
 #: core/views/manage_recurring.php:103
 msgctxt "manage subscriptions"
 msgid "Subscription canceled."
-msgstr ""
+msgstr "Регистрацията е отказана"
 
 #: core/views/renew_listing.php:13
 msgctxt "renewal"
 msgid "Listing renewal is disabled at this moment. Please try again later."
 msgstr ""
+"Обновяването на Обявите не е активно в момента. Моля, опитайте по-късно."
 
 #: core/views/renew_listing.php:16
 msgctxt "renewal"
@@ -6029,7 +6036,7 @@ msgstr "Телефонен номер"
 #: core/views/renew_listing.php:92
 msgctxt "renewal"
 msgid "Expiration date:"
-msgstr ""
+msgstr "Валидна до:"
 
 #: core/views/renew_listing.php:96
 msgctxt "renew"
@@ -6168,107 +6175,108 @@ msgstr "Кратко описание"
 #: core/widget-search.php:29
 msgctxt "widgets"
 msgid "Form Style:"
-msgstr ""
+msgstr "Стил на формата"
 
 #: core/widget-search.php:37
 msgctxt "widgets"
 msgid "Basic"
-msgstr ""
+msgstr "Основен"
 
 #: core/widget-search.php:45
 msgctxt "widgets"
 msgid "Advanced"
-msgstr ""
+msgstr "Разширено търсене"
 
 #: core/widget-search.php:49
 msgctxt "widgets"
 msgid "Search Fields (advanced mode):"
-msgstr ""
+msgstr "Разширено търсене"
 
 #: core/widget-search.php:50
 msgctxt "widgets"
 msgid "Display the following fields in the form."
-msgstr ""
+msgstr "Покажи избраните полета от формуляра"
 
 #: core/widget-search.php:107
 msgctxt "widgets"
 msgid "Search"
-msgstr ""
+msgstr "Търси"
 
 #: templates/billing-information-form.tpl.php:4
 msgctxt "months"
 msgid "Jan"
-msgstr ""
+msgstr "Януари"
 
 #: templates/billing-information-form.tpl.php:5
 msgctxt "months"
 msgid "Feb"
-msgstr ""
+msgstr "Февруари"
 
 #: templates/billing-information-form.tpl.php:6
 msgctxt "months"
 msgid "Mar"
-msgstr ""
+msgstr "Март"
 
 #: templates/billing-information-form.tpl.php:7
 msgctxt "months"
 msgid "Apr"
-msgstr ""
+msgstr "Април"
 
 #: templates/billing-information-form.tpl.php:8
 msgctxt "months"
 msgid "May"
-msgstr ""
+msgstr "Май"
 
 #: templates/billing-information-form.tpl.php:9
 msgctxt "months"
 msgid "Jun"
-msgstr ""
+msgstr "Юни"
 
 #: templates/billing-information-form.tpl.php:10
 msgctxt "months"
 msgid "Jul"
-msgstr ""
+msgstr "Юли"
 
 #: templates/billing-information-form.tpl.php:11
 msgctxt "months"
 msgid "Aug"
-msgstr ""
+msgstr "Август"
 
 #: templates/billing-information-form.tpl.php:12
 msgctxt "months"
 msgid "Sep"
-msgstr ""
+msgstr "Септември"
 
 #: templates/billing-information-form.tpl.php:13
 msgctxt "months"
 msgid "Oct"
-msgstr ""
+msgstr "Октомври"
 
 #: templates/billing-information-form.tpl.php:14
 msgctxt "months"
 msgid "Nov"
-msgstr ""
+msgstr "Ноември"
 
 #: templates/billing-information-form.tpl.php:15
 msgctxt "months"
 msgid "Dec"
-msgstr ""
+msgstr "Декември"
 
 #: templates/billing-information-form.tpl.php:30
 msgctxt "checkout form"
 msgid "Credit Card Details"
-msgstr ""
+msgstr "Детайли на кредитна или дебитна карта"
 
 #: templates/billing-information-form.tpl.php:31
 msgctxt "checkout form"
 msgid "Please enter your credit card details below."
 msgstr ""
+"Моля попълнете по-долу информацията от кредитната или дебитната ви карта"
 
 #: templates/billing-information-form.tpl.php:36
 msgctxt "checkout form"
 msgid "E-mail:"
-msgstr ""
+msgstr "Въведете валиден e-mail адрес"
 
 #: templates/billing-information-form.tpl.php:44
 #, fuzzy
@@ -6291,12 +6299,12 @@ msgstr "Телефонен номер"
 #: templates/billing-information-form.tpl.php:68
 msgctxt "checkout form"
 msgid "Expiration Date (MM/YYYY):"
-msgstr ""
+msgstr "Валидна до  (MM/YYYY):"
 
 #: templates/billing-information-form.tpl.php:88
 msgctxt "checkout form"
 msgid "CVC:"
-msgstr ""
+msgstr "Трицифрен CVC код на гърба на картата :"
 
 #: templates/billing-information-form.tpl.php:98
 #, fuzzy
@@ -6307,17 +6315,17 @@ msgstr "Бизнес адрес"
 #: templates/billing-information-form.tpl.php:103
 msgctxt "checkout form"
 msgid "Country:"
-msgstr ""
+msgstr "Държава"
 
 #: templates/billing-information-form.tpl.php:111
 msgctxt "checkout form"
 msgid "State:"
-msgstr ""
+msgstr "Област"
 
 #: templates/billing-information-form.tpl.php:119
 msgctxt "checkout form"
 msgid "City:"
-msgstr ""
+msgstr "Населено място"
 
 #: templates/billing-information-form.tpl.php:127
 #, fuzzy
@@ -6346,17 +6354,17 @@ msgstr "Телефонен номер"
 #: templates/billing-information-form.tpl.php:161
 msgctxt "WPBDM"
 msgid "Cancel"
-msgstr ""
+msgstr "Откажи"
 
 #: templates/billing-information-form.tpl.php:162
 msgctxt "WPBDM"
 msgid "Submit Payment"
-msgstr ""
+msgstr "Плати"
 
 #: templates/delete-listing-confirm.tpl.php:3
 msgctxt "manage recurring"
 msgid "Delete Listing"
-msgstr ""
+msgstr "Изтрий Обявата"
 
 #: templates/delete-listing-confirm.tpl.php:7
 msgctxt "delete listing"
@@ -6364,7 +6372,7 @@ msgid ""
 "Your listing is associated to a recurring payment. If you don't cancel the "
 "recurring payment before deleting the listing, you might be charged for "
 "additional periods even though your listing won't be available."
-msgstr ""
+msgstr "??"
 
 #: templates/delete-listing-confirm.tpl.php:12
 msgctxt "delete listing"
@@ -6376,22 +6384,22 @@ msgstr ""
 #: templates/delete-listing-confirm.tpl.php:18
 msgctxt "delete listing"
 msgid "You are about to remove your listing \"%s\" from the directory."
-msgstr ""
+msgstr "Вие сте на път на премахнете обявата \"%s\" от директорията "
 
 #: templates/delete-listing-confirm.tpl.php:19
 msgctxt "delete listing"
 msgid "Are you sure you want to do this?"
-msgstr ""
+msgstr "Сигурни ли сте че желаете да изтриете обявата ?"
 
 #: templates/delete-listing-confirm.tpl.php:24
 msgctxt "delete listing"
 msgid "No. Take me back to the directory."
-msgstr ""
+msgstr "НЕ. върнете ме обратно в директорията."
 
 #: templates/delete-listing-confirm.tpl.php:25
 msgctxt "delete listing"
 msgid "Yes. Delete my listing."
-msgstr ""
+msgstr "Да, изтрий обявата."
 
 #: templates/email/listing-added.tpl.php:2
 msgctxt "emails"
@@ -6399,6 +6407,8 @@ msgid ""
 "A new listing has been submitted to the directory. Listing details can be "
 "found below."
 msgstr ""
+"Регистрационните данни на наскоро създадената обява в директорията могат да "
+"бъдат намерени по-долу."
 
 #: templates/email/listing-added.tpl.php:7
 #: templates/email/listing-edited.tpl.php:7
@@ -6441,7 +6451,7 @@ msgstr "Всички категории"
 #: templates/email/listing-edited.tpl.php:20
 msgctxt "notify email"
 msgid "Posted By"
-msgstr ""
+msgstr "Публикувано от"
 
 #: templates/email/listing-edited.tpl.php:2
 msgctxt "emails"
@@ -6449,6 +6459,8 @@ msgid ""
 "A listing in the directory has been edited recently. Listing details can be "
 "found below."
 msgstr ""
+"Наскоро е създадена обява в директорията. Регистрационните данни могат да "
+"бъдат намерени по-долу."
 
 #: templates/email-access-keys.tpl.php:1
 msgctxt "request_access_keys"
@@ -6456,21 +6468,23 @@ msgid ""
 "Below you'll find the access keys for all the listings registered with your "
 "e-mail address on our site."
 msgstr ""
+"По-долу ще намерите клавишите за достъп за всички обяви, регистриран с вашия "
+"e-mail адрес на нашия сайт."
 
 #: templates/email-access-keys.tpl.php:5
 msgctxt "request_access_keys"
 msgid "Access Key:"
-msgstr ""
+msgstr "Клавиш за достъп:"
 
 #: templates/email-access-keys.tpl.php:6
 msgctxt "request_access_keys"
 msgid "URL:"
-msgstr ""
+msgstr "URL адрес"
 
 #: templates/listing-contactform.tpl.php:9
 msgctxt "templates"
 msgid "Listing Title: "
-msgstr ""
+msgstr "Заглавие обява"
 
 #: templates/listing-contactform.tpl.php:16
 msgctxt "templates"
@@ -6478,6 +6492,8 @@ msgid ""
 "You are currently logged in as %s. Your message will be sent using your "
 "logged in contact email."
 msgstr ""
+"Вие сте регистриран като %s Вашето съобщение ще бъде изпратено от e-mail "
+"адреса, с който сте се регистрирали."
 
 #: templates/listing-contactform.tpl.php:21
 #, fuzzy
@@ -6494,22 +6510,22 @@ msgstr "Електронен адрес"
 #: templates/listing-contactform.tpl.php:30
 msgctxt "templates"
 msgid "Message"
-msgstr ""
+msgstr "Съобщение"
 
 #: templates/listing-contactform.tpl.php:38
 msgctxt "templates"
 msgid "Send"
-msgstr ""
+msgstr "Изпрати"
 
 #: templates/listing-upgradetosticky.tpl.php:1
 msgctxt "templates"
 msgid "Upgrade listing"
-msgstr ""
+msgstr "Обнови обявата"
 
 #: templates/listing-upgradetosticky.tpl.php:10
 msgctxt "templates"
 msgid "Upgrade listing to %s for %s."
-msgstr ""
+msgstr "Подобрете вашата обява на %s само за %s"
 
 #: templates/main-box.tpl.php:13
 msgctxt "main box"
@@ -6519,7 +6535,7 @@ msgstr "Открий обява за <ключова дума>"
 #: templates/main-box.tpl.php:19
 msgctxt "main box"
 msgid "Find Listings"
-msgstr ""
+msgstr "Открий обява"
 
 #: templates/main-box.tpl.php:20
 msgctxt "main box"
@@ -6529,12 +6545,12 @@ msgstr "Разширено търсене"
 #: templates/manage-recurring-cancel.tpl.php:1
 msgctxt "manage recurring"
 msgid "Manage Recurring Payments - Cancel"
-msgstr ""
+msgstr "Управление на плащанията"
 
 #: templates/manage-recurring-cancel.tpl.php:5
 msgctxt "manage recurring"
 msgid "Plan Details"
-msgstr ""
+msgstr "Абонаментен план"
 
 #: templates/manage-recurring-cancel.tpl.php:9
 #, fuzzy
@@ -6545,7 +6561,7 @@ msgstr "Име на бизнеса"
 #: templates/manage-recurring-cancel.tpl.php:15
 msgctxt "manage recurring"
 msgid "Cost:"
-msgstr ""
+msgstr "Цена"
 
 #: templates/manage-recurring-cancel.tpl.php:18
 msgctxt "manage recurring"
@@ -6561,12 +6577,12 @@ msgstr "Телефонен номер"
 #: templates/manage-recurring-cancel.tpl.php:29
 msgctxt "manage recurring"
 msgid "Expires on:"
-msgstr ""
+msgstr "Изтича на"
 
 #: templates/manage-recurring.tpl.php:1
 msgctxt "manage recurring"
 msgid "Manage Recurring Payments"
-msgstr ""
+msgstr "Управление на плащанията"
 
 #: templates/manage-recurring.tpl.php:5
 #, fuzzy
@@ -6580,7 +6596,7 @@ msgstr ""
 #: templates/manage-recurring.tpl.php:6
 msgctxt "manage subscriptions"
 msgid "Subscription / Fee Plan"
-msgstr ""
+msgstr "Регистрация  / Тарифен план"
 
 #: templates/manage-recurring.tpl.php:27
 msgctxt "manage recurring"
@@ -6590,7 +6606,7 @@ msgstr ""
 #: templates/manage-recurring.tpl.php:31
 msgctxt "manage recurring"
 msgid "Cancel recurring payment"
-msgstr ""
+msgstr "Отказ на плащането"
 
 #: templates/parts/category-fee-selection.tpl.php:13
 msgctxt "templates"
@@ -6605,27 +6621,27 @@ msgstr "Такса"
 #: templates/parts/category-fee-selection.tpl.php:19
 msgctxt "templates"
 msgid "Price"
-msgstr ""
+msgstr "Цена"
 
 #: templates/parts/category-fee-selection.tpl.php:20
 msgctxt "templates"
 msgid "Duration"
-msgstr ""
+msgstr "Продължителност"
 
 #: templates/parts/category-fee-selection.tpl.php:21
 msgctxt "templates"
 msgid "Images Allowed"
-msgstr ""
+msgstr "Позволени снимки"
 
 #: templates/parts/category-fee-selection.tpl.php:28
 msgctxt "templates"
 msgid "There are no fees available for this category."
-msgstr ""
+msgstr "Липсва цена за тази категория"
 
 #: templates/parts/category-fee-selection.tpl.php:50
 msgctxt "templates"
 msgid "Unlimited"
-msgstr ""
+msgstr "Безсрочно"
 
 #: templates/parts/category-fee-selection.tpl.php:52
 msgctxt "templates"
@@ -6643,7 +6659,7 @@ msgstr "Редактирай"
 #: templates/parts/listing-buttons.tpl.php:7
 msgctxt "templates"
 msgid "Upgrade Listing"
-msgstr ""
+msgstr "Обнови обявата"
 
 #: templates/parts/listing-buttons.tpl.php:10
 #: templates/parts/listing-buttons.tpl.php:19
@@ -6654,11 +6670,11 @@ msgstr "Изтрий"
 #: templates/parts/listing-buttons.tpl.php:10
 msgctxt "templates"
 msgid "Are you sure you wish to delete this listing?"
-msgstr ""
+msgstr "Сигурни ли сте че желаете да изтриете обявата ?"
 
 #: templates/parts/listing-buttons.tpl.php:13
 msgid "← Back to Directory"
-msgstr ""
+msgstr "Обратно в директорията"
 
 #: templates/parts/listing-buttons.tpl.php:17
 msgctxt "templates"
@@ -6694,12 +6710,12 @@ msgstr "Забравена парола?"
 #: templates/payment/payment_items.tpl.php:5
 msgctxt "payment_items"
 msgid "Item"
-msgstr ""
+msgstr "Продукт"
 
 #: templates/payment/payment_items.tpl.php:6
 msgctxt "payment_items"
 msgid "Amount"
-msgstr ""
+msgstr "Стойност"
 
 #: templates/payment/payment_items.tpl.php:19
 msgctxt "payment_items"
@@ -6709,17 +6725,17 @@ msgstr "Общо"
 #: templates/payment-page.tpl.php:17
 msgctxt "templates"
 msgid "We can not process your payment at this moment. Please try again later."
-msgstr ""
+msgstr "Плащането не може да бъде извършено в момента. Моля опитайте по-късно"
 
 #: templates/renew-listing.tpl.php:3
 msgctxt "templates"
 msgid "Renew Listing"
-msgstr ""
+msgstr "Обнови"
 
 #: templates/renew-listing.tpl.php:7
 msgctxt "renewal"
 msgid "Proceed to Checkout"
-msgstr ""
+msgstr "Напред"
 
 #: templates/renew-listing.tpl.php:10
 msgctxt "templates"
@@ -6727,6 +6743,7 @@ msgid ""
 "You are about to renew your listing \"%s\" publication inside category \"%s"
 "\"."
 msgstr ""
+"Вие сте на път да обновите категорията на вашата обява \"%s\" на \"%s\""
 
 #: templates/renew-listing.tpl.php:15
 msgctxt "WPBDM"
@@ -6734,6 +6751,8 @@ msgid ""
 "Please select a fee option or click \"Do not renew my listing\" to cancel "
 "your renewal."
 msgstr ""
+"Моля, изберете тарифен план или натиснете \"Не променяйте обявата\" за да "
+"откажете промените."
 
 #: templates/renew-listing.tpl.php:22
 #: templates/submit-listing/category-selection.tpl.php:8
@@ -6747,12 +6766,12 @@ msgstr "Напред"
 #: templates/renew-listing.tpl.php:25
 msgctxt "renewal"
 msgid "Cancel Listing Renewal"
-msgstr ""
+msgstr "Откажи обновяването на обявата"
 
 #: templates/renew-listing.tpl.php:26
 msgctxt "templates"
 msgid "Do not renew my listing"
-msgstr ""
+msgstr "Не обновявай обявата"
 
 #: templates/search-form.tpl.php:3
 msgctxt "templates"
@@ -6767,7 +6786,7 @@ msgstr "Изчистване"
 #: templates/send-access-keys.tpl.php:5
 msgctxt "send-access-keys"
 msgid "Enter your e-mail address"
-msgstr ""
+msgstr "Въведете валиден e-mail адрес"
 
 #: templates/send-access-keys.tpl.php:9
 msgctxt "send-access-keys"
@@ -6792,12 +6811,12 @@ msgstr "Успешно добавихте обява."
 #: templates/submit-listing/done.tpl.php:6
 msgctxt "templates"
 msgid "Your listing changes were saved."
-msgstr ""
+msgstr "Промените бяха запаметени"
 
 #: templates/submit-listing/done.tpl.php:11
 msgctxt "templates"
 msgid "Go to your listing"
-msgstr ""
+msgstr "Отворете вашата обява"
 
 #: templates/submit-listing/done.tpl.php:13
 msgctxt "templates"
@@ -6822,23 +6841,24 @@ msgstr "Такса / Секция Надграждане "
 #: templates/submit-listing/fee-selection.tpl.php:18
 msgctxt "templates"
 msgid "Would you like to upgrade your listing to \"%s\" for %s more?"
-msgstr ""
+msgstr "Желаете ли да повишите нивото на услугите  на \"%s\" само за \"%s\" ?"
 
 #: templates/submit-listing/fee-selection.tpl.php:21
 msgctxt "templates"
 msgid "Yes, upgrade my listing now."
-msgstr ""
+msgstr "Да, обнови обявата. "
 
 #: templates/submit-listing/fee-selection.tpl.php:31
 msgctxt "submit"
 msgid ""
 "Would you like to make your fee renew automatically at the end of the period?"
 msgstr ""
+"Желаете ли да обновите абонамента ви автоматично след неговото изтичане ?"
 
 #: templates/submit-listing/images-single.tpl.php:18
 msgctxt "templates"
 msgid "Delete Image"
-msgstr ""
+msgstr "Изтрий снимки"
 
 #: templates/submit-listing/images-single.tpl.php:24
 msgctxt "templates"
@@ -6848,12 +6868,12 @@ msgstr "Избери за главно изображение"
 #: templates/submit-listing/images-upload-form.tpl.php:17
 msgctxt "templates"
 msgid "Upload Images"
-msgstr ""
+msgstr "Качи снимки"
 
 #: templates/submit-listing/images-upload-form.tpl.php:22
 msgctxt "templates"
 msgid "Drop files here"
-msgstr "Селектирайте и пуснете снимки тук"
+msgstr "Селектирайте и пуснете снимките тук"
 
 #: templates/submit-listing/images-upload-form.tpl.php:23
 msgctxt "templates image upload"
@@ -6868,7 +6888,7 @@ msgstr "Изберете изображения от вашия хард дис�
 #: templates/submit-listing/images-upload-form.tpl.php:27
 msgctxt "templates"
 msgid "Uploading %s file(s)... Please wait."
-msgstr ""
+msgstr "Фаловете се качват. Моля изчакайте. "
 
 #: templates/submit-listing/images-upload-form.tpl.php:31
 msgctxt "templates"
@@ -6877,6 +6897,8 @@ msgid ""
 "you are done, or \"Delete Image\" to upload a new image in place of a "
 "current one."
 msgstr ""
+"Вие достигнахте лимита за качване на снимки. Натиснете \"Продължи\" ако сте "
+"приключили или \"Изтрий снимка\" за да качите нова."
 
 #: templates/submit-listing/images-upload-form.tpl.php:39
 msgctxt "templates"
@@ -6893,7 +6915,7 @@ msgstr "Размер на файла:"
 #: templates/submit-listing/images-upload-form.tpl.php:61
 msgctxt "templates"
 msgid "No limit"
-msgstr ""
+msgstr "Без ограничения"
 
 #: templates/submit-listing/images-upload-form.tpl.php:52
 msgctxt "templates"
@@ -6915,7 +6937,7 @@ msgctxt "templates"
 msgid ""
 "There is an image pending upload. Would you still like to continue without "
 "saving the image?"
-msgstr ""
+msgstr "Снимката се качва в момента. Искате ли да продължите без за запазите ?"
 
 #: templates/submit-listing/images.tpl.php:13
 msgctxt "templates"
