@@ -1,3 +1,9 @@
+<div class="breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">
+    <?php if(function_exists('bcn_display'))
+    {
+        bcn_display();
+    }?>
+</div>
 <?php if ( $images->main ): ?>
     <div class="main-image"><?php echo $images->main->html; ?></div>
 <?php endif; ?>
