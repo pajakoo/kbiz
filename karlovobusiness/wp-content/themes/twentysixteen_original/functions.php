@@ -31,7 +31,7 @@ function createProductCat($catName, $parent) {
 }
 */
 
-require get_template_directory() . '/inc/Kint/Kint.class.php';
+require get_template_directory() . '/inc/kint/Kint.class.php';
 
 
 
@@ -494,18 +494,35 @@ add_action('wp_enqueue_scripts',load_script_enqueue);
  */
 
 
-
 /*function acme_login_redirect( $redirect_to, $request, $user  ) {
 
     if( is_array( $user->roles ) && in_array( 'administrator', $user->roles ) ){
         return admin_url();
     } else {
-        wp_redirect( get_post_permalink( get_page_by_title('Business Directory')->ID ).'?wpbdp_view=submit_listing' );
+        wp_redirect( get_post_permalink( get_page_by_title('Всички обяви')->ID ) );
+    }
+}
+add_filter( 'login_redirect', 'acme_login_redirect', 10, 3 );*/
+
+/*
+function acme_login_redirect( $redirect_to, $request, $user  ) {
+    if( is_array( $user->roles ) && in_array( 'administrator', $user->roles ) ){
+        return admin_url();
+    } else {
+        wp_redirect( get_post_permalink( $_COOKIE['kbiz_url'])  );
     }
 }
 add_filter( 'login_redirect', 'acme_login_redirect', 10, 3 );
 
+
+
+
+
+
+https://www.longren.io/wordpress-tip-redirect-to-previous-page-after-login/
+
 */
+
 
 add_action('after_setup_theme', 'remove_admin_bar');
 

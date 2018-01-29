@@ -54,7 +54,9 @@
 <div class="col-lg-12 cat-container hi-icon-wrap hi-icon-effect-5 hi-icon-effect-5d">
 <!--    http://bootsnipp.com/snippets/featured/responsive-sidebar-menu-->
 
-
+    <script type="text/javascript">
+        window.cats = [];
+    </script>
     <?php
 
     //taxonomy=wpbdp_category&post_type=wpbdp_listing&post_type=category
@@ -66,7 +68,7 @@
         'hide_empty' => false
     ));
 
-//    Kint::dump($terms);
+   //Kint::dump($terms);
 
     if ($terms && !is_wp_error($terms)) :
     foreach ($terms as $term) { ?>
@@ -75,10 +77,33 @@
                href="<?php echo esc_url(get_term_link($term)) ?>"></a>
             <div class="cat_name"><?php echo /*get_field('short_name', $taxonomy . '_' . $term->term_id);*/ $term->name;  ?></div>
         </div>
-
+        <script type="text/javascript">
+            window.cats.push( { "class": '<?php   echo 'hi-icon icon-icons_'. get_field('class', $taxonomy . '_' . $term->term_id) ?> '
+            , "name": '<?php   echo $term->name; ?> ' } )
+        </script>
     <?php } ?>
 </div>
+
+<script type="text/javascript">
+    if(localStorage){
+        localStorage.setItem('cats', JSON.stringify(window.cats) );
+    } else {
+        document.cookie = 'cats=' + JSON.stringify(window.cats);
+    }
+
+    console.log(localStorage.getItem('cats'))
+</script>
 <?php endif;
+
+
+
+
+
+
+
+
+
+
 
 
 //echo do_shortcode('[supsystic-slider id=1 position="center"]');

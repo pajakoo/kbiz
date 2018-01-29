@@ -512,6 +512,15 @@ body:not(.home) .bg {
     background-color: #F8F8F8;
 }
 
+body:not(.custom-background-image):before,
+body:not(.custom-background-image):after {
+    display: none;
+}
+
+.wpbdp-view-search {
+    background-color: #F8F8F8;
+}
+
 .home h1.entry-title {
     color: white;
 }
@@ -523,6 +532,7 @@ body:not(.home) .bg {
 .home .wrap {
     height: 100%;
     position: relative;
+
 }
 
 /*.home .bg {
@@ -589,7 +599,9 @@ body:not(.home) .bg {
 .home:not(.mobile) #primary,
 .home:not(.mobile) main,
 .home:not(.mobile) article {
-    height: 100%
+    height: 100%;
+    margin-bottom: 50px;
+    float: none;
     /*height:auto;*/
 }
 
@@ -619,13 +631,51 @@ body:not(.home) .bg {
     font-weight: bold;
 }
 
-.cat-item {
+
+.cat-container .cat-item {
     list-style: none;
     width: 91px;
     height: 91px;
     background-color: #F7A707;
     margin: 50px 0 0 50px;
     float: left;
+}
+
+
+aside ul#lct-widget-wpbdp_category > li.cat-item:not(.current-cat),
+aside ul#lct-widget-wpbdp_category > li.cat-item:not(.current-cat) a {
+    display:none;
+}
+
+.current-cat,
+.current-cat a,
+.current-cat-ancestor,
+.current-cat-ancestor a,
+.current-cat-parent,
+.current-cat-parent a {
+    display:inline!important;
+}
+
+
+.wpbdp-view-submit_listing aside ul#lct-widget-wpbdp_category > li.cat-item:not(.current-cat),
+.wpbdp-view-submit_listing aside ul#lct-widget-wpbdp_category > li.cat-item:not(.current-cat) a {
+    display:inline;
+}
+
+aside ul#lct-widget-wpbdp_category .cat-item,
+aside ul#lct-widget-wpbdp_category .cat-item a {
+    font-size:14px;
+    color:black;
+}
+
+aside ul#lct-widget-wpbdp_category li.current-cat,
+aside ul#lct-widget-wpbdp_category li.current-cat a{
+    font-weight:100;
+    color:#f6a71c;
+}
+
+.sidebar{
+    margin-left:0px;
 }
 
 .cat-icons.zzz {
@@ -1081,6 +1131,7 @@ nav.sidebar, .main {
         opacity: 0;
     }
 
+    /*Karlovo snimka BGKBIZ*/
     .home .bg {
         width: 100%;
         height: 100%;
@@ -1089,7 +1140,7 @@ nav.sidebar, .main {
         top: 0;
         left: 0;
         z-index: -1;
-
+        /*background-color:#284a2b;*/
         background: url('../../../uploads/2017/03/DSC4802_2.jpg') no-repeat center center;
         background-size: cover;
     }
@@ -1145,12 +1196,13 @@ nav:hover .forAnimate {
 .team-content {
     display: inline-block;
     text-align: center;
+    margin-bottom: 40px;
+
 }
 
 .team-position {
     font-weight: bold;
     font-size: 16px;
-    margin-bottom: 40px;
 }
 
 .about-us-text {
@@ -1449,6 +1501,237 @@ table .fee-label label {
 }
 
 
+/*samsung 7s edge*/
+@media only screen and (min-device-width: 320px)  and (orientation: portrait) {
+
+    /* Styles */
+    svg#Layer_1 {
+        width: 100px;
+        height: 30px;
+        margin-top: -4px;
+        margin-left: -25px;
+    }
+
+    #logo2 {
+        display:none;
+    }
+
+    #welcome-text {
+        font-size: 20px;
+        font-weight: 100;
+        margin-top: 20px;
+        color:#8c8b8a;
+    }
+
+    #welcome-screen {
+        margin-left:0px;
+    }
+
+    #welcome-text > #btn-enter {
+        margin-top:50px;
+    }
+
+    body.wpbdp-view-main .wrap {
+        overflow: inherit !important;
+    }
+
+    #menu-menu_bg {
+        margin-top: 0px;
+    }
+
+    /*  HOME SCREEN */
+
+    .cat-icons2 {
+        width: 190px;
+        zoom: 0.90;
+        -moz-transform: scale(0.60);
+        -moz-transform-origin: 0 0;
+    }
+
+    .cat_name {
+        text-align: center;
+        text-transform: uppercase;
+        color: #f7a707;
+        width:auto;
+        font-size:20px;
+    }
+
+    .home .bg {
+        background-image: none;
+        background-color: #F8F8F8;
+    }
+
+    body {
+        background-color: #F8F8F8;
+
+    }
+
+    .about-us-text {
+        width: auto;
+    }
+
+    .team-content {
+        display: block;
+    }
+
+    body.wpbdp-view-main #primary {
+        width: 281px;
+    }
+
+    #primary {
+        /*width: 256px;*/
+        /*background:red;*/
+    }
+
+    #page {
+        margin-left: 0;
+    }
+
+    #content {
+        margin-top: 42px;
+    }
+
+    .hi-icon:before {
+        font-size: 60px;
+        width: 90px;
+    }
+
+    .hi-icon-effect-5 .hi-icon {
+        box-shadow: 0 0 0 4px rgba(247, 167, 7, 1);
+        overflow: hidden;
+        -webkit-transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+        -moz-transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+        transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+    }
+
+    .cat-icons2 {
+        margin: 20px 0 0 -3px;
+        float: left;
+        color: white;
+        zoom: 0.50;
+        -moz-transform: scale(0.50);
+        -moz-transform-origin: 0 0;
+    }
+
+    /* about us */
+    .page-template-page-aboutus #content h1 {
+        background: #F8F8F8;
+        width: 150px;
+        margin: -40px auto;
+        font-size: 30px;
+    }
+
+    /* Servces */
+    .services-title {
+        float: none;
+    }
+
+    body:not(.home) #page {
+        background: none;
+    }
+
+    .page-template-page-services .btn {
+        width: 150px;
+        display: block;
+    }
+
+    .page-template-page-services #content h1 {
+        background: #F8F8F8;
+        width: 240px;
+        margin: -40px auto;
+        font-size: 30px;
+    }
+
+    body.page-template-page-contacts .kbiz-contact-form {
+        float: none;
+    }
+
+    #wpbdp-main-box {
+        display: none;
+    }
+
+    h3.text-center.team-name {
+        margin-top: 10px;
+        margin-bottom: -10px;
+    }
+
+    .page-template-page-contacts .contacts-text > div.fa {
+        color: #f7a707;
+        float: left;
+    }
+
+    .page-template-page-contacts .contacts-text > div {
+        margin-bottom: 5px;
+    }
+
+    .page-template-page-contacts .contacts-text {
+        margin: 73px auto 20px;
+        text-align: center;
+    }
+
+    .wpcf7-form-control .wpcf7-text .wpcf7-validates-as-required {
+
+    }
+
+    .navbar-inverse .navbar-toggle {
+        margin-right: -10px;
+    }
+
+    .container-fluid > .navbar-collapse {
+        margin-right: -25px;
+        margin-left: -25px;
+    }
+
+    /*Servces*/
+    .page-template-page-services #services-text div {
+        margin: 0 auto;
+    }
+
+    .page-template-page-services .services div {
+        margin: 0 auto 10px;
+        text-align: center;
+    }
+
+    .services-title {
+        float: none;
+        margin: 0 auto;
+    }
+
+    .page-template-page-services #content h1 {
+        background: #F8F8F8;
+        width: 240px;
+        margin: -40px auto;
+        font-size: 30px;
+    }
+
+    body.page-template-page-contacts .kbiz-contact-form {
+        float: none;
+    }
+
+    #wpbdp-main-box {
+        display: none;
+    }
+
+    .hi-icon-effect-5 .hi-icon {
+        background: #F9A700;
+        color: rgba(255, 255, 255, 1);
+    }
+
+
+    /* REGISTRATION Plane  */
+
+    .wpbdp-plan-info-box {
+        width:260px;
+    }
+    .wpbdp-plan.wpbdp-plan-info-box > div {
+        width: auto;
+        word-break: break-all;
+    }
+}
+
+
+
+
 /* Smartphones (landscape) ----------- */
 @media only screen and (min-width: 321px) {
     /* Styles */
@@ -1558,11 +1841,11 @@ iPad 3
     .hi-icon-wrap {
         display: table-cell;
         position: absolute;
-        /* left: 0; */
         top: calc(50% - 322px);
-        /*opacity: 1;*/
         text-align: center;
         margin: 0 auto;
+        /*opacity: 1;*/
+        /* left: 0; */
         /* padding: 2em 0 3em;
          margin-top: -150px;*/
     }
@@ -1662,8 +1945,14 @@ iPad 3
 
 
 
+    body.wpbdp-view-main #primary {
+        /*width: 1322px;*/
+        width: 1059px;
+    }
+
     #primary {
-        width: 1060px;
+        width:728px;
+        /*width: 978px; !*1060px;*!*/
         /*background :green;*/
     }
 
@@ -1674,6 +1963,8 @@ iPad 3
         text-align: center;
         margin: 0 auto;
         z-index: -1;
+        zoom:0.9;
+        -moz-transform: scale(0.8);
         /* left: 0; */
         /*opacity: 1;*/
         /* padding: 2em 0 3em;
@@ -1924,7 +2215,7 @@ iPad 3
     }
 
     .hi-icon:before {
-        font-size: 30px;
+        font-size: 40px;
         width: 90px;
     }
 
@@ -2082,7 +2373,6 @@ iPad 3
 /* Samsung Galaxy S5 ----------- */
 @media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 3) {
     /* Styles */
-
 }
 
 @media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3) {
@@ -2100,222 +2390,334 @@ iPad 3
     }
 }
 
-@media only screen and (min-device-width: 320px)  and (orientation: portrait) {
 
-    /* Styles */
-    svg#Layer_1 {
-        width: 100px;
-        height: 30px;
-        margin-top: -4px;
-        margin-left: -25px;
-    }
+.wpbdp-listing-single .extra-images ul li img{
+    border:none;
+}
 
-    #logo2 {
-        display:none;
-    }
+.watermark > .triangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 55px 0 0 55px;
+    border-color: transparent transparent transparent #373737;
+    position: absolute;
+    top: 97px;
+}
 
-    #welcome-text {
-        font-size: 20px;
-        font-weight: 100;
-        margin-top: 20px;
-        color:#8c8b8a;
-    }
+.watermark > .triangle > svg#logo-kbiz {
+    width: 40px;
+    height: auto;
+    transform: rotate(45deg);
+    position: absolute;
+    top: -28px;
+    left: -56px;
+}
 
-    #welcome-screen {
-        margin-left:0px;
-    }
+.watermark {
+    position:relative;
+    padding: 2px;
+    float: left;
+    height: 154px;
+    width: 154px;
+    overflow: hidden;
+    margin: 15px 0 0 15px;
 
-    #welcome-text > #btn-enter {
-        margin-top:50px;
-    }
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f9a702+0,373737+84,373737+84 */
+    background: #f9a702; /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #f9a702 0%, #373737 84%, #373737 84%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #f9a702 0%,#373737 84%,#373737 84%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, #f9a702 0%,#373737 84%,#373737 84%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9a702', endColorstr='#373737',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 
-    body.wpbdp-view-main .wrap {
-        overflow: inherit !important;
-    }
-
-    #menu-menu_bg {
-        margin-top: 0px;
-    }
-
-    /*  HOME SCREEN */
-    .cat-icons2 {
-        width: 190px;
-        zoom: 0.90;
-        -moz-transform: scale(0.60);
-        -moz-transform-origin: 0 0;
-    }
-
-    .cat_name {
-        text-align: center;
-        text-transform: uppercase;
-        color: #f7a707;
-        width:auto;
-    }
-
-    .home .bg {
-        background-image: none;
-        background-color: #F8F8F8;
-    }
-
-    body {
-        background-color: #F8F8F8;
-
-    }
-
-    .about-us-text {
-        width: auto;
-    }
-
-    .team-content {
-        display: block;
-    }
-
-    body.wpbdp-view-main #primary {
-        width: 281px;
-    }
-
-    #primary {
-        /*width: 256px;*/
-        /*background:red;*/
-    }
-
-    #page {
-        margin-left: 0;
-    }
-
-    #content {
-        margin-top: 42px;
-    }
-
-    .hi-icon-effect-5 .hi-icon {
-        box-shadow: 0 0 0 4px rgba(247, 167, 7, 1);
-        overflow: hidden;
-        -webkit-transition: background 0.3s, color 0.3s, box-shadow 0.3s;
-        -moz-transition: background 0.3s, color 0.3s, box-shadow 0.3s;
-        transition: background 0.3s, color 0.3s, box-shadow 0.3s;
-    }
-
-    .cat-icons2 {
-        margin: 20px 0 0 -3px;
-        float: left;
-        color: white;
-        zoom: 0.50;
-        -moz-transform: scale(0.50);
-        -moz-transform-origin: 0 0;
-    }
-
-    /* about us */
-    .page-template-page-aboutus #content h1 {
-        background: #F8F8F8;
-        width: 150px;
-        margin: -40px auto;
-        font-size: 30px;
-    }
-
-    /* Servces */
-    .services-title {
-        float: none;
-    }
-
-    body:not(.home) #page {
-        background: none;
-    }
-
-    .page-template-page-services .btn {
-        width: 150px;
-        display: block;
-    }
-
-    .page-template-page-services #content h1 {
-        background: #F8F8F8;
-        width: 240px;
-        margin: -40px auto;
-        font-size: 30px;
-    }
-
-    body.page-template-page-contacts .kbiz-contact-form {
-        float: none;
-    }
-
-    #wpbdp-main-box {
-        display: none;
-    }
-
-    h3.text-center.team-name {
-        margin-top: 10px;
-        margin-bottom: -10px;
-    }
-
-    .page-template-page-contacts .contacts-text > div.fa {
-        color: #f7a707;
-        float: left;
-    }
-
-    .page-template-page-contacts .contacts-text > div {
-        margin-bottom: 5px;
-    }
-
-    .page-template-page-contacts .contacts-text {
-        margin: 73px auto 20px;
-        text-align: center;
-    }
-
-    .wpcf7-form-control .wpcf7-text .wpcf7-validates-as-required {
-
-    }
-
-    .navbar-inverse .navbar-toggle {
-        margin-right: -10px;
-    }
-
-    .container-fluid > .navbar-collapse {
-        margin-right: -25px;
-        margin-left: -25px;
-    }
-
-    /*Servces*/
-    .page-template-page-services #services-text div {
-        margin: 0 auto;
-    }
-
-    .page-template-page-services .services div {
-        margin: 0 auto 10px;
-        text-align: center;
-    }
-
-    .services-title {
-        float: none;
-        margin: 0 auto;
-    }
-
-    .page-template-page-services #content h1 {
-        background: #F8F8F8;
-        width: 240px;
-        margin: -40px auto;
-        font-size: 30px;
-    }
-
-    body.page-template-page-contacts .kbiz-contact-form {
-        float: none;
-    }
-
-    #wpbdp-main-box {
-        display: none;
-    }
-
-    .hi-icon-effect-5 .hi-icon {
-        background: #F9A700;
-        color: rgba(255, 255, 255, 1);
-    }
+}
 
 
-    /* REGISTRATION Plane  */
+/*div.watermark > a > img{visibility:hidden!important;}*/
 
-    .wpbdp-plan-info-box {
-        width:260px;
-    }
-    .wpbdp-plan.wpbdp-plan-info-box > div {
-        width: auto;
-        word-break: break-all;
+
+
+
+
+
+.wpbdp-pagination {    margin: 25px 0 50px 0; }
+.wpbdp-pagination span a {
+    text-decoration: none;
+    color: white;
+    background-color: #021f34;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+.main-cat {
+    font-weight: bold;
+    color:#f9a702;
+}
+
+.sub-cat {
+
+    color:grey;
+}
+
+
+.select2-container--default .select2-results>.select2-results__options {
+    max-height: 350px!important;
+}
+
+.wpbdp-view-submit_listing #secondary,
+.wpbdp-view-search #secondary {
+    display: none;
+    visibility: hidden;
+}
+
+
+.wpbdp-map-container:before{
+    content: 'Открийте ни на картата...';
+    font-size: 28px;
+    margin: 0 auto;
+    color:#F9A700;
+    font-weight:300;
+}
+
+.wpbdp-map-container{
+    margin-top:100px;
+}
+
+
+.required{
+    color: #F9A700;
+}
+
+.wpbdp-view-submit_listing h3,
+.wpbdp-view-submit_listing h2 {
+    color:#9d9d9d;
+}
+
+
+.wpbdp-view-show_listing #secondary {
+    display:none;
+}
+
+.wpbdp-view-show_listing .extra-images {
+    overflow:auto;
+}
+
+#helper-categories {
+    width: 100%;
+    height: 100%;
+}
+
+#helper-categories .cat-icons2 .hi-icon {
+    color: #F9A700;
+}
+
+#helper-categories .cat-icons2 {
+    color: #F9A700;
+    pointer-events: none;
+}
+
+.wpbdp-view-show_listing footer {
+    display: none;
+}
+
+#cookie-notice {
+    color: rgb(255, 255, 255);
+    background-color: rgb(246, 167, 30)!important;
+    display: block;
+    opacity: .8;
+}
+
+.cookie-notice-container{
+    padding:20px;
+}
+
+
+#cn-accept-cookie {
+
+    background: white!important;
+    color: orange!important;
+    text-shadow: none!important;
+    box-shadow: none!important;
+    border: none;
+}
+
+
+
+
+/*TEST FIXES*/
+
+.wpbdp-login-form .wpbdp-login-form-extra-links {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+.wpbdp-msg {
+    font-size: 95%;
+    font-weight:bold;
+}
+
+
+#wpbdp-submit-page.step-confirmation {
+    background: white;
+    right: 50px;
+    opacity: 0.91;
+    padding: 15px;
+}
+
+
+.tp-sub-title {
+
+    display: block;
+    font-size: 12px;
+    color: black;
+}
+
+
+.about-us-text p {
+    text-indent: 50px;
+}
+
+/*
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+body {
+    -webkit-font-smoothing: antialiased;
+    text-align: center;
+    font: 18px / 1.4 'Helvetica', 'Arial', sans-serif;
+    padding-top: 60px;
+}
+ul {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    height: 60px;
+    background: #cccccc;
+    font-size: 0;
+    line-height: 0;
+    letter-spacing: -0.3em;
+}
+li {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 25%;
+    text-align: center;
+    font-size: 18px;
+    line-height: 60px;
+    letter-spacing: normal;
+}
+li a {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+li a:hover,
+li a.active {
+    background: #333333;
+    color: #ffffff;
+}
+li a.active:after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -10px;
+    border: 10px solid;
+    border-color: transparent;
+    border-top-color: #333333;
+}
+.chart {
+    position: relative;
+    display: inline-block;
+    width: 110px;
+    height: 110px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+.chart canvas {
+    position: absolute;
+    top: -38px;
+    left: 0;
+}
+.percent {
+    display: inline-block;
+    line-height: 110px;
+    z-index: 2;
+}
+.percent:after {
+    content: '%';
+    margin-left: 0.1em;
+    font-size: .8em;
+}
+.angular {
+    margin-top: 100px;
+}
+.angular .chart {
+    margin-top: 0;
+}
+input {
+    display: block;
+    margin: auto;
+    margin-bottom: 3em;
+}
+.btn {
+    display: block;
+    width: 200px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background: #cccccc;
+    color: #ffffff;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 0.8em;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.btn:hover {
+    background: #333333;
+    color: #ffffff;
+}
+.span6 {
+    float: left;
+    width: 50%;
+}
+@media only screen and (max-width: 600px) {
+    li {
+        font-size: 14.4px;
     }
 }
+@media only screen and (max-width: 430px) {
+    .span6 {
+        float: none;
+        width: 100%;
+    }
+    body {
+        padding-top: 0;
+    }
+    ul {
+        height: auto;
+        position: static;
+    }
+    li {
+        display: block;
+        width: 100%;
+    }
+    li a {
+        white-space: normal;
+    }
+    a.active:after {
+        display: none;
+    }
+}
+*/

@@ -27,7 +27,8 @@ $uploads = wp_upload_dir();
         </hr>
         <div class="col-lg-12">
             <div class="col-lg-12 contacts-text">
-                <div class="fa fa-phone" aria-hidden="true"></div><div class="">+ 359 889 123 123</div>
+                <div class="fa fa-user" aria-hidden="true"></div><div>лице за контакти:</div><span>Николай Начев - управляващ съдружник</span></div>
+                <div class="fa fa-phone" aria-hidden="true"></div><div class="">+ 359 887 376 123 </div>
                 <div class="fa fa-map-marker" aria-hidden="true"></div><div class="">ул. "Граф Игнатиев 9",<br> гр. Карлово</div>
                 <div class="col-lg-12 contacts-content">
             </div>

@@ -11,6 +11,15 @@
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js">
 <head>
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=100116546"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments)};
+        gtag('js', new Date());
+
+        gtag('config', 'GA_TRACKING_ID');
+    </script>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="http://gmpg.org/xfn/11">
@@ -23,12 +32,14 @@
     <script type="text/javascript">
         var siteURL = '<?= site_url(); ?>';
         var templateUrl = '<?= get_bloginfo("template_url"); ?>';
+        var registerPage = '<?= get_post_permalink( get_page_by_title('Всички обяви')->ID ).'?wpbdp_view=submit_listing' ?>';
+        function noBack(){}
     </script>
     <?php wp_head(); ?>
     <?php include_once( get_template_directory() . "/inc/analyticstracking.php") ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class(); ?> onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 <div class="wrap">
 <div class="bg"></div>
     <nav class="navbar navbar-inverse sidebar  navbar-fixed-top" role="navigation">

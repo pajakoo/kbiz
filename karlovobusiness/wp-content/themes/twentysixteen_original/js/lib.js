@@ -10,12 +10,15 @@
 
 jQuery(document).ready(function () {
 
-
-
-
-
     stop = false;
     document.cookie = 'payAtOffice=false';
+    //document.cookie = 'selectedPlan=free';
+
+    console.log('load LIB:', getCookie('kbiz_url'));
+    if ( getCookie('kbiz_url') == '' || getCookie('kbiz_url') == siteURL ) {
+        //document.cookie = 'kbiz_url='+siteURL;
+    }
+
     initKBIZTheme();
 
     if (getCookie('seen') == 'true') {
@@ -35,8 +38,9 @@ jQuery(document).ready(function () {
     jQuery('.cat-container a').css('cursor', 'default');
 
 
-    if (jQuery('body').hasClass('wpbdp-view-main')) {
+    if (jQuery('body').hasClass('wpbdp-view-main') && jQuery('body').hasClass('desktop')) {
         jQuery('.wrap').css('overflow', 'hidden');
+        jQuery('body').css('overflow', 'hidden');
         moveBackground();
     }
     jQuery("#btn-enter").on("click", function () {
@@ -77,12 +81,17 @@ jQuery(document).ready(function () {
         jQuery("body").css("background-image","url('"+imgUrl+"')");
     }
 
-    if (jQuery('.step-before-save').length > 0) {
-        var html = ' <label > <input type="radio" id="q128" name="quality[21]" value="1" /> Плащане в офис или банков път </label> ' +
-            '<label > <input type="radio" id="q129" name="quality[21]" checked="checked" value="2" /> Онлайн плащане с Paypal, Stripe и др. </label>' +
-            '<p id="payment-info" class="hide">За консумирана електрическа енергия ЕВН България Електроснабдяване ЕАД Ситибанк Н.А. – клон София ВІС: CITIBGSF; IBAN: BG39CITI92501000109001</p>' +
-            '<div class="clearfix"></div> '
-        jQuery('#wpbdp-listing-form-extra input[type="submit"]').before(html);
+    // if (jQuery('.step-before-save').length > 0) {
+    //     var html = '<div id="payment-options"> <label > <input type="radio" id="q128" name="quality[21]" value="1" /> Плащане в офис или банков път </label> ' +
+    //         '<label > <input type="radio" id="q129" name="quality[21]" checked="checked" value="2" /> Онлайн плащане с Paypal, Stripe и др. </label>' +
+    //         '<p id="payment-info" class="hide">За консумирана електрическа енергия ЕВН България Електроснабдяване ЕАД Ситибанк Н.А. – клон София ВІС: CITIBGSF; IBAN: BG39CITI92501000109001</p></div>' +
+    //         '<div class="clearfix"></div> '
+    //     jQuery('#wpbdp-listing-form-extra input[type="submit"]').before(html);
+    // }
+
+    if ( getCookie("selectedPlan") =='free' ){
+        jQuery('#payment-options').hide();
+        console.log('Free plan so hide payment options!!', jQuery('#payment-options'));
     }
 
 
@@ -102,7 +111,7 @@ jQuery(document).ready(function () {
 
 
     if (jQuery('#welcome-screen').length == 0) {
-        jQuery("nav.sidebar").css('left', '0');
+         jQuery("nav.sidebar").css('left', '0');
         jQuery('.bg').css('display', 'none');
     }
 
@@ -126,7 +135,7 @@ jQuery(document).ready(function () {
     var loader = document.getElementById('loader')
         , α = 0
         , π = Math.PI
-        , t = 0;//12
+        , t = 34
 
     if (loader) {
         (function draw() {
@@ -194,13 +203,41 @@ jQuery(document).ready(function () {
 
     // jQuery('#wpbdp-field-2').attr("multiple","multiple");
     // jQuery('#wpbdp-field-2').prepend('<option value="-1">Изберете дейност</option>')
-    jQuery('#wpbdp-field-2').select2();
+    //jQuery('#wpbdp-field-2').select2();
+    jQuery('#wpbdp-field-2').select2({
+        templateResult: function (data) {
+            // We only really care if there is an element to pull classes from
+            if (!data.element) {
+                return data.text;
+            }
+
+            var $wrapper;
+            if( jQuery(data.element).text().indexOf( String.fromCharCode(160) ) == 0){
+                $wrapper= jQuery('<span></span>');
+                $wrapper.addClass('sub-cat');
+                $wrapper.text('-' + data.text);
+
+            } else {
+                $wrapper= jQuery('<span></span>');
+                $wrapper.addClass('main-cat');
+                $wrapper.text(data.text);
+            }
+            return $wrapper;
+        }
+    })
+
     jQuery('#wpbdp-field-12').select2();
     jQuery('.primary-menu').addClass('nav navbar-nav');
 
 
     jQuery('.wpbdp-plan-info-box').on('click', function (e) {
         jQuery(e.currentTarget).find('input').prop("checked", true);
+        var selectedPlan = jQuery(e.currentTarget).find('input').prop("value");
+        if(selectedPlan == 1){
+            document.cookie = 'selectedPlan=free';
+        } else {
+            document.cookie = 'selectedPlan=notFree';
+        }
         jQuery('#wpbdp-listing-form-fees').submit();
     });
 
@@ -281,6 +318,9 @@ function htmlBodyHeightUpdate() {
 
 
 function initKBIZTheme() {
+    var REG_PATH= '/karlovobusiness/bg/%d0%b2%d1%81%d0%b8%d1%87%d0%ba%d0%b8-%d0%be%d0%b1%d1%8f%d0%b2%d0%b8/';
+    var RATING_PATH= '/karlovobusiness/bg/%d0%b2%d1%81%d0%b8%d1%87%d0%ba%d0%b8-%d0%be%d0%b1%d1%8f%d0%b2%d0%b8/';
+
     jQuery('.listing-actions a').addClass('btn btn-success');
     // jQuery('#content .wpbdp-page:not(.wpbdp-page-main_page)').addClass('container');
 
@@ -292,6 +332,65 @@ function initKBIZTheme() {
         }, 1500);
         e.preventDefault(); //this is the important line.
     });
+
+
+    //https://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
+    /*var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) {
+            return p.toString() === "[object SafariRemoteNotification]";
+        })(!window['safari'] || safari.pushNotification);*/
+
+    var catsArray = [];
+
+    if (localStorage) {
+        catsArray = localStorage.getItem('cats')
+
+    } else {
+        catsArray = getCookie('cats').split(',');
+    }
+
+    catsArray = catsArray == null ? [] : catsArray;
+
+    if (catsArray.length > 1) {
+        window.html = '';
+        jQuery.each(JSON.parse(catsArray), function (i, cat) {
+
+            window.html += '<div class="cat-icons2">' +
+                '<a href="#" class="' + cat.class + '"></a>' +
+                '<div class="cat_name">' + cat.name + '</div></div>'
+
+        })
+        jQuery('#wpbdp-listing-form-categories').append('<div id="helper-categories">' + html + '</div>');
+
+    }
+
+
+    if ( jQuery('body').hasClass('wpbdp-view-submit_listing')) {
+        window.history.forward();
+        function noBack() { window.history.forward(); }
+    }
+
+/*
+
+
+    jQuery('.wpbdp-listing.wpbdp-excerpt a').click(function(e){
+        // e.preventDefault();
+        document.cookie = 'kbiz_url=' + window.location.href;
+        // window.location.href = e.target.href;
+    });
+    
+    
+    jQuery('.menu-item.menu-item-type-post_type').click(function(e){
+        // e.preventDefault();
+        document.cookie = 'kbiz_url='+ registerPage;
+        // window.location.href = e.target.href;
+    });
+
+*/
+
+
+
+
+
 }
 
 
@@ -310,3 +409,25 @@ function getCookie(cname) {
     }
     return "";
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
