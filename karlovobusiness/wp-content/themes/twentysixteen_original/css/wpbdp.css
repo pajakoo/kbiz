@@ -1299,7 +1299,7 @@ table .fee-label label {
 
 
 .wpbdp-plan.wpbdp-plan-info-box .wpbdp-plan-price {
-    width:100%;
+    /*width:100%;*/
     min-height: 80px;
     background:#f9a700;
     padding-bottom:45px;
@@ -1307,7 +1307,7 @@ table .fee-label label {
 }
 
 .wpbdp-plan.wpbdp-plan-info-box > div {
-    width: 300px;
+    /*width: 300px;*/
     float: none;
     text-align: center;
 }
@@ -1392,6 +1392,18 @@ table .fee-label label {
 /* start            SERVICES         page styles  */
 
 
+.page-template-page-price #lc_taxonomy-2 {
+    display: none;
+}
+
+.page-template-page-price h3 {
+    font-family: Verdana,Geneva,sans-serif;
+    color: #021f34;
+    font-weight: 300;
+    font-size: 1.3em;
+    text-align: center;
+}
+
 .wpbdp-plan-info-box:hover {
     box-shadow: -2px 2px 6px 2px #C1BEC6;
 }
@@ -1399,16 +1411,20 @@ table .fee-label label {
 
 .wpbdp-plan-info-box {
     padding: 0px;
-    margin: 0px 30px 30px 0;
+    /*margin: 0px 30px 30px 0;*/
     border: none;
     background: none;
     /*padding: 20px;*/
-    width: 350px;
+    /*width: 350px;*/
     border: 3px solid #f9a700;
     border-radius: 10px;
     cursor: pointer;
     min-height: 350px;
-    float: left;
+    /*float: left;*/
+}
+
+.panel-footer {
+    min-height: 350px;
 }
 
 .wpbdp-plan-label {
@@ -1575,7 +1591,7 @@ table .fee-label label {
     }
 
     body.wpbdp-view-main #primary {
-        width: 281px;
+        /*width: 281px;*/
     }
 
     #primary {
@@ -1721,7 +1737,7 @@ table .fee-label label {
     /* REGISTRATION Plane  */
 
     .wpbdp-plan-info-box {
-        width:260px;
+        /*width:260px;*/
     }
     .wpbdp-plan.wpbdp-plan-info-box > div {
         width: auto;
@@ -1729,7 +1745,10 @@ table .fee-label label {
     }
 }
 
-
+.container > .navbar-header, .container-fluid > .navbar-header,
+.container > .navbar-collapse, .container-fluid > .navbar-collapse {
+    margin:0;
+}
 
 
 /* Smartphones (landscape) ----------- */
@@ -1775,7 +1794,7 @@ iPad 3
     }
 
     #primary {
-        width: 751px;
+        /*width: 751px;*/
         /*background: red;*/
     }
 
@@ -1815,7 +1834,7 @@ iPad 3
     }
 
     #primary {
-        width: 751px;
+        /*width: 751px;*/
         /*background :red;*/
     }
 
@@ -1855,7 +1874,7 @@ iPad 3
     }
 
     #primary {
-        width: 951px;
+        /*width: 951px;*/
         /*background :red;*/
     }
 
@@ -1940,18 +1959,18 @@ iPad 3
     /* Styles */
 
     .container {
-        width: 970px;
+        /*width: 970px;*/
     }
 
 
 
     body.wpbdp-view-main #primary {
         /*width: 1322px;*/
-        width: 1059px;
+        /*width: 1059px;*/
     }
 
     #primary {
-        width:728px;
+        /*width:728px;*/
         /*width: 978px; !*1060px;*!*/
         /*background :green;*/
     }

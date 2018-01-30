@@ -15,9 +15,47 @@
 
 get_header();
 
+
+
+
 $uploads = wp_upload_dir();
 
 ?>
+
+    <script src="http://localhost:8888/karlovobusiness/wp-content/themes/twentysixteen_original/js/rendro-easy-pie-chart/dist/easypiechart.js"></script>
+    <script>
+
+        jQuery(document).ready(function () {
+            setTimeout(function () {
+                var element = document.querySelector('.chart');
+                new EasyPieChart(element, {
+                    // your options goes here
+                });
+            }, 2000);
+
+
+            var chart = window.chart = new EasyPieChart(document.querySelector('div.chart2'), {
+                easing: 'easeOutElastic',
+                delay: 1000,
+                barColor: '#69c',
+                trackColor: '#ace',
+                scaleColor: false,
+                lineWidth: 20,
+                trackWidth: 16,
+                lineCap: 'butt',
+                onStep: function (from, to, percent) {
+                    this.el.children[0].innerHTML = Math.round(percent);
+                }
+            });
+
+        })
+
+    </script>
+
+    <div class="chart" data-percent="100">73%</div>
+                    <div class="chart2" data-percent="86">
+                        <span class="percent"></span>
+                    </div>
 
     <div class="custom-page-container">
         <hr style="border-color:orange">
