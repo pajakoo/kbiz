@@ -15,7 +15,7 @@ jQuery(document).ready(function () {
     //document.cookie = 'selectedPlan=free';
 
     console.log('load LIB:', getCookie('kbiz_url'));
-    if ( getCookie('kbiz_url') == '' || getCookie('kbiz_url') == siteURL ) {
+    if (getCookie('kbiz_url') == '' || getCookie('kbiz_url') == siteURL) {
         //document.cookie = 'kbiz_url='+siteURL;
     }
 
@@ -48,12 +48,12 @@ jQuery(document).ready(function () {
 
 
         /*Well, how many:
-        hours are in a day?
-        days are in a year?
-        years are in a decade?
-        Answer:
+         hours are in a day?
+         days are in a year?
+         years are in a decade?
+         Answer:
 
-        time += 3600 * 1000 * 24 * 365 * 10;*/
+         time += 3600 * 1000 * 24 * 365 * 10;*/
 
 
         var now = new Date();
@@ -77,8 +77,8 @@ jQuery(document).ready(function () {
     });
 
     if (jQuery('.step-confirmation').length > 0) {
-        var imgUrl =  templateUrl + '../../../uploads/2017/05/3.jpg';
-        jQuery("body").css("background-image","url('"+imgUrl+"')");
+        var imgUrl = templateUrl + '../../../uploads/2017/05/3.jpg';
+        jQuery("body").css("background-image", "url('" + imgUrl + "')");
     }
 
     // if (jQuery('.step-before-save').length > 0) {
@@ -89,7 +89,7 @@ jQuery(document).ready(function () {
     //     jQuery('#wpbdp-listing-form-extra input[type="submit"]').before(html);
     // }
 
-    if ( getCookie("selectedPlan") =='free' ){
+    if (getCookie("selectedPlan") == 'free') {
         jQuery('#payment-options').hide();
         console.log('Free plan so hide payment options!!', jQuery('#payment-options'));
     }
@@ -111,7 +111,7 @@ jQuery(document).ready(function () {
 
 
     if (jQuery('#welcome-screen').length == 0) {
-         jQuery("nav.sidebar").css('left', '0');
+        jQuery("nav.sidebar").css('left', '0');
         jQuery('.bg').css('display', 'none');
     }
 
@@ -132,10 +132,10 @@ jQuery(document).ready(function () {
      }*/
 
 
-    var loader = document.getElementById('loader')
+    var loader =   document.getElementById('loader')
         , α = 0
         , π = Math.PI
-        , t = 34
+        , t = 1//34
 
     if (loader) {
         (function draw() {
@@ -182,10 +182,7 @@ jQuery(document).ready(function () {
 
             var element = document.getElementsByClassName("cat-container")[0];
             animate(element);
-            var menu = document.getElementsByClassName("sidebar")[0];
-            // console.log('menu:',menu);
-            //animateMenu(menu);
-            !isMobile() ? animateMenu(menu) : null;
+            jQuery(window).width() > 767 ? animateMenu() : null;
         }
     }
 
@@ -204,36 +201,38 @@ jQuery(document).ready(function () {
     // jQuery('#wpbdp-field-2').attr("multiple","multiple");
     // jQuery('#wpbdp-field-2').prepend('<option value="-1">Изберете дейност</option>')
     //jQuery('#wpbdp-field-2').select2();
-    jQuery('#wpbdp-field-2').select2({
+    /*jQuery('#wpbdp-field-2').select2({
         templateResult: function (data) {
+            console.log('gg',data)
             // We only really care if there is an element to pull classes from
             if (!data.element) {
                 return data.text;
             }
 
             var $wrapper;
-            if( jQuery(data.element).text().indexOf( String.fromCharCode(160) ) == 0){
-                $wrapper= jQuery('<span></span>');
+            if (jQuery(data.element).text().indexOf(String.fromCharCode(160)) == 0) {
+                $wrapper = jQuery('<span></span>');
                 $wrapper.addClass('sub-cat');
                 $wrapper.text('-' + data.text);
 
             } else {
-                $wrapper= jQuery('<span></span>');
+                $wrapper = jQuery('<span></span>');
                 $wrapper.addClass('main-cat');
                 $wrapper.text(data.text);
             }
+
             return $wrapper;
         }
-    })
+    })*/
 
-    jQuery('#wpbdp-field-12').select2();
+    //jQuery('#wpbdp-field-12').select2();
     jQuery('.primary-menu').addClass('nav navbar-nav');
 
 
     jQuery('.wpbdp-plan-info-box').on('click', function (e) {
         jQuery(e.currentTarget).find('input').prop("checked", true);
         var selectedPlan = jQuery(e.currentTarget).find('input').prop("value");
-        if(selectedPlan == 1){
+        if (selectedPlan == 1) {
             document.cookie = 'selectedPlan=free';
         } else {
             document.cookie = 'selectedPlan=notFree';
@@ -244,7 +243,8 @@ jQuery(document).ready(function () {
 
     //htmlBodyHeightUpdate();
     jQuery(window).resize(function () {
-        htmlBodyHeightUpdate()
+        htmlBodyHeightUpdate();
+        handleMenu();
     });
     jQuery(window).scroll(function () {
         height2 = jQuery('.main').height();
@@ -258,8 +258,9 @@ function animate(element) {
     transition.begin(element, ["opacity", "0", "1", "500ms", "linear"], element.style.display = "block");
 }
 
-function animateMenu(element) {
-    transition.begin(element, [
+function animateMenu() {
+    var menu = document.getElementsByClassName("sidebar")[0];
+    transition.begin(menu, [
         ["transform", "translateX(0)", "translateX(200px)", "1s", "ease-in-out"],
     ]);
 }
@@ -316,19 +317,48 @@ function htmlBodyHeightUpdate() {
 
 }
 
+function handleMenu() {
+
+    var menu = document.getElementsByClassName("sidebar")[0];
+    var style = window.getComputedStyle(menu);
+    var matrix = new WebKitCSSMatrix(style.webkitTransform);
+    // console.log('translateX: ', matrix.m41);
+
+    if (matrix.m41 != 0) {
+        transition.begin(menu, [
+            ["transform", "translateX(0)", "translateX(0px)", "1s", "ease-in-out"],
+        ]);
+    }
+
+    if (jQuery(window).width() > 767) {
+        jQuery(menu).css('left', 0)
+    } else {
+        jQuery(menu).css('left', 0)
+    }
+}
+
 
 function initKBIZTheme() {
-    var REG_PATH= '/karlovobusiness/bg/%d0%b2%d1%81%d0%b8%d1%87%d0%ba%d0%b8-%d0%be%d0%b1%d1%8f%d0%b2%d0%b8/';
-    var RATING_PATH= '/karlovobusiness/bg/%d0%b2%d1%81%d0%b8%d1%87%d0%ba%d0%b8-%d0%be%d0%b1%d1%8f%d0%b2%d0%b8/';
+    var REG_PATH = '/karlovobusiness/bg/%d0%b2%d1%81%d0%b8%d1%87%d0%ba%d0%b8-%d0%be%d0%b1%d1%8f%d0%b2%d0%b8/';
+    var RATING_PATH = '/karlovobusiness/bg/%d0%b2%d1%81%d0%b8%d1%87%d0%ba%d0%b8-%d0%be%d0%b1%d1%8f%d0%b2%d0%b8/';
+    var menu = document.getElementsByClassName("sidebar")[0];
+
+    if (jQuery(window).width() > 767) {
+        jQuery(menu).css('left', -200)
+    } else {
+        jQuery(menu).css('left', 0)
+    }
+
+
 
     jQuery('.listing-actions a').addClass('btn btn-success');
     // jQuery('#content .wpbdp-page:not(.wpbdp-page-main_page)').addClass('container');
 
-    jQuery(".wpbdp-rating-info span > a").click(function(e){
+    jQuery(".wpbdp-rating-info span > a").click(function (e) {
         var $anchor = jQuery(this);
         var id = $anchor.attr('href');
         jQuery('html, body').stop().animate({
-            scrollTop: jQuery('form[action="'+id+'"]').offset().top - 190
+            scrollTop: jQuery('form[action="' + id + '"]').offset().top - 190
         }, 1500);
         e.preventDefault(); //this is the important line.
     });
@@ -336,8 +366,8 @@ function initKBIZTheme() {
 
     //https://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
     /*var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) {
-            return p.toString() === "[object SafariRemoteNotification]";
-        })(!window['safari'] || safari.pushNotification);*/
+     return p.toString() === "[object SafariRemoteNotification]";
+     })(!window['safari'] || safari.pushNotification);*/
 
     var catsArray = [];
 
@@ -364,31 +394,30 @@ function initKBIZTheme() {
     }
 
 
-    if ( jQuery('body').hasClass('wpbdp-view-submit_listing')) {
+    /*if (jQuery('body').hasClass('wpbdp-view-submit_listing')) {
         window.history.forward();
-        function noBack() { window.history.forward(); }
-    }
+        function noBack() {
+            window.history.forward();
+        }
+    }*/
 
-/*
-
-
-    jQuery('.wpbdp-listing.wpbdp-excerpt a').click(function(e){
-        // e.preventDefault();
-        document.cookie = 'kbiz_url=' + window.location.href;
-        // window.location.href = e.target.href;
-    });
-    
-    
-    jQuery('.menu-item.menu-item-type-post_type').click(function(e){
-        // e.preventDefault();
-        document.cookie = 'kbiz_url='+ registerPage;
-        // window.location.href = e.target.href;
-    });
-
-*/
+    /*
 
 
+     jQuery('.wpbdp-listing.wpbdp-excerpt a').click(function(e){
+     // e.preventDefault();
+     document.cookie = 'kbiz_url=' + window.location.href;
+     // window.location.href = e.target.href;
+     });
 
+
+     jQuery('.menu-item.menu-item-type-post_type').click(function(e){
+     // e.preventDefault();
+     document.cookie = 'kbiz_url='+ registerPage;
+     // window.location.href = e.target.href;
+     });
+
+     */
 
 
 }

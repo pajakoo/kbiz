@@ -33,13 +33,14 @@
         var siteURL = '<?= site_url(); ?>';
         var templateUrl = '<?= get_bloginfo("template_url"); ?>';
         var registerPage = '<?= get_post_permalink( get_page_by_title('Всички обяви')->ID ).'?wpbdp_view=submit_listing' ?>';
-        function noBack(){}
+//        function noBack(){}
     </script>
     <?php wp_head(); ?>
     <?php include_once( get_template_directory() . "/inc/analyticstracking.php") ?>
 </head>
 
-<body <?php body_class(); ?> onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+<body <?php body_class(); ?> >
+<!--<body --><?php //body_class(); ?><!-- onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">-->
 <div class="wrap">
 <div class="bg"></div>
     <nav class="navbar navbar-inverse sidebar  navbar-fixed-top" role="navigation">

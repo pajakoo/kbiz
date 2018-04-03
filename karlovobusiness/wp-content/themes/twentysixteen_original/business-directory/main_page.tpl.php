@@ -73,12 +73,12 @@
     if ($terms && !is_wp_error($terms)) :
     foreach ($terms as $term) { ?>
         <div class="cat-icons2">
-            <a class="hi-icon icon-icons_<?php echo get_field('class', $taxonomy . '_' . $term->term_id) ?>"
+            <a class="hi-icon icon-<?php echo get_field('class', $taxonomy . '_' . $term->term_id) ?>"
                href="<?php echo esc_url(get_term_link($term)) ?>"></a>
             <div class="cat_name"><?php echo /*get_field('short_name', $taxonomy . '_' . $term->term_id);*/ $term->name;  ?></div>
         </div>
         <script type="text/javascript">
-            window.cats.push( { "class": '<?php   echo 'hi-icon icon-icons_'. get_field('class', $taxonomy . '_' . $term->term_id) ?> '
+            window.cats.push( { "class": '<?php   echo 'hi-icon icon-'. get_field('class', $taxonomy . '_' . $term->term_id) ?> '
             , "name": '<?php   echo $term->name; ?> ' } )
         </script>
     <?php } ?>
