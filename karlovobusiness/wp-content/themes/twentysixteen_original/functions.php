@@ -1,4 +1,6 @@
 <?php
+//update_option( 'siteurl', 'http://localhost:8888/karlovobusiness' );
+//update_option( 'home', 'http://localhost:8888/karlovobusiness' );
 /*
 function load_script_enqueue(){
     wp_enqueue_script('customscript', get_template_directory_uri() . '/js/lib.js', array('jquery'), '1.0', true);
@@ -462,10 +464,10 @@ add_filter( 'widget_tag_cloud_args', 'twentysixteen_widget_tag_cloud_args' );
 function register_css() {
     wp_deregister_style('twentysixteen-style');
     wp_register_style( 'style', get_template_directory_uri() . '/style.css', 'bootstrap-min' );
-    wp_register_style( 'wpbdp-css', get_template_directory_uri() . '/css/wpbdp.css', ['bootstrap','style'], '1.1.2' );
 //    wp_register_style( 'select2', get_template_directory_uri() . '/js/external/select2.min.css' );
     wp_register_style( 'font-awesome', get_template_directory_uri() . '/css/font-awesome.min.css' );
     wp_register_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap-3.3.7-dist/css/bootstrap.css' );
+    wp_register_style( 'wpbdp-css', get_template_directory_uri() . '/css/wpbdp.css', ['bootstrap','style'], '1.1.2' );
     wp_enqueue_style( 'style' );
     //wp_enqueue_style( 'wpbdp-css' );
     wp_enqueue_style( 'bootstrap' );
@@ -477,11 +479,11 @@ function register_css() {
 add_action( 'wp_enqueue_scripts', 'register_css' );
 
 function load_script_enqueue(){
-    wp_enqueue_script('customscript', get_template_directory_uri() . '/js/lib.js', array('jquery'), '1.0', true);
     wp_enqueue_script('component', get_template_directory_uri() . '/js/effects/component.js', array('jquery'), '1.0', true);
     wp_enqueue_script('transition', get_template_directory_uri() . '/js/effects/transition.min.js',null, '1.0', true);
     wp_enqueue_script('bootstrap', get_template_directory_uri() . '/js/external/bootstrap.min.js', array('jquery'), '1.0', true);
     wp_enqueue_script('select2', get_template_directory_uri() . '/js/external/select2.min.js', array('jquery'), '1.0', true);
+    wp_enqueue_script('customscript', get_template_directory_uri() . '/js/lib.js', array('jquery'), '1.0', true);
 }
 
 
@@ -536,4 +538,19 @@ function remove_admin_bar() {
 add_filter('render_integration', 'myfunc');
 function myfunc (){
     return  $paypal['currency_code'] = "EU";
+}
+
+
+add_action('wp_head', 'my_js_variables');
+function my_js_variables() { ?>
+    <script type="text/javascript">
+
+        var is_user_logged_in =  '<?= is_user_logged_in(); ?>';
+        var siteURL = '<?= site_url(); ?>';
+        var templateUrl = '<?= get_bloginfo("template_url"); ?>';
+        var registerPage = '<?= get_post_permalink( get_page_by_title('Всички обяви')->ID ).'?wpbdp_view=submit_listing' ?>';
+        document.getElementsByTagName("body")[0].style.display = "none";
+
+    </script>
+    <?php
 }

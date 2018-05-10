@@ -25,14 +25,17 @@
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
+    <script type="text/javascript" src="http://wurfl.io/wurfl.js"></script>
+
     <?php if ( is_singular() && pings_open( get_queried_object() ) ) : ?>
         <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
     <?php endif; ?>
     <?php /*include(get_template_directory() . '/kbiz-header.php'); */?>
     <script type="text/javascript">
-        var siteURL = '<?= site_url(); ?>';
-        var templateUrl = '<?= get_bloginfo("template_url"); ?>';
-        var registerPage = '<?= get_post_permalink( get_page_by_title('Всички обяви')->ID ).'?wpbdp_view=submit_listing' ?>';
+      // document.getElementsByClassName('sidebar').style.display = 'none';
+      document.getElementsByTagName("body")[0].style.display = "none";
+
 //        function noBack(){}
     </script>
     <?php wp_head(); ?>
@@ -43,7 +46,7 @@
 <!--<body --><?php //body_class(); ?><!-- onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">-->
 <div class="wrap">
 <div class="bg"></div>
-    <nav class="navbar navbar-inverse sidebar  navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-inverse sidebar  navbar-fixed-top" role="navigation" style="display:none"';>
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -102,6 +105,23 @@
 
                 </a>
             </div>
+
+            <?php if( get_current_user_id() !== 0 ): ?>
+                <?php //echo get_avatar( get_current_user_id() ); ?>
+                <a href="<?php echo get_dashboard_url(null,'edit.php?post_type=wpbdp_listing') ?>" class="fa fa-user" aria-hidden="true" style="margin-top:100px;"></a>
+            <?php endif; ?>
+
+<!--            <div class="row author-post">-->
+<!--                <div class="small-12 medium-4 column">-->
+<!--                    pajak  --><?php //echo get_current_user_id() ?>
+<!--                    --><?php //if($avatar = get_avatar(get_the_author_meta('ID')) !== 0): ?>
+<!--                         --><?php //echo get_avatar( get_current_user_id() ); ?>
+<!--                    --><?php //else: ?>
+<!--                        <img src="/images/no-image-default.jpg">-->
+<!--                    --><?php //endif; ?>
+<!--                </div>-->
+<!--            </div>-->
+
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">

@@ -542,6 +542,11 @@ body:not(.custom-background-image):after {
 	display: flex;
 	justify-content: center;
 }
+/*
+body:not(.wpbdp-view-main) .sidebar{
+	left: 0!important;
+	display: block!important;
+}*/
 
 #secondary,
 .site-footer {
@@ -692,7 +697,8 @@ path {
 /******************************
 	Sidebar
 ******************************/
-.desktop nav.sidebar {
+.desktop nav.sidebar,
+.tablet.landsacape-orientation nav.sidebar{
 	left: -200px;
 }
 
