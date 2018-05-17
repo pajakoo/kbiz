@@ -24,29 +24,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
     <script type="text/javascript" src="http://wurfl.io/wurfl.js"></script>
-
     <?php if ( is_singular() && pings_open( get_queried_object() ) ) : ?>
         <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
     <?php endif; ?>
-    <?php /*include(get_template_directory() . '/kbiz-header.php'); */?>
-    <script type="text/javascript">
-      // document.getElementsByClassName('sidebar').style.display = 'none';
-      document.getElementsByTagName("body")[0].style.display = "none";
-
-//        function noBack(){}
-    </script>
     <?php wp_head(); ?>
     <?php include_once( get_template_directory() . "/inc/analyticstracking.php") ?>
 </head>
 
 <body <?php body_class(); ?> >
-<!--<body --><?php //body_class(); ?><!-- onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">-->
 <div class="wrap">
 <div class="bg"></div>
-    <nav class="navbar navbar-inverse sidebar  navbar-fixed-top" role="navigation" style="display:none"';>
+    <nav class="navbar navbar-inverse sidebar  navbar-fixed-top" role="navigation" style="display:none">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">

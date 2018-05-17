@@ -487,7 +487,7 @@ function load_script_enqueue(){
 }
 
 
-add_action('wp_enqueue_scripts',load_script_enqueue);
+add_action('wp_enqueue_scripts','load_script_enqueue');
 
 /**
  * Redirect non-admins to the homepage after logging into the site.
@@ -549,7 +549,6 @@ function my_js_variables() { ?>
         var siteURL = '<?= site_url(); ?>';
         var templateUrl = '<?= get_bloginfo("template_url"); ?>';
         var registerPage = '<?= get_post_permalink( get_page_by_title('Всички обяви')->ID ).'?wpbdp_view=submit_listing' ?>';
-        document.getElementsByTagName("body")[0].style.display = "none";
 
     </script>
     <?php

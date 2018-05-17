@@ -124,9 +124,8 @@ jQuery(window).load(function() {
         jQuery('.cat-container a').css('cursor', 'default');
 
         if (!jQuery('body').hasClass('wpbdp-view-main') ){
-            if ( jQuery('body').hasClass('desktop') || jQuery('body').hasClass('tablet landsacape-orientation')) {
-                animateMenu()
-            }
+            jQuery(menu).css({left:'0'});
+            jQuery(menu).show();
         }
 
         if (jQuery('body').hasClass('wpbdp-view-main') && jQuery('body').hasClass('desktop')) {
@@ -188,6 +187,9 @@ jQuery(window).load(function() {
                 animate(element);
                 if ( jQuery('body').hasClass('desktop') || jQuery('body').hasClass('tablet landsacape-orientation')) {
                     animateMenu()
+                } else {
+                    jQuery(menu).show();
+
                 }
             }
         }
