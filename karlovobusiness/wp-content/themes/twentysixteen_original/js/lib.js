@@ -206,7 +206,40 @@ jQuery(window).load(function() {
         jQuery('#user_login').addClass('form-control');
         jQuery('#user_pass').addClass('form-control');
 
+
+        var disableEnCats = ["Agriculture", "Auto Moto", "Beauty", "Computer equipment", "Construction and renovation", "Education and Qualification", "Electrical equipment and appliances", "Furniture", "Heating facilities\, Ventilation equipment and Solar energy", "Hunting and fishing", "Institutions and Organizations", "Manufacturing and industry", "Marketing and Advertising", "Medical centers\, hospitals and health institutions", "Others", "Printing and disign", "Restaurants", "Services", "Sports and entertainment", "Tourism and hotels", "Trade and Selling"]
+
         //jQuery('#wpbdp-field-12').select2();
+        jQuery('#wpbdp-field-2 option').each( function(){
+            if (disableEnCats.indexOf( jQuery(this).text() ) != -1 ){
+                jQuery(this).remove()
+            }
+        });
+
+        jQuery('#wpbdp-field-2').select2({
+            templateResult: function (data) {
+                //console.log('gg',data)
+
+                // We only really care if there is an element to pull classes from
+                if (!data.element) {
+                    return data.text;
+                }
+
+                var $wrapper;
+                if (jQuery(data.element).text().indexOf(String.fromCharCode(160)) == 0) {
+                    $wrapper = jQuery('<span></span>');
+                    $wrapper.addClass('sub-cat');
+                    $wrapper.text('-' + data.text);
+
+                } else {
+                    $wrapper = jQuery('<span></span>');
+                    $wrapper.addClass('main-cat');
+                    $wrapper.text(data.text);
+                }
+                return $wrapper;
+            }
+        });
+
         jQuery('.primary-menu').addClass('nav navbar-nav');
 
         if (is_user_logged_in) {
