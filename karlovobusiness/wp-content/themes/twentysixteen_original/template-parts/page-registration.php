@@ -19,5 +19,11 @@ if (get_locale() == 'en_US') {
     wp_redirect( get_post_permalink( get_page_by_title('Всички обяви')->ID ) .'?wpbdp_view=submit_listing' );
 }*/
 
+
+
+
+
+echo get_site_url().'/всички-обяви/?wpbdp_view=submit_listing';
+
 wp_redirect( get_site_url().'/всички-обяви/?wpbdp_view=submit_listing' );
 //wp_redirect( get_site_url().'/bg/всички-обяви/?wpbdp_view=submit_listing' );

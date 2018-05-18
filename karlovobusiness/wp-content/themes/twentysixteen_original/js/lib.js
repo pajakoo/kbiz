@@ -82,7 +82,7 @@ jQuery(window).load(function() {
     })
     jQuery(window).resize(function () {
         htmlBodyHeightUpdate();
-        //handleMenu();
+        handleMenu();
     });
     jQuery(window).scroll(function () {
         height2 = jQuery('.main').height();
@@ -259,11 +259,15 @@ jQuery(window).load(function() {
     }
 
     function animateMenu() {
-        console.log('animateMenu called ')
         jQuery(menu).css('display', 'block');
-        transition.begin(menu, [
-            ["transform", "translateX(0)", "translateX(200px)", ".s", "ease-in-out"],
-        ]);
+        if (jQuery(window).width() > 767) {
+            transition.begin(menu, [
+                ["transform", "translateX(0)", "translateX(200px)", ".s", "ease-in-out"],
+            ]);
+        } else {
+            jQuery(menu).css('left', 0)
+        }
+
     }
 
     function htmlBodyHeightUpdate() {
@@ -300,7 +304,7 @@ jQuery(window).load(function() {
 
         var style = window.getComputedStyle(menu);
         var matrix = new WebKitCSSMatrix(style.webkitTransform);
-         console.log('translateX: ', matrix.m41);
+        //console.log('translateX: ', matrix.m41);
 
         if (matrix.m41 != 0) {
             transition.begin(menu, [
@@ -308,6 +312,9 @@ jQuery(window).load(function() {
             ]);
         }
 
+        if (jQuery(window).width() > 767) {
+            jQuery(menu).css('left', 0)
+        }
     }
 
     function getCookie(cname) {

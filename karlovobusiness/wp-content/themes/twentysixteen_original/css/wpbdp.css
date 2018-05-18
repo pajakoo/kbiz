@@ -1017,6 +1017,15 @@ nav.sidebar,
 	padding: 10px 10px 0 10px;
 }
 
+.user-icon {
+	text-decoration: none;
+	margin-top: 16px;
+	float: right;
+	color: white;
+	margin-right: 15px;
+	font-size: 18px;
+}
+
 nav.sidebar .navbar-nav .open .dropdown-menu > li > a:hover,
 nav.sidebar .navbar-nav .open .dropdown-menu > li > a:focus {
 	color: #CCC;
@@ -1376,6 +1385,16 @@ table .fee-label label {
 	nav.sidebar .navbar-header {
 		text-align: center;
 		width: 100%;
+	}
+
+	.user-icon {
+		text-decoration: none;
+		margin-top: 88px;
+		float: right;
+		color: white;
+		margin-right: 15px;
+		font-size: 18px;
+		position: absolute;
 	}
 
 	/*Center Icons*/

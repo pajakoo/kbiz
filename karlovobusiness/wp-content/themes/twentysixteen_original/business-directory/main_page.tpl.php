@@ -52,15 +52,8 @@
 </div>
 
 <div class="col-lg-12 cat-container hi-icon-wrap hi-icon-effect-5 hi-icon-effect-5d">
-<!--    http://bootsnipp.com/snippets/featured/responsive-sidebar-menu-->
 
-    <script type="text/javascript">
-        window.cats = [];
-    </script>
     <?php
-
-    //taxonomy=wpbdp_category&post_type=wpbdp_listing&post_type=category
-
 
     $taxonomy = 'wpbdp_category';
     $terms = get_terms($taxonomy, array(

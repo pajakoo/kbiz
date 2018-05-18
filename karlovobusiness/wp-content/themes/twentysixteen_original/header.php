@@ -24,7 +24,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script type="text/javascript" src="http://wurfl.io/wurfl.js"></script>
+    <script type="text/javascript" src="//wurfl.io/wurfl.js"></script>
     <?php if ( is_singular() && pings_open( get_queried_object() ) ) : ?>
         <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
     <?php endif; ?>
@@ -32,8 +32,8 @@
     <?php include_once( get_template_directory() . "/inc/analyticstracking.php") ?>
 </head>
 
-<body <?php body_class(); ?> >
-<div class="wrap">
+<body  <?php body_class(); ?> >
+<div class="wrap TEST">
 <div class="bg"></div>
     <nav class="navbar navbar-inverse sidebar  navbar-fixed-top" role="navigation" style="display:none">
         <div class="container-fluid">
@@ -45,6 +45,24 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+
+                <?php if( get_current_user_id() !== 0 ): ?>
+                    <?php //echo get_avatar( get_current_user_id() ); ?>
+                    <a href="<?php echo get_dashboard_url(null,'edit.php?post_type=wpbdp_listing') ?>" class="fa fa-user user-icon" aria-hidden="true"></a>
+                <?php endif; ?>
+
+                <!--            <div class="row author-post">-->
+                <!--                <div class="small-12 medium-4 column">-->
+                <!--                    pajak  --><?php //echo get_current_user_id() ?>
+                <!--                    --><?php //if($avatar = get_avatar(get_the_author_meta('ID')) !== 0): ?>
+                <!--                         --><?php //echo get_avatar( get_current_user_id() ); ?>
+                <!--                    --><?php //else: ?>
+                <!--                        <img src="/images/no-image-default.jpg">-->
+                <!--                    --><?php //endif; ?>
+                <!--                </div>-->
+                <!--            </div>-->
+
+
                 <a class="navbar-brand" href="<?php echo  site_url(); ?>">
                     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                          width="482.963px" height="137.998px" viewBox="0 0 482.963 137.998" style="enable-background:new 0 0 482.963 137.998;"
@@ -95,21 +113,6 @@
                 </a>
             </div>
 
-            <?php if( get_current_user_id() !== 0 ): ?>
-                <?php //echo get_avatar( get_current_user_id() ); ?>
-                <a href="<?php echo get_dashboard_url(null,'edit.php?post_type=wpbdp_listing') ?>" class="fa fa-user" aria-hidden="true" style="margin-top:100px;"></a>
-            <?php endif; ?>
-
-<!--            <div class="row author-post">-->
-<!--                <div class="small-12 medium-4 column">-->
-<!--                    pajak  --><?php //echo get_current_user_id() ?>
-<!--                    --><?php //if($avatar = get_avatar(get_the_author_meta('ID')) !== 0): ?>
-<!--                         --><?php //echo get_avatar( get_current_user_id() ); ?>
-<!--                    --><?php //else: ?>
-<!--                        <img src="/images/no-image-default.jpg">-->
-<!--                    --><?php //endif; ?>
-<!--                </div>-->
-<!--            </div>-->
 
 
             <!-- Collect the nav links, forms, and other content for toggling -->
